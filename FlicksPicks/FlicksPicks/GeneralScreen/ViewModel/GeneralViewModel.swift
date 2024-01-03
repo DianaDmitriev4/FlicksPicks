@@ -8,31 +8,28 @@
 // TODO: поставить foundation после того, как засетаю из сети
 import UIKit
 
-protocol SwipeCardsDelegate {
-    func swipeDidEnd(on view: SwipeCardView)
-}
-
 protocol GeneralViewModelProtocol {
     var movies: [MovieResponseViewModel] { get set }
+    
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
     var movies: [MovieResponseViewModel] = []
     
-    func numberOfCardsToShow() -> Int {
-            return movies.count
-        }
-        
-        func card(at index: Int) -> SwipeCardView {
-            let card = SwipeCardView()
-            card.dataSource = movies[index] 
-            return card
-        }
-        
-        func emptyView() -> UIView? {
-            return nil
-        }
+//    func numberOfCardsToShow() -> Int {
+//        return movies.count
+//    }
+//    
+//    func card(at index: Int) -> SwipeCardView {
+//        let card = SwipeCardView()
+//        card.dataSource = movies[index]
+//        return card
+//    }
+//    
+//    func emptyView() -> UIView? {
+//        return nil
+//    }
     
     // MARK: - Private methods
    private func loadMockImage() {

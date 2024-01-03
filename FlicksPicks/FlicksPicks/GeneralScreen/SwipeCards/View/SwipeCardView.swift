@@ -20,13 +20,15 @@ class SwipeCardView : UIView {
     
     lazy var movieTitleLabel: UILabel = {
         let label = UILabel()
+        
         label.textColor = .black
-        label.font = .systemFont(ofSize: 18)
+        label.font = .boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
         
         return label
     }()
     
-    var dataSource : MovieResponseViewModel? {
+    var dataSource : MovieResponse? {
         didSet {
             movieTitleLabel.text = dataSource?.title
             imageView.image = dataSource?.image
@@ -43,7 +45,6 @@ class SwipeCardView : UIView {
         setupConstraints()
         addPanGestureOnCards()
         
-        backgroundColor = .blue
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,10 +75,10 @@ class SwipeCardView : UIView {
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         card.center = CGPoint(x: centerOfParentContainer.x + point.x, y: centerOfParentContainer.y + point.y)
         
-//        let distanceFromCenter = ((UIScreen.main.bounds.width / 2) - card.center.x)
         
         switch sender.state {
         case .ended:
+            // Swipe right
             if (card.center.x) > 400 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 0.2) {
@@ -86,6 +87,7 @@ class SwipeCardView : UIView {
                     self.layoutIfNeeded()
                 }
                 return
+                // Swipe left
             }else if card.center.x < -65 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 0.2) {
@@ -109,3 +111,4 @@ class SwipeCardView : UIView {
         }
     }
 }
+

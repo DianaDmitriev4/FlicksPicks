@@ -20,7 +20,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
-    var dataSource: GeneralViewModel? {
+    var dataSource: SwipeCardsDataSource? {
         didSet {
             reloadData()
         }
@@ -29,7 +29,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        backgroundColor = .brown
     }
     
     required init?(coder aDecoder: NSCoder) {
