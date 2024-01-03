@@ -7,21 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586402B42CF0C0050AA58 /* MovieResponse.swift */; };
+		CEB586482B443DC20050AA58 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586472B443DC20050AA58 /* TabBar.swift */; };
+		CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */; };
+		CEB586512B452A2F0050AA58 /* MovieResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586502B452A2F0050AA58 /* MovieResponseViewModel.swift */; };
+		CEB586532B45324F0050AA58 /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586522B45324F0050AA58 /* SwipeCardView.swift */; };
+		CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586542B454E980050AA58 /* UIView + extens.swift */; };
 		CECE68942B4084E900EC6813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68932B4084E900EC6813 /* AppDelegate.swift */; };
-		CECE68982B4084E900EC6813 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68972B4084E900EC6813 /* ViewController.swift */; };
+		CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68972B4084E900EC6813 /* GeneralViewController.swift */; };
 		CECE689D2B4084E900EC6813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECE689C2B4084E900EC6813 /* Assets.xcassets */; };
 		CECE68A02B4084E900EC6813 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE689E2B4084E900EC6813 /* LaunchScreen.storyboard */; };
 		CECE68A92B40854E00EC6813 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CECE68A82B40854E00EC6813 /* SnapKit */; };
 		CECE68AB2B40854E00EC6813 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = CECE68AA2B40854E00EC6813 /* SnapKit-Dynamic */; };
+		CECE68AF2B40879D00EC6813 /* GeneralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68AE2B40879D00EC6813 /* GeneralViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CEB586402B42CF0C0050AA58 /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
+		CEB586472B443DC20050AA58 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СardСontainer.swift"; sourceTree = "<group>"; };
+		CEB586502B452A2F0050AA58 /* MovieResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponseViewModel.swift; sourceTree = "<group>"; };
+		CEB586522B45324F0050AA58 /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
+		CEB586542B454E980050AA58 /* UIView + extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extens.swift"; sourceTree = "<group>"; };
 		CECE68902B4084E900EC6813 /* FlicksPicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlicksPicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE68932B4084E900EC6813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CECE68972B4084E900EC6813 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CECE68972B4084E900EC6813 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		CECE689C2B4084E900EC6813 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CECE689F2B4084E900EC6813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CECE68A12B4084E900EC6813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CECE68AE2B40879D00EC6813 /* GeneralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +51,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEB5863F2B4151560050AA58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CECE68AE2B40879D00EC6813 /* GeneralViewModel.swift */,
+				CEB586502B452A2F0050AA58 /* MovieResponseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEB586422B42CF120050AA58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB586402B42CF0C0050AA58 /* MovieResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEB5864C2B4516F60050AA58 /* SwipeCards */ = {
+			isa = PBXGroup;
+			children = (
+				CEB5864D2B45184B0050AA58 /* View */,
+			);
+			path = SwipeCards;
+			sourceTree = "<group>";
+		};
+		CEB5864D2B45184B0050AA58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */,
+				CEB586522B45324F0050AA58 /* SwipeCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEB586562B45575F0050AA58 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CEB586542B454E980050AA58 /* UIView + extens.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		CECE68872B4084E900EC6813 = {
 			isa = PBXGroup;
 			children = (
@@ -57,12 +113,33 @@
 			isa = PBXGroup;
 			children = (
 				CECE68932B4084E900EC6813 /* AppDelegate.swift */,
-				CECE68972B4084E900EC6813 /* ViewController.swift */,
+				CEB586472B443DC20050AA58 /* TabBar.swift */,
+				CECE68AD2B40876400EC6813 /* GeneralScreen */,
+				CEB586562B45575F0050AA58 /* Extension */,
 				CECE689C2B4084E900EC6813 /* Assets.xcassets */,
 				CECE689E2B4084E900EC6813 /* LaunchScreen.storyboard */,
 				CECE68A12B4084E900EC6813 /* Info.plist */,
 			);
 			path = FlicksPicks;
+			sourceTree = "<group>";
+		};
+		CECE68AC2B40873C00EC6813 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CECE68972B4084E900EC6813 /* GeneralViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CECE68AD2B40876400EC6813 /* GeneralScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CEB5864C2B4516F60050AA58 /* SwipeCards */,
+				CECE68AC2B40873C00EC6813 /* View */,
+				CEB5863F2B4151560050AA58 /* ViewModel */,
+				CEB586422B42CF120050AA58 /* Model */,
+			);
+			path = GeneralScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,8 +219,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CECE68982B4084E900EC6813 /* ViewController.swift in Sources */,
+				CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */,
 				CECE68942B4084E900EC6813 /* AppDelegate.swift in Sources */,
+				CEB586512B452A2F0050AA58 /* MovieResponseViewModel.swift in Sources */,
+				CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */,
+				CEB586532B45324F0050AA58 /* SwipeCardView.swift in Sources */,
+				CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */,
+				CECE68AF2B40879D00EC6813 /* GeneralViewModel.swift in Sources */,
+				CEB586482B443DC20050AA58 /* TabBar.swift in Sources */,
+				CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
