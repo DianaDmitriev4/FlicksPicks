@@ -49,6 +49,11 @@ final class GeneralViewController: UIViewController {
         navigationController?.pushViewController(Movie(), animated: true)
     }
     
+    private func addGestureForImage() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
+        moviePosterView.addGestureRecognizer(gesture)
+    }
+    
     private func makeConstraints() {
         moviePosterView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
@@ -56,11 +61,6 @@ final class GeneralViewController: UIViewController {
             make.width.equalTo(350)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
         }
-    }
-    
-    private func addGestureForImage() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
-        moviePosterView.addGestureRecognizer(gesture)
     }
     
     private func setupUI() {

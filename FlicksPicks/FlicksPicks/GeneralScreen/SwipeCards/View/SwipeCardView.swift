@@ -18,19 +18,8 @@ final class SwipeCardView : UIView {
         return imageView
     }()
     
-    private lazy var movieTitleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.textColor = .black
-        label.font = .boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
     var dataSource : MovieResponseViewModel? {
         didSet {
-            movieTitleLabel.text = dataSource?.title
             imageView.image = dataSource?.image
         }
     }
@@ -41,7 +30,7 @@ final class SwipeCardView : UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        addSubviews(views: [movieTitleLabel, imageView])
+        addSubviews(views: [imageView])
         setupConstraints()
         addPanGestureOnCards()
     }
@@ -55,11 +44,6 @@ final class SwipeCardView : UIView {
         imageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(30)
-        }
-        
-        movieTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(15)
-            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
