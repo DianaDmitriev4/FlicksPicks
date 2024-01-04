@@ -8,13 +8,14 @@
 import SnapKit
 import UIKit
 
-class SwipeCardView : UIView {
+final class SwipeCardView : UIView {
     
     //MARK: - Properties
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-
+        imageView.isUserInteractionEnabled = true
+        
         return imageView
     }()
     
@@ -28,7 +29,7 @@ class SwipeCardView : UIView {
         return label
     }()
     
-    var dataSource : MovieResponse? {
+    var dataSource : MovieResponseViewModel? {
         didSet {
             movieTitleLabel.text = dataSource?.title
             imageView.image = dataSource?.image
@@ -44,7 +45,6 @@ class SwipeCardView : UIView {
         addSubviews(views: [movieTitleLabel, imageView])
         setupConstraints()
         addPanGestureOnCards()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

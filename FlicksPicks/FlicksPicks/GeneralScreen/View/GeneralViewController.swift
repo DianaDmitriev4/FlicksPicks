@@ -9,14 +9,7 @@ import SnapKit
 import UIKit
 
 final class GeneralViewController: UIViewController {
-    // MARK: - Properties
-    var viewModelData = [
-        MovieResponse(image: UIImage(named: "mock1") ?? .add, title: "Avatar"),
-        MovieResponse(image: UIImage(named: "mock2") ?? .add, title: "Телекинез"),
-        MovieResponse(image: UIImage(named: "mock3") ?? .add, title: "Остров проклятых"),
-        MovieResponse(image: UIImage(named: "mock4") ?? .add, title: "Время")
-        ]
-        
+    // MARK: - Properties 
     private let viewModel: GeneralViewModelProtocol
     
     lazy private var moviePosterView: СardСontainer = {
@@ -66,15 +59,15 @@ final class GeneralViewController: UIViewController {
     }
 }
 
-extension GeneralViewController: SwipeCardsDataSource {
+extension GeneralViewController: SwipeCardsDataProtocol {
     
     func numberOfCardsToShow() -> Int {
-        return viewModelData.count
+        return viewModel.movies.count
     }
     
     func card(at index: Int) -> SwipeCardView {
         let card = SwipeCardView()
-        card.dataSource = viewModelData[index]
+        card.dataSource = viewModel.movies[index]
         return card
     }
     

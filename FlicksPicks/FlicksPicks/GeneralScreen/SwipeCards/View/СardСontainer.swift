@@ -20,7 +20,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
-    var dataSource: SwipeCardsDataSource? {
+    var dataSource: SwipeCardsDataProtocol? {
         didSet {
             reloadData()
         }

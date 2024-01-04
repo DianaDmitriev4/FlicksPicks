@@ -17,19 +17,9 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
     var movies: [MovieResponseViewModel] = []
     
-//    func numberOfCardsToShow() -> Int {
-//        return movies.count
-//    }
-//    
-//    func card(at index: Int) -> SwipeCardView {
-//        let card = SwipeCardView()
-//        card.dataSource = movies[index]
-//        return card
-//    }
-//    
-//    func emptyView() -> UIView? {
-//        return nil
-//    }
+    init() {
+        loadMockImage()
+    }
     
     // MARK: - Private methods
    private func loadMockImage() {

@@ -13,7 +13,7 @@
 		CEB586512B452A2F0050AA58 /* MovieResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586502B452A2F0050AA58 /* MovieResponseViewModel.swift */; };
 		CEB586532B45324F0050AA58 /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586522B45324F0050AA58 /* SwipeCardView.swift */; };
 		CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586542B454E980050AA58 /* UIView + extens.swift */; };
-		CEB5865E2B457C9C0050AA58 /* SwipeCardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */; };
+		CEB5865E2B457C9C0050AA58 /* SwipeCardsDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5865D2B457C9C0050AA58 /* SwipeCardsDataProtocol.swift */; };
 		CECE68942B4084E900EC6813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68932B4084E900EC6813 /* AppDelegate.swift */; };
 		CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68972B4084E900EC6813 /* GeneralViewController.swift */; };
 		CECE689D2B4084E900EC6813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECE689C2B4084E900EC6813 /* Assets.xcassets */; };
@@ -30,7 +30,7 @@
 		CEB586502B452A2F0050AA58 /* MovieResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponseViewModel.swift; sourceTree = "<group>"; };
 		CEB586522B45324F0050AA58 /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
 		CEB586542B454E980050AA58 /* UIView + extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extens.swift"; sourceTree = "<group>"; };
-		CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardsDataSource.swift; sourceTree = "<group>"; };
+		CEB5865D2B457C9C0050AA58 /* SwipeCardsDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardsDataProtocol.swift; sourceTree = "<group>"; };
 		CECE68902B4084E900EC6813 /* FlicksPicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlicksPicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE68932B4084E900EC6813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE68972B4084E900EC6813 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE7EC6E02B46D78F00EEC570 /* SwipeCardsViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEB5865D2B457C9C0050AA58 /* SwipeCardsDataProtocol.swift */,
+			);
+			path = SwipeCardsViewModel;
+			sourceTree = "<group>";
+		};
 		CEB5863F2B4151560050AA58 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +81,7 @@
 		CEB5864C2B4516F60050AA58 /* SwipeCards */ = {
 			isa = PBXGroup;
 			children = (
+				CE7EC6E02B46D78F00EEC570 /* SwipeCardsViewModel */,
 				CEB5864D2B45184B0050AA58 /* View */,
 			);
 			path = SwipeCards;
@@ -116,7 +125,6 @@
 			children = (
 				CECE68932B4084E900EC6813 /* AppDelegate.swift */,
 				CEB586472B443DC20050AA58 /* TabBar.swift */,
-				CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */,
 				CECE68AD2B40876400EC6813 /* GeneralScreen */,
 				CEB586562B45575F0050AA58 /* Extension */,
 				CECE689C2B4084E900EC6813 /* Assets.xcassets */,
@@ -227,7 +235,7 @@
 				CEB586512B452A2F0050AA58 /* MovieResponseViewModel.swift in Sources */,
 				CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */,
 				CEB586532B45324F0050AA58 /* SwipeCardView.swift in Sources */,
-				CEB5865E2B457C9C0050AA58 /* SwipeCardsDataSource.swift in Sources */,
+				CEB5865E2B457C9C0050AA58 /* SwipeCardsDataProtocol.swift in Sources */,
 				CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */,
 				CECE68AF2B40879D00EC6813 /* GeneralViewModel.swift in Sources */,
 				CEB586482B443DC20050AA58 /* TabBar.swift in Sources */,

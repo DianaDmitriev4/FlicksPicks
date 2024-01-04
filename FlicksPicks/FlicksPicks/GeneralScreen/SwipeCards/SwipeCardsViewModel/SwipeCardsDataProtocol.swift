@@ -7,11 +7,10 @@
 
 import UIKit
 
-protocol SwipeCardsDataSource {
+protocol SwipeCardsDataProtocol {
     func numberOfCardsToShow() -> Int
     func card(at index: Int) -> SwipeCardView
     func emptyView() -> UIView?
-    
 }
 
 protocol SwipeCardsDelegate {
