@@ -9,15 +9,15 @@ import UIKit
 
 final class СardСontainer: UIView, SwipeCardsDelegate {
     // MARK: - Properties
-    var numberOfCardsToShow: Int = 0
-    var cardsToBeVisible: Int = 3
-    var cardViews : [SwipeCardView] = []
-    var remainingCards: Int = 0
+    private var numberOfCardsToShow: Int = 0
+    private var cardsToBeVisible: Int = 3
+    private var cardViews : [SwipeCardView] = []
+    private var remainingCards: Int = 0
     
-    let horizontalInset: CGFloat = 10.0
-    let verticalInset: CGFloat = 10.0
+    private let horizontalInset: CGFloat = 10.0
+    private let verticalInset: CGFloat = 10.0
     
-    var visibleCards: [SwipeCardView] {
+    private var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
     var dataSource: SwipeCardsDataProtocol? {
@@ -28,7 +28,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     //MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +35,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Private methods
-    func reloadData() {
+    private func reloadData() {
         removeAllCardViews()
         guard let dataSources = dataSource else { return }
         setNeedsLayout()
@@ -92,7 +91,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                     self.layoutIfNeeded()
                 })
             }
-            
         }else {
             for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
                 UIView.animate(withDuration: 0.2, animations: {

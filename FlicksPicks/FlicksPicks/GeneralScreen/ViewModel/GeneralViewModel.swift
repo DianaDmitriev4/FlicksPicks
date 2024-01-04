@@ -10,7 +10,6 @@ import UIKit
 
 protocol GeneralViewModelProtocol {
     var movies: [MovieResponseViewModel] { get set }
-    
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
@@ -30,6 +29,4 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             MovieResponseViewModel(response: MovieResponse(image: UIImage(named: "mock4") ?? .add, title: "Время"))
             ]
     }
-    
-    
 }

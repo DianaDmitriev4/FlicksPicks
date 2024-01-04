@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 final class GeneralViewController: UIViewController {
-    // MARK: - Properties 
+    // MARK: - Properties
     private let viewModel: GeneralViewModelProtocol
     
     lazy private var moviePosterView: СardСontainer = {
@@ -51,7 +51,6 @@ final class GeneralViewController: UIViewController {
             make.width.equalTo(350)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
         }
-
     }
     
     private func setupUI() {
@@ -59,6 +58,7 @@ final class GeneralViewController: UIViewController {
     }
 }
 
+// MARK: - SwipeCardsDataProtocol
 extension GeneralViewController: SwipeCardsDataProtocol {
     
     func numberOfCardsToShow() -> Int {

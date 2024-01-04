@@ -11,7 +11,7 @@ import UIKit
 final class SwipeCardView : UIView {
     
     //MARK: - Properties
-    lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
@@ -19,7 +19,7 @@ final class SwipeCardView : UIView {
         return imageView
     }()
     
-    lazy var movieTitleLabel: UILabel = {
+    private lazy var movieTitleLabel: UILabel = {
         let label = UILabel()
         
         label.textColor = .black
@@ -75,7 +75,6 @@ final class SwipeCardView : UIView {
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         card.center = CGPoint(x: centerOfParentContainer.x + point.x, y: centerOfParentContainer.y + point.y)
         
-        
         switch sender.state {
         case .ended:
             // Swipe right
@@ -105,7 +104,6 @@ final class SwipeCardView : UIView {
         case .changed:
             let rotation = tan(point.x / (self.frame.width * 2.0))
             card.transform = CGAffineTransform(rotationAngle: rotation)
-            
         default:
             break
         }
