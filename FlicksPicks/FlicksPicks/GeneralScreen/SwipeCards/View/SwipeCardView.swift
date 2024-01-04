@@ -14,7 +14,6 @@ final class SwipeCardView : UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()

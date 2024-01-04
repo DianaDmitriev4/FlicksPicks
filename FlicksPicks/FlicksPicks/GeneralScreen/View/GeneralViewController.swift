@@ -10,7 +10,7 @@ import UIKit
 
 final class GeneralViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: GeneralViewModelProtocol
+    private let viewModel: GeneralViewModelProtocol?
     
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer()
@@ -19,7 +19,7 @@ final class GeneralViewController: UIViewController {
     }()
     
     // MARK: - Initialization
-    init(viewModel: GeneralViewModelProtocol) {
+    init(viewModel: GeneralViewModelProtocol?) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -34,16 +34,21 @@ final class GeneralViewController: UIViewController {
         view = UIView()
         view.addSubview(moviePosterView)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         makeConstraints()
         moviePosterView.dataSource = self
+        addGestureForImage()
     }
     
     // MARK: - Private func
+    @objc private func showMovie() {
+        navigationController?.pushViewController(Movie(), animated: true)
+    }
+    
     private func makeConstraints() {
         moviePosterView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
@@ -51,6 +56,11 @@ final class GeneralViewController: UIViewController {
             make.width.equalTo(350)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
         }
+    }
+    
+    private func addGestureForImage() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
+        moviePosterView.addGestureRecognizer(gesture)
     }
     
     private func setupUI() {
@@ -62,12 +72,12 @@ final class GeneralViewController: UIViewController {
 extension GeneralViewController: SwipeCardsDataProtocol {
     
     func numberOfCardsToShow() -> Int {
-        return viewModel.movies.count
+        return viewModel?.movies.count ?? 0
     }
     
     func card(at index: Int) -> SwipeCardView {
         let card = SwipeCardView()
-        card.dataSource = viewModel.movies[index]
+        card.dataSource = viewModel?.movies[index]
         return card
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE7EC6E22B46DE4E00EEC570 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E12B46DE4E00EEC570 /* Movie.swift */; };
 		CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586402B42CF0C0050AA58 /* MovieResponse.swift */; };
 		CEB586482B443DC20050AA58 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586472B443DC20050AA58 /* TabBar.swift */; };
 		CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE7EC6E12B46DE4E00EEC570 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		CEB586402B42CF0C0050AA58 /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		CEB586472B443DC20050AA58 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СardСontainer.swift"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				CECE68932B4084E900EC6813 /* AppDelegate.swift */,
 				CEB586472B443DC20050AA58 /* TabBar.swift */,
+				CE7EC6E12B46DE4E00EEC570 /* Movie.swift */,
 				CECE68AD2B40876400EC6813 /* GeneralScreen */,
 				CEB586562B45575F0050AA58 /* Extension */,
 				CECE689C2B4084E900EC6813 /* Assets.xcassets */,
@@ -239,6 +242,7 @@
 				CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */,
 				CECE68AF2B40879D00EC6813 /* GeneralViewModel.swift in Sources */,
 				CEB586482B443DC20050AA58 /* TabBar.swift in Sources */,
+				CE7EC6E22B46DE4E00EEC570 /* Movie.swift in Sources */,
 				CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
