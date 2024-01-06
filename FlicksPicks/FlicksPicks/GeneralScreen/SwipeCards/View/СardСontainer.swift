@@ -45,7 +45,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: dataSources.card(at: i), atIndex: i )
-            
         }
     }
     

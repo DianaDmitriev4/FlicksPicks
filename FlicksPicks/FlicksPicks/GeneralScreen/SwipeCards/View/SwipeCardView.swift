@@ -42,8 +42,7 @@ final class SwipeCardView : UIView {
     // MARK: - Private methods
     private func setupConstraints() {
         imageView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(30)
+            make.edges.equalToSuperview()
         }
     }
     

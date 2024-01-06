@@ -17,7 +17,7 @@ final class GeneralViewController: UIViewController {
         
         return view
     }()
-    
+
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol?) {
         self.viewModel = viewModel
@@ -42,9 +42,14 @@ final class GeneralViewController: UIViewController {
         makeConstraints()
         moviePosterView.dataSource = self
         addGestureForImage()
+        setupNavBar()
     }
     
     // MARK: - Private func
+    @objc private func selectFilters() {
+        let vc = Filters()
+        navigationController?.present(vc, animated: true)
+    }
     @objc private func showMovie() {
         navigationController?.pushViewController(Movie(), animated: true)
     }
@@ -57,14 +62,17 @@ final class GeneralViewController: UIViewController {
     private func makeConstraints() {
         moviePosterView.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
-            make.height.equalTo(500)
-            make.width.equalTo(350)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
+            make.height.equalTo(450)
+            make.width.equalTo(300)
+            make.top.equalToSuperview().inset(150)
         }
     }
     
-    private func setupUI() {
-        
+    private func setupNavBar() {
+        let filterButton = UIBarButtonItem(barButtonSystemItem: .action,
+                                           target: self,
+                                           action: #selector(selectFilters))
+        navigationItem.rightBarButtonItem = filterButton
     }
 }
 
@@ -79,10 +87,6 @@ extension GeneralViewController: SwipeCardsDataProtocol {
         let card = SwipeCardView()
         card.dataSource = viewModel?.movies[index]
         return card
-    }
-    
-    func emptyView() -> UIView? {
-        return nil
     }
 }
 
