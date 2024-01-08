@@ -10,19 +10,21 @@ import UIKit
 
 final class GeneralViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: GeneralViewModelProtocol?
+    private let viewModel: GeneralViewModelProtocol
     
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer()
         
         return view
     }()
+    
 
     // MARK: - Initialization
-    init(viewModel: GeneralViewModelProtocol?) {
+    init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -43,15 +45,20 @@ final class GeneralViewController: UIViewController {
         moviePosterView.dataSource = self
         addGestureForImage()
         setupNavBar()
+        viewModel.loadData()
     }
     
     // MARK: - Private func
+       
+    
+    
     @objc private func selectFilters() {
         let vc = Filters()
         navigationController?.present(vc, animated: true)
     }
     @objc private func showMovie() {
-        navigationController?.pushViewController(Movie(), animated: true)
+//        guard let movies = viewModel.movies as? MovieResponseViewModel else { return }
+//        navigationController?.pushViewController(Movie(viewModel: movies), animated: true)
     }
     
     private func addGestureForImage() {
@@ -74,18 +81,22 @@ final class GeneralViewController: UIViewController {
                                            action: #selector(selectFilters))
         navigationItem.rightBarButtonItem = filterButton
     }
+    
+    private func setupUI() {
+        
+    }
 }
 
 // MARK: - SwipeCardsDataProtocol
 extension GeneralViewController: SwipeCardsDataProtocol {
     
     func numberOfCardsToShow() -> Int {
-        return viewModel?.movies.count ?? 0
+        return viewModel.movies.count
     }
     
     func card(at index: Int) -> SwipeCardView {
         let card = SwipeCardView()
-        card.dataSource = viewModel?.movies[index]
+        card.dataSource = viewModel.movies[index]
         return card
     }
 }

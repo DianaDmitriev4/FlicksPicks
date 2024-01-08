@@ -1,5 +1,5 @@
 //
-//  SwipeCardsDataSource.swift
+//  SwipeCardsDataProtocol.swift
 //  FlicksPicks
 //
 //  Created by User on 03.01.2024.

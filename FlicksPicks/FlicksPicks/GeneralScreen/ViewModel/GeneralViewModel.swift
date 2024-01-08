@@ -6,27 +6,70 @@
 //
 
 // TODO: поставить foundation после того, как засетаю из сети
-import UIKit
+import Foundation
 
 protocol GeneralViewModelProtocol {
     var movies: [MovieResponseViewModel] { get set }
+    var showError: ((String) -> Void)? { get set }
+    var reloadData: (() -> Void)? { get set }
+    func loadData()
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
-    var movies: [MovieResponseViewModel] = []
+    var movies: [MovieResponseViewModel] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.reloadData?()
+            }
+        }
+    }
+    var showError: ((String) -> Void)?
+    var reloadData: (() -> Void)? 
     
-    init() {
-        loadMockImage()
+    func loadData() {
+        ApiManager.getFilms { [weak self] result in
+            self?.handleResult(result: result)
+            self?.getImage()
+        }
+    }
+    
+    private func handleResult(result: (Result<MovieResponse, Error>)) {
+        switch result {
+        case .success(let movie):
+            convertToMovieResponse(movie)
+        case .failure(let error):
+            DispatchQueue.main.async { [ weak self ] in
+                self?.showError?(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func convertToMovieResponse(_ response: MovieResponse) {
+        let movieResponseViewModel = MovieResponseViewModel(response)
+        movies.append(movieResponseViewModel)
+    }
+    
+    private func getImage() {
+        for movie in movies {
+            let url = movie.poster
+            
+            ApiManager.getImage(url: url) { [weak self] result in
+                
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                            movie.imageData = data
+                            let json = try? JSONSerialization.jsonObject(with: data , options: [])
+                            print(json ?? "")
+                        
+                    case .failure(let error):
+                        self?.showError?(error.localizedDescription)
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Private methods
-   private func loadMockImage() {
-        movies = [
-            MovieResponseViewModel(response: MovieResponse(image: UIImage(named: "mock1") ?? .add, title: "Avatar")),
-            MovieResponseViewModel(response: MovieResponse(image: UIImage(named: "mock2") ?? .add, title: "Телекинез")),
-            MovieResponseViewModel(response: MovieResponse(image: UIImage(named: "mock3") ?? .add, title: "Остров проклятых")),
-            MovieResponseViewModel(response: MovieResponse(image: UIImage(named: "mock4") ?? .add, title: "Время"))
-            ]
-    }
 }
