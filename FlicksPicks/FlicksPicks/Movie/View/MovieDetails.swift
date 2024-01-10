@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  MovieDetails.swift
 //  FlicksPicks
 //
 //  Created by User on 04.01.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class Movie: UIViewController {
+final class MovieDetails: UIViewController {
     
     // MARK: - GUI Variables
     private lazy var imageView: UIImageView = {
@@ -56,17 +56,17 @@ final class Movie: UIViewController {
     }()
     
     // MARK: - Properties
-    private let viewModel: MovieResponseViewModel
+//    private let viewModel: MovieResponseViewModel
     
     // MARK: - Life cycle
-    init(viewModel: MovieResponseViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init(viewModel: MovieResponseViewModel) {
+//        self.viewModel = viewModel
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,8 +85,8 @@ final class Movie: UIViewController {
             descriptionLabel,
         ])
         
-        titleNameLabel.text = viewModel.name
-        descriptionLabel.text = viewModel.description
+//        titleNameLabel.text = viewModel.name
+//        descriptionLabel.text = viewModel.description
         //        imageView.image = viewModel.
         
         setupConstraints()

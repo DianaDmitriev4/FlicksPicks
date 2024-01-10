@@ -14,43 +14,27 @@ final class SwipeCardView : UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = .cancel
-        
+        imageView.image = UIImage(named: "mock1")
         return imageView
     }()
-    
-    var dataSource : MovieResponseViewModel? {
+    var url = "" {
         didSet {
-            //            guard let data = dataSource?.imageData else { return }
-            //            let image = UIImage(data: data)
-            //            DispatchQueue.main.async { [weak self] in
-            //                self?.imageView.image = image
-            //            }
-            if let url = dataSource?.poster {
-                ApiManager.getImage(url: url) { result in
-                    switch result {
-                    case .success(let data):
-                        DispatchQueue.main.async { [weak self] in
-                            let image = UIImage(data: data)
-                            self?.imageView.image = image
-                        }
-                    case .failure(let failure):
-                        print(failure)
-                    }
-                }
-            }
+            print(url)
         }
     }
+    
+    var dataSource : MovieResponse?
 
 var delegate: SwipeCardsDelegate?
-
+    let viewModel = GeneralViewModel()
 //MARK: - Initialization
 override init(frame: CGRect) {
     super.init(frame: .zero)
     
-    addSubviews(views: [imageView])
+    addSubview(imageView)
     setupConstraints()
     addPanGestureOnCards()
+    
 }
 
 required init?(coder aDecoder: NSCoder) {
@@ -58,6 +42,53 @@ required init?(coder aDecoder: NSCoder) {
 }
 
 // MARK: - Private methods
+    func getImage() {
+        if let url = dataSource?.poster?.url {
+            ApiManager.getImage(url: url) { result in
+                switch result {
+                case .success(let data):
+                    self.imageView.image = UIImage(data: data)
+                case .failure(let failure):
+                    print("lox")
+                }
+            }
+        }
+    }
+    
+//    func getImage() {
+//        getURL()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+//            self?.setImage()
+//            print("ZAGRUZILOS")
+//        }
+//    }
+//    
+//    func setImage() {
+//        ApiManager.getImage(url: url) { [weak self] result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let dataPict):
+//                    self?.imageView.image = UIImage(data: dataPict)
+//                case .failure(_):
+//                    print("lox")
+//                }
+//            }
+//        }
+//    }
+//
+//func getURL() {
+//    ApiManager.getFilms { result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let data):
+//                            self.url = data.poster?.url ?? ""
+//                case .failure(let failure):
+//                    print("")
+//                }
+//            }
+//        }
+//    }
+    
 private func setupConstraints() {
     imageView.snp.makeConstraints { make in
         make.edges.equalToSuperview()

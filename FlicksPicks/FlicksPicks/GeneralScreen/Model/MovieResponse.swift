@@ -1,5 +1,5 @@
 //
-//  movieResponse.swift
+//  MovieResponse.swift
 //  FlicksPicks
 //
 //  Created by User on 01.01.2024.
@@ -27,7 +27,7 @@ struct MovieResponse: Codable {
 }
 
 struct Poster: Codable {
-let url: String
+    let url: String
     
     enum CodingKeys: CodingKey {
         case url
@@ -43,7 +43,7 @@ struct Rating: Codable {
 }
 
 struct Genres: Codable {
-let name: String
+    let name: String
     
     enum CodingKeys: CodingKey {
         case name

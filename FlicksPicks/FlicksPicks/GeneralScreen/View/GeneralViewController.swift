@@ -14,11 +14,23 @@ final class GeneralViewController: UIViewController {
     
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer()
+        view.viewModel = self.viewModel
         
         return view
     }()
     
+    lazy private var labelView: UILabel = {
+        let view = UILabel()
+        
+        return view
+    }()
 
+    lazy private var imageView: UIImageView = {
+        let view = UIImageView()
+        
+        return view
+    }()
+    
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
@@ -30,11 +42,13 @@ final class GeneralViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Life cycle
     override func loadView() {
         view = UIView()
         view.addSubview(moviePosterView)
+//        view.addSubview(labelView)
+//        view.addSubview(imageView)
     }
     
     override func viewDidLoad() {
@@ -42,23 +56,22 @@ final class GeneralViewController: UIViewController {
         
         view.backgroundColor = .white
         makeConstraints()
-        moviePosterView.dataSource = self
+//        moviePosterView.dataSource = self
         addGestureForImage()
         setupNavBar()
         viewModel.loadData()
     }
     
     // MARK: - Private func
-       
-    
-    
+
+
     @objc private func selectFilters() {
         let vc = Filters()
         navigationController?.present(vc, animated: true)
     }
     @objc private func showMovie() {
 //        guard let movies = viewModel.movies as? MovieResponseViewModel else { return }
-//        navigationController?.pushViewController(Movie(viewModel: movies), animated: true)
+        navigationController?.pushViewController(MovieDetails(), animated: true)
     }
     
     private func addGestureForImage() {
@@ -73,6 +86,14 @@ final class GeneralViewController: UIViewController {
             make.width.equalTo(300)
             make.top.equalToSuperview().inset(150)
         }
+        
+//        labelView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
+//        
+//        imageView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
     }
     
     private func setupNavBar() {
@@ -88,16 +109,5 @@ final class GeneralViewController: UIViewController {
 }
 
 // MARK: - SwipeCardsDataProtocol
-extension GeneralViewController: SwipeCardsDataProtocol {
     
-    func numberOfCardsToShow() -> Int {
-        return viewModel.movies.count
-    }
-    
-    func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView()
-        card.dataSource = viewModel.movies[index]
-        return card
-    }
-}
-
+   

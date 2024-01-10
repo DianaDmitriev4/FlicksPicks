@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE7EC6E22B46DE4E00EEC570 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E12B46DE4E00EEC570 /* Movie.swift */; };
+		CE7EC6E22B46DE4E00EEC570 /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E12B46DE4E00EEC570 /* MovieDetails.swift */; };
 		CE7EC6E42B46F05C00EEC570 /* SelectedMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */; };
 		CE9C591C2B46F7BE0012EA2F /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C591B2B46F7BE0012EA2F /* Filters.swift */; };
 		CE9C59232B4921BB0012EA2F /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C59222B4921BB0012EA2F /* ApiManager.swift */; };
@@ -26,10 +26,12 @@
 		CECE68A92B40854E00EC6813 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CECE68A82B40854E00EC6813 /* SnapKit */; };
 		CECE68AB2B40854E00EC6813 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = CECE68AA2B40854E00EC6813 /* SnapKit-Dynamic */; };
 		CECE68AF2B40879D00EC6813 /* GeneralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68AE2B40879D00EC6813 /* GeneralViewModel.swift */; };
+		CEE331532B4E557F00D2EF1B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEE331522B4E557F00D2EF1B /* SnapKit */; };
+		CEE331552B4E557F00D2EF1B /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = CEE331542B4E557F00D2EF1B /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE7EC6E12B46DE4E00EEC570 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		CE7EC6E12B46DE4E00EEC570 /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 		CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovies.swift; sourceTree = "<group>"; };
 		CE9C591B2B46F7BE0012EA2F /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		CE9C59222B4921BB0012EA2F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -55,8 +57,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE331532B4E557F00D2EF1B /* SnapKit in Frameworks */,
 				CECE68A92B40854E00EC6813 /* SnapKit in Frameworks */,
 				CECE68AB2B40854E00EC6813 /* SnapKit-Dynamic in Frameworks */,
+				CEE331552B4E557F00D2EF1B /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +94,7 @@
 		CE9C591E2B4906270012EA2F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE7EC6E12B46DE4E00EEC570 /* Movie.swift */,
+				CE7EC6E12B46DE4E00EEC570 /* MovieDetails.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,6 +223,8 @@
 			packageProductDependencies = (
 				CECE68A82B40854E00EC6813 /* SnapKit */,
 				CECE68AA2B40854E00EC6813 /* SnapKit-Dynamic */,
+				CEE331522B4E557F00D2EF1B /* SnapKit */,
+				CEE331542B4E557F00D2EF1B /* SnapKit-Dynamic */,
 			);
 			productName = FlicksPicks;
 			productReference = CECE68902B4084E900EC6813 /* FlicksPicks.app */;
@@ -290,7 +296,7 @@
 				CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */,
 				CECE68AF2B40879D00EC6813 /* GeneralViewModel.swift in Sources */,
 				CEB586482B443DC20050AA58 /* TabBar.swift in Sources */,
-				CE7EC6E22B46DE4E00EEC570 /* Movie.swift in Sources */,
+				CE7EC6E22B46DE4E00EEC570 /* MovieDetails.swift in Sources */,
 				CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +527,16 @@
 			productName = SnapKit;
 		};
 		CECE68AA2B40854E00EC6813 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CECE68A72B40854E00EC6813 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		CEE331522B4E557F00D2EF1B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CECE68A72B40854E00EC6813 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		CEE331542B4E557F00D2EF1B /* SnapKit-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CECE68A72B40854E00EC6813 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";

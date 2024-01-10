@@ -7,10 +7,10 @@
 
 import UIKit
 
-protocol SwipeCardsDataProtocol {
-    func numberOfCardsToShow() -> Int
-    func card(at index: Int) -> SwipeCardView
-}
+//protocol SwipeCardsDataProtocol {
+//    func numberOfCardsToShow() -> Int
+//    func card(at index: Int) -> SwipeCardView
+//}
 
 protocol SwipeCardsDelegate {
     func swipeDidEnd(on view: SwipeCardView)

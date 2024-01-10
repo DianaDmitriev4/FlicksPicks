@@ -10,24 +10,24 @@ import Foundation
 final class ApiManager {
     private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2"
     
-    static func getFilms(completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+    static func getFilms(count: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
         let headers = [
             "accept": "application/json",
             "X-API-KEY": token
         ]
-        
-        guard let url = URL(string: "https://api.kinopoisk.dev/v1/movie/random") else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        
-        let session = URLSession.shared.dataTask(with: request) { data, _, error in
-            handleResponse(data: data,
-                           error: error,
-                           completion: completion)
-                           }
-        session.resume()
+        for _ in 1...count {
+            guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie/random?isSeries=false&rating.kp=7-10") else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.allHTTPHeaderFields = headers
+            
+            let session = URLSession.shared.dataTask(with: request) { data, _, error in
+                handleResponse(data: data,
+                               error: error,
+                               completion: completion)
+            }
+            session.resume()
+        }
     }
     
     static func getImage(url: String, completion: @escaping (Result<Data, Error>) -> ()) {
@@ -47,8 +47,8 @@ final class ApiManager {
         if let error {
             completion(.failure(NetworkingError.networkingError(error)))
         } else if let data {
-//            let json = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(json ?? "")
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(json ?? "")
             do {
                 let films = try JSONDecoder().decode(MovieResponse.self, from: data)
                 completion(.success(films))
