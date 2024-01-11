@@ -9,7 +9,7 @@ import UIKit
 
 final class СardСontainer: UIView, SwipeCardsDelegate {
     // MARK: - Properties
-    private var cardsToShow: Int = 0
+    private var numberOfCardsToShow: Int = 0
     private var cardsToBeVisible: Int = 3
     private var cardViews : [SwipeCardView] = []
     private var remainingCards: Int = 0
@@ -20,45 +20,37 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     private var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
-    
-     var viewModel: GeneralViewModelProtocol
+    var dataSource: SwipeCardsDataSource? {
+        didSet {
+            reloadData()
+        }
+    }
+    var viewModel: GeneralViewModelProtocol
     
     //MARK: - Initialization
     override init(frame: CGRect) {
-       
+        
         self.viewModel = GeneralViewModel()
         super.init(frame: .zero)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 8) { [weak self] in
-            if let self {
-                self.addCardView(cardView: self.card(at: 0), atIndex: 0)
-            }
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Private methods
     
-    func numberOfCardsToShow() -> Int {
-        return viewModel.movies.count
-    }
-    
-    func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView()
-        card.dataSource = viewModel.movies[index]
-        return card
-    }
-    
-    private func reloadData() {
+    func reloadData() {
         removeAllCardViews()
+        guard let data = dataSource else { return }
         setNeedsLayout()
         layoutIfNeeded()
-        remainingCards = cardsToShow
+        numberOfCardsToShow = data.numberOfCardsToShow()
+        remainingCards = numberOfCardsToShow
         
-        for i in 0..<min(cardsToShow,cardsToBeVisible) {
-            addCardView(cardView: card(at: i), atIndex: i )
+        for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
+            addCardView(cardView: data.card(at: i), atIndex: i )
+            
         }
     }
     
@@ -92,11 +84,11 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     // MARK: - Methods
     func swipeDidEnd(on view: SwipeCardView) {
         view.removeFromSuperview()
-        
+        guard let data = dataSource else { return }
         if remainingCards > 0 {
-            let newIndex = numberOfCardsToShow() - remainingCards
-            addCardView(cardView: card(at: newIndex), atIndex: 2)
-            for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
+            let newIndex = data.numberOfCardsToShow() - remainingCards
+            addCardView(cardView: data.card(at: newIndex), atIndex: 2)
+            for (cardIndex, cardView) in visibleCards.enumerated() {
                 UIView.animate(withDuration: 0.2, animations: {
                     cardView.center = self.center
                     self.addCardFrame(index: cardIndex, cardView: cardView)
@@ -104,7 +96,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                 })
             }
         }else {
-            for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
+            for (cardIndex, cardView) in visibleCards.enumerated() {
                 UIView.animate(withDuration: 0.2, animations: {
                     cardView.center = self.center
                     self.addCardFrame(index: cardIndex, cardView: cardView)
@@ -112,6 +104,5 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                 })
             }
         }
-        
     }
 }

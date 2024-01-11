@@ -10,11 +10,10 @@ import UIKit
 
 final class GeneralViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: GeneralViewModelProtocol
+    private var viewModel: GeneralViewModelProtocol
     
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer()
-        view.viewModel = self.viewModel
         
         return view
     }()
@@ -56,10 +55,13 @@ final class GeneralViewController: UIViewController {
         
         view.backgroundColor = .white
         makeConstraints()
-//        moviePosterView.dataSource = self
+//        viewModel.reloadData = { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 9) { [weak self] in
+            self?.moviePosterView.dataSource = self
+        }
         addGestureForImage()
         setupNavBar()
-        viewModel.loadData()
+        viewModel.loadData(count: 3)
     }
     
     // MARK: - Private func
@@ -109,5 +111,21 @@ final class GeneralViewController: UIViewController {
 }
 
 // MARK: - SwipeCardsDataProtocol
+extension GeneralViewController : SwipeCardsDataSource {
+
+    func numberOfCardsToShow() -> Int {
+        return viewModel.movies.count
+    }
     
-   
+    func card(at index: Int) -> SwipeCardView {
+        let card = SwipeCardView()
+        card.dataSource = viewModel.movies[index]
+        return card
+    }
+    
+    func emptyView() -> UIView? {
+        return nil
+    }
+    
+
+}

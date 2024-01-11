@@ -9,19 +9,17 @@
 import Foundation
 
 protocol GeneralViewModelProtocol {
-    var movies: [MovieResponse] { get set }
+    var movies: [MovieResponseViewModel] { get set }
     var showError: ((String) -> Void)? { get set }
     func loadData(count: Int)
     var reloadData: (() -> Void)? { get set }
-    var reloadImageData: (() -> Void)? { get set }
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
     var reloadData: (() -> Void)?
-    var reloadImageData: (() -> Void)?
-    var movies: [MovieResponse] = [] {
-        didSet{
+    var movies: [MovieResponseViewModel] = [] {
+        didSet {
             DispatchQueue.main.async {
                 self.reloadData?()
             }
@@ -38,8 +36,8 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     private func handleResult(result: (Result<MovieResponse, Error>)) {
         switch result {
         case .success(let movie):
-            movies.append(movie)
-                getImage()
+            getImage()
+            convertToMovieResponse(movie)
             
         case .failure(let error):
             DispatchQueue.main.async { [ weak self ] in
@@ -48,24 +46,22 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     
-//    private func convertToMovieResponse(_ response: MovieResponse) {
-//        let movieResponseViewModel = MovieResponseViewModel(response)
-//        movies.append(movieResponseViewModel)
-//    }
-    var imageData: Data?
+    private func convertToMovieResponse(_ response: MovieResponse) {
+        let movieResponseViewModel = MovieResponseViewModel(response)
+        movies.append(movieResponseViewModel)
+    }
+    
     private func getImage() {
         for (i, film) in movies.enumerated() {
-            if let url = film.poster?.url {
-                ApiManager.getImage(url: url) { [weak self] result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let data):
-                            let movie = self?.movies[i] as? MovieResponse
-                            self?.imageData = data
-                            self?.reloadImageData?()
-                        case .failure(let error):
-                            self?.showError?(error.localizedDescription)
-                        }
+            let url = film.poster
+            ApiManager.getImage(url: url) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        let movie = self?.movies[i]
+                        movie?.imageData = data
+                    case .failure(let error):
+                        self?.showError?(error.localizedDescription)
                     }
                 }
             }
