@@ -20,9 +20,9 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     var reloadData: (() -> Void)?
     var movies: [MovieResponseViewModel] = [] {
         didSet {
-            DispatchQueue.main.async {
-                self.reloadData?()
-            }
+                DispatchQueue.main.async {
+                    self.reloadData?()
+                }
         }
     }
     var showError: ((String) -> Void)?
@@ -36,12 +36,12 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     private func handleResult(result: (Result<MovieResponse, Error>)) {
         switch result {
         case .success(let movie):
-            getImage()
             convertToMovieResponse(movie)
-            
+            getImage()
         case .failure(let error):
             DispatchQueue.main.async { [ weak self ] in
                 self?.showError?(error.localizedDescription)
+                print("NOOOOOOOOOOOOOOO")
             }
         }
     }

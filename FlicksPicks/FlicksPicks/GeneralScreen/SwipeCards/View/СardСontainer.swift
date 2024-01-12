@@ -20,9 +20,11 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     private var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
+    let emptyClosure: (() -> Void)? = {}
     var dataSource: SwipeCardsDataSource? {
         didSet {
             reloadData()
+            print("СРАБОТАЛ ДИДСЕТ У КАРТОЧЕК")
         }
     }
     var viewModel: GeneralViewModelProtocol
@@ -32,6 +34,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         self.viewModel = GeneralViewModel()
         super.init(frame: .zero)
+        print("КАРТОЧКИ ИНИЦИАЛИЗИРОВАНЫ")
     }
     
     required init?(coder aDecoder: NSCoder) {
