@@ -15,7 +15,7 @@ final class GeneralViewController: UIViewController {
         
         return view
     }()
-
+    
     private var viewModel: GeneralViewModelProtocol
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
@@ -43,6 +43,7 @@ final class GeneralViewController: UIViewController {
         setupNavBar()
         viewModel.loadData(count: 4)
         setupViewModel()
+        
     }
     
     // MARK: - Private func
@@ -51,13 +52,14 @@ final class GeneralViewController: UIViewController {
         navigationController?.present(vc, animated: true)
     }
     @objc private func showMovie() {
-        //        guard let movies = viewModel.movies as? MovieResponseViewModel else { return }
-        navigationController?.pushViewController(MovieDetails(), animated: true)
+        let movies = viewModel.movies[moviePosterView.currentIndex] 
+        navigationController?.pushViewController(MovieDetails(viewModel: movies), animated: true)
     }
     
     private func setupViewModel() {
         viewModel.reloadData = { [weak self] in
             self?.moviePosterView.dataSource = self
+//            self?.navigationItem.title = self?.viewModel.movies[self?.moviePosterView.currentIndex ?? 0].name
             print("ЗАМЫКАНИЕ СРАБОТАЛО")
         }
     }

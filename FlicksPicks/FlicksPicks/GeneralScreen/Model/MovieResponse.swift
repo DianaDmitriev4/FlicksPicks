@@ -13,16 +13,18 @@ struct MovieResponse: Codable {
     let rating: Rating?
     let name: String?
     let description: String?
-    let genres: [Genres]?
-    let countries: [Countries]?
+//    let genres: [Genres]?
+//    let countries: [Country]?
+    let year: Int?
     
     enum CodingKeys: CodingKey {
         case poster
         case rating
         case name
         case description
-        case genres
-        case countries
+//        case genres
+//        case countries
+        case year
     }
 }
 
@@ -50,7 +52,7 @@ struct Genres: Codable {
     }
 }
 
-struct Countries: Codable {
+struct Country: Codable {
     let name: String
     
     enum CodingKeys: CodingKey {

@@ -13,7 +13,6 @@ final class MovieDetails: UIViewController {
         let imageView = UIImageView()
         
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         
         return imageView
@@ -25,16 +24,21 @@ final class MovieDetails: UIViewController {
         return view
     }()
     
-    private lazy var titleNameLabel: UILabel = {
-        let label = UILabel()
+    private lazy var titleView: UIView = {
+        let view = UIView()
         
-        label.font = .boldSystemFont(ofSize: 30)
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
+        view.backgroundColor = .black
+        view.alpha = 0.8
         
-        return label
+        return view
     }()
+    
+    private lazy var titleLabel = makeLabel(size: 27, textColor: .white, numberOfLines: 1)
+    private lazy var yearLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
+    private lazy var ratingLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
+    //    private lazy var countriesLabel = makeLabel(size: 19)
+    //    private lazy var genresLabel = makeLabel(size: 19)
+    private lazy var descriptionLabel = makeLabel(size: 23, textColor: .black, numberOfLines: 0)
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -44,28 +48,18 @@ final class MovieDetails: UIViewController {
         return scrollView
     }()
     
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = .systemFont(ofSize: 20)
-        label.textAlignment = .justified
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
-    
     // MARK: - Properties
-//    private let viewModel: MovieResponseViewModel
+    private let viewModel: MovieResponseViewModel
     
     // MARK: - Life cycle
-//    init(viewModel: MovieResponseViewModel) {
-//        self.viewModel = viewModel
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    init(viewModel: MovieResponseViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,20 +69,46 @@ final class MovieDetails: UIViewController {
     }
     
     // MARK: - Private methods
+    private func makeLabel(size: CGFloat, textColor: UIColor, numberOfLines: Int) -> UILabel {
+        let label: UILabel = {
+            
+            let label = UILabel()
+            
+            label.font = .systemFont(ofSize: size)
+            label.textAlignment = .left
+            label.numberOfLines = numberOfLines
+            label.lineBreakMode = .byWordWrapping
+            label.textColor = textColor
+            
+            return label
+        }()
+        return label
+    }
+    
     private func setupUI() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        titleView.addSubview(titleLabel)
         contentView.addSubviews(views: [
             imageView,
-            titleNameLabel,
+            titleView,
             descriptionLabel,
+            yearLabel,
+            ratingLabel
         ])
-        
-//        titleNameLabel.text = viewModel.name
-//        descriptionLabel.text = viewModel.description
-        //        imageView.image = viewModel.
-        
+        setData()
         setupConstraints()
+    }
+    
+    private func setData() {
+        titleLabel.text = viewModel.name
+        descriptionLabel.text = viewModel.description
+        yearLabel.text = "Year: " + String(viewModel.year)
+        ratingLabel.text = "Rating: " + String(viewModel.rating)
+        
+        if let data = viewModel.imageData {
+            imageView.image = UIImage(data: data)
+        }
     }
     
     private func setupConstraints() {
@@ -101,20 +121,36 @@ final class MovieDetails: UIViewController {
             make.width.equalTo(scrollView.snp.width)
         }
         
-        titleNameLabel.snp.makeConstraints { make in
+        imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.trailing.leading.equalToSuperview().inset(30)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(350)
         }
         
-        imageView.snp.makeConstraints { make in
-            make.top.equalTo(titleNameLabel.snp.bottom).offset(30)
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(200)
+        titleView.snp.makeConstraints { make in
+            make.bottom.equalTo(imageView.snp.bottom)
+            make.height.equalTo(titleLabel.snp.height)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        yearLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(15)
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+        
+        ratingLabel.snp.makeConstraints { make in
+            make.top.equalTo(yearLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(30)
+            make.top.equalTo(ratingLabel.snp.bottom).offset(30)
             make.trailing.leading.equalToSuperview().inset(30)
+            make.bottom.equalToSuperview()
         }
     }
 }

@@ -28,6 +28,8 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         }
     }
     
+    var currentIndex = 0
+    
     //MARK: - Initialization
     override init(frame: CGRect) {
         
@@ -50,6 +52,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: data.card(at: i), atIndex: i )
+            currentIndex = i
         }
     }
     

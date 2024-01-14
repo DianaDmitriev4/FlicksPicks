@@ -13,21 +13,18 @@ final class MovieResponseViewModel {
     let rating: Double
     let name: String
     let description: String
-//    let genres: [GenresType]
-//    let countries: [CountriesType]
+//    let genres: [String]
+//    let countries: [String]
     var imageData: Data?
+    let year: Int
     
     init(_ from: MovieResponse) {
         self.poster = from.poster?.url ?? ""
         self.rating = from.rating?.kp ?? 0.0
         self.name = from.name ?? ""
         self.description = from.description ?? ""
-        
-//        self.poster = PosterType(from.poster)
-//        self.rating = RatingType(from.rating)
-//        self.name = from.name ?? ""
-//        self.description = from.description ?? ""
-//        self.genres = from.genres.map { GenresType ($0) }
-//        self.countries = from.countries.map { CountriesType ($0) }
+        self.year = from.year ?? 0
+//        self.countries = from.countries?.compactMap { $0.name } ?? []
+//        self.genres = from.genres?.compactMap { $0.name } ?? []
     }
 }

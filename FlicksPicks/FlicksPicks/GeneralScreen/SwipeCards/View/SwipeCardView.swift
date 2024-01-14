@@ -75,7 +75,7 @@ final class SwipeCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-                    //                    self.viewModel?.loadData(count: 2)
+//                                        self.viewModel?.loadData(count: 2)
                 }
                 return
                 // Swipe left
@@ -85,7 +85,7 @@ final class SwipeCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-                    //                    self.viewModel?.loadData(count: 2)
+//                                        self.viewModel?.loadData(count: 2)
                 }
                 return
             }
