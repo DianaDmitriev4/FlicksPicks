@@ -5,34 +5,35 @@
 //  Created by User on 31.12.2023.
 //
 
-// TODO: поставить foundation после того, как засетаю из сети
 import Foundation
 
 protocol GeneralViewModelProtocol {
     var movies: [MovieResponseViewModel] { get set }
     var showError: ((String) -> Void)? { get set }
-    func loadData(count: Int)
     var reloadData: (() -> Void)? { get set }
+    func loadData(count: Int)
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
     var reloadData: (() -> Void)?
+    var showError: ((String) -> Void)?
     var movies: [MovieResponseViewModel] = [] {
         didSet {
-                DispatchQueue.main.async {
-                    self.reloadData?()
-                }
+            DispatchQueue.main.async {
+                self.reloadData?()
+            }
         }
     }
-    var showError: ((String) -> Void)?
     
+    // MARK: - Methods
     func loadData(count: Int) {
         ApiManager.getFilms(count: count) { [weak self] result in
             self?.handleResult(result: result)
         }
     }
     
+    // MARK: - Private methods
     private func handleResult(result: (Result<MovieResponse, Error>)) {
         switch result {
         case .success(let movie):
@@ -41,7 +42,6 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         case .failure(let error):
             DispatchQueue.main.async { [ weak self ] in
                 self?.showError?(error.localizedDescription)
-                print("NOOOOOOOOOOOOOOO")
             }
         }
     }

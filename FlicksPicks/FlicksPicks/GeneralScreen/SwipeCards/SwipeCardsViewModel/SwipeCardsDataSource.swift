@@ -5,7 +5,7 @@
 //  Created by User on 03.01.2024.
 //
 
-import UIKit
+import Foundation
 
 protocol SwipeCardsDataSource {
     func numberOfCardsToShow() -> Int

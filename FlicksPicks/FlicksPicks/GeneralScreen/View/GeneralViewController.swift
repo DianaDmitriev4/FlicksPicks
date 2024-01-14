@@ -10,26 +10,13 @@ import UIKit
 
 final class GeneralViewController: UIViewController {
     // MARK: - Properties
-    private var viewModel: GeneralViewModelProtocol
-    
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer()
         
         return view
     }()
-    
-    lazy private var labelView: UILabel = {
-        let view = UILabel()
-        
-        return view
-    }()
-    
-    lazy private var imageView: UIImageView = {
-        let view = UIImageView()
-        
-        return view
-    }()
-    
+
+    private var viewModel: GeneralViewModelProtocol
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
@@ -55,17 +42,10 @@ final class GeneralViewController: UIViewController {
         addGestureForImage()
         setupNavBar()
         viewModel.loadData(count: 4)
-        set()
+        setupViewModel()
     }
     
     // MARK: - Private func
-    private func set() {
-        viewModel.reloadData = { [weak self] in
-            self?.moviePosterView.dataSource = self
-            print("ЗАМЫКАНИЕ СРАБОТАЛО")
-        }
-    }
-    
     @objc private func selectFilters() {
         let vc = Filters()
         navigationController?.present(vc, animated: true)
@@ -73,6 +53,13 @@ final class GeneralViewController: UIViewController {
     @objc private func showMovie() {
         //        guard let movies = viewModel.movies as? MovieResponseViewModel else { return }
         navigationController?.pushViewController(MovieDetails(), animated: true)
+    }
+    
+    private func setupViewModel() {
+        viewModel.reloadData = { [weak self] in
+            self?.moviePosterView.dataSource = self
+            print("ЗАМЫКАНИЕ СРАБОТАЛО")
+        }
     }
     
     private func addGestureForImage() {
@@ -95,10 +82,6 @@ final class GeneralViewController: UIViewController {
                                            action: #selector(selectFilters))
         navigationItem.rightBarButtonItem = filterButton
     }
-    
-    private func setupUI() {
-        
-    }
 }
 
 // MARK: - SwipeCardsDataProtocol
@@ -113,10 +96,4 @@ extension GeneralViewController : SwipeCardsDataSource {
         card.dataSource = viewModel.movies[index]
         return card
     }
-    
-    func emptyView() -> UIView? {
-        return nil
-    }
-    
-    
 }

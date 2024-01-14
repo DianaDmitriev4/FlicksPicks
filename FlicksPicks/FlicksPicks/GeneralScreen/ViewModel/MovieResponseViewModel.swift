@@ -23,7 +23,6 @@ final class MovieResponseViewModel {
         self.name = from.name ?? ""
         self.description = from.description ?? ""
         
-        
 //        self.poster = PosterType(from.poster)
 //        self.rating = RatingType(from.rating)
 //        self.name = from.name ?? ""
@@ -32,35 +31,3 @@ final class MovieResponseViewModel {
 //        self.countries = from.countries.map { CountriesType ($0) }
     }
 }
-
-final class PosterType {
-var url: String
-    
-    init(_ from: Poster?) {
-        self.url = from?.url ?? ""
-    }
-}
-
-final class RatingType {
-    var kp: Double
-    
-    init(_ from: Rating?) {
-        self.kp = from?.kp ?? 0.0
-    }
-}
-
-//final class GenresType {
-//let name: String
-//    
-//    init(_ from: Genres?) {
-//        self.name = from?.name ?? ""
-//    }
-//}
-//
-//final class CountriesType {
-//    let name: String
-//    
-//    init(_ from: Countries?) {
-//        self.name = from?.name ?? ""
-//    }
-//}

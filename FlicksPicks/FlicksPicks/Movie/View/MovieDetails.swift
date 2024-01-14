@@ -8,7 +8,6 @@
 import UIKit
 
 final class MovieDetails: UIViewController {
-    
     // MARK: - GUI Variables
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()

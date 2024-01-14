@@ -20,19 +20,17 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     private var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
-    let emptyClosure: (() -> Void)? = {}
+    
     var dataSource: SwipeCardsDataSource? {
         didSet {
             reloadData()
             print("СРАБОТАЛ ДИДСЕТ У КАРТОЧЕК")
         }
     }
-    var viewModel: GeneralViewModelProtocol
     
     //MARK: - Initialization
     override init(frame: CGRect) {
         
-        self.viewModel = GeneralViewModel()
         super.init(frame: .zero)
         print("КАРТОЧКИ ИНИЦИАЛИЗИРОВАНЫ")
     }
@@ -42,8 +40,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Private methods
-    
-    func reloadData() {
+    private func reloadData() {
         removeAllCardViews()
         guard let data = dataSource else { return }
         setNeedsLayout()
@@ -53,7 +50,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: data.card(at: i), atIndex: i )
-            
         }
     }
     
@@ -65,7 +61,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         remainingCards -= 1
     }
     
-    func addCardFrame(index: Int, cardView: SwipeCardView) {
+    private func addCardFrame(index: Int, cardView: SwipeCardView) {
         var cardViewFrame = bounds
         let horizontalInset = (CGFloat(index) * self.horizontalInset)
         let verticalInset = CGFloat(index) * self.verticalInset
@@ -98,7 +94,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                     self.layoutIfNeeded()
                 })
             }
-        }else {
+        } else {
             for (cardIndex, cardView) in visibleCards.enumerated() {
                 UIView.animate(withDuration: 0.2, animations: {
                     cardView.center = self.center
