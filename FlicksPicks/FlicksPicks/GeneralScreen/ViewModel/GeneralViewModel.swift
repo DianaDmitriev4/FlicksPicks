@@ -38,7 +38,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     // MARK: - Methods
     func loadData(count: Int) {
-        ApiManager.getFilms(count: count) { [weak self] result in
+        ApiManager.getFilms(genre: <#[GenreTypes]?#>, count: count) { [weak self] result in
             self?.handleResult(result: result)
         }
     }

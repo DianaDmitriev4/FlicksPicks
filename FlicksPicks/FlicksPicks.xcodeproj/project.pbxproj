@@ -31,6 +31,7 @@
 		CEE331592B53B83200D2EF1B /* SelectedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE331582B53B83200D2EF1B /* SelectedMovieCell.swift */; };
 		CEE3315F2B55474200D2EF1B /* FiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3315E2B55474200D2EF1B /* FiltersTableViewCell.swift */; };
 		CEE331612B5552D800D2EF1B /* GenreTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE331602B5552D800D2EF1B /* GenreTypes.swift */; };
+		CEE331632B55599000D2EF1B /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE331622B55599000D2EF1B /* FiltersViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		CEE331582B53B83200D2EF1B /* SelectedMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieCell.swift; sourceTree = "<group>"; };
 		CEE3315E2B55474200D2EF1B /* FiltersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewCell.swift; sourceTree = "<group>"; };
 		CEE331602B5552D800D2EF1B /* GenreTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTypes.swift; sourceTree = "<group>"; };
+		CEE331622B55599000D2EF1B /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 			children = (
 				CE9C591B2B46F7BE0012EA2F /* FiltersTableViewController.swift */,
 				CEE3315E2B55474200D2EF1B /* FiltersTableViewCell.swift */,
+				CEE331622B55599000D2EF1B /* FiltersViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				CEE331592B53B83200D2EF1B /* SelectedMovieCell.swift in Sources */,
 				CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */,
 				CECE68942B4084E900EC6813 /* AppDelegate.swift in Sources */,
+				CEE331632B55599000D2EF1B /* FiltersViewModel.swift in Sources */,
 				CEE3315F2B55474200D2EF1B /* FiltersTableViewCell.swift in Sources */,
 				CEB586512B452A2F0050AA58 /* MovieResponseViewModel.swift in Sources */,
 				CE9C59232B4921BB0012EA2F /* ApiManager.swift in Sources */,

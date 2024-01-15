@@ -52,4 +52,9 @@ final class FiltersTableViewCell: UITableViewCell {
     private func setupUI() {
         
     }
+    
+    func configureCell(genre: GenreTypes, isSelected: Bool) {
+        genreNameLabel.text = genre.genreName
+        checkboxImageView.image = isSelected ? State.select.image : State.unselect.image
+    }
 }
