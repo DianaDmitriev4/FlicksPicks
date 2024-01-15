@@ -9,6 +9,17 @@ import UIKit
 
 final class SelectedMovieCell: UITableViewCell {
     // MARK: - GUI variables
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.alignment = .center
+        view.spacing = 5
+        
+        return view
+    }()
+    
     lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         

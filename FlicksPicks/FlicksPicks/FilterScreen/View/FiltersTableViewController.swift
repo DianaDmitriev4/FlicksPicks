@@ -7,10 +7,11 @@
 
 import UIKit
 
-final class Filters: UIViewController {
+final class FiltersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .red
+        tableView.register(FiltersTableViewCell.self, forCellReuseIdentifier: "FiltersTableViewCell")
     }
 }
