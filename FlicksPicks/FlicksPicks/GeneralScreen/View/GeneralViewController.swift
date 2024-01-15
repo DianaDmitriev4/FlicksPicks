@@ -11,7 +11,7 @@ import UIKit
 final class GeneralViewController: UIViewController {
     // MARK: - Properties
     lazy private var moviePosterView: СardСontainer = {
-        let view = СardСontainer()
+        let view = СardСontainer(viewModel: self.viewModel)
         
         return view
     }()
@@ -52,8 +52,8 @@ final class GeneralViewController: UIViewController {
         navigationController?.present(vc, animated: true)
     }
     @objc private func showMovie() {
-        let movies = viewModel.movies[moviePosterView.currentIndex] 
-        navigationController?.pushViewController(MovieDetails(viewModel: movies), animated: true)
+        let movies = viewModel.movies[viewModel.currentIndex]
+        navigationController?.pushViewController(Movie(viewModel: movies), animated: true)
     }
     
     private func setupViewModel() {
@@ -94,7 +94,7 @@ extension GeneralViewController : SwipeCardsDataSource {
     }
     
     func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView()
+        let card = SwipeCardView(viewModel: self.viewModel)
         card.dataSource = viewModel.movies[index]
         return card
     }

@@ -1,5 +1,5 @@
 //
-//  MovieDetails.swift
+//  Movie.swift
 //  FlicksPicks
 //
 //  Created by User on 04.01.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieDetails: UIViewController {
+final class Movie: UIViewController {
     // MARK: - GUI Variables
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -33,7 +33,7 @@ final class MovieDetails: UIViewController {
         return view
     }()
     
-    private lazy var titleLabel = makeLabel(size: 27, textColor: .white, numberOfLines: 1)
+    private lazy var titleLabel = makeLabel(size: 40, textColor: .white, numberOfLines: 1)
     private lazy var yearLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
     private lazy var ratingLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
     //    private lazy var countriesLabel = makeLabel(size: 19)
@@ -64,6 +64,7 @@ final class MovieDetails: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        title = viewModel.name
         view.backgroundColor = .white
         setupUI()
     }
@@ -149,7 +150,7 @@ final class MovieDetails: UIViewController {
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(ratingLabel.snp.bottom).offset(30)
-            make.trailing.leading.equalToSuperview().inset(30)
+            make.trailing.leading.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
         }
     }

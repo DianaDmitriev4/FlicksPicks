@@ -16,11 +16,10 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     
     private let horizontalInset: CGFloat = 10.0
     private let verticalInset: CGFloat = 10.0
-    
+    private var viewModel: GeneralViewModelProtocol
     private var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
-    
     var dataSource: SwipeCardsDataSource? {
         didSet {
             reloadData()
@@ -31,10 +30,14 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     var currentIndex = 0
     
     //MARK: - Initialization
-    override init(frame: CGRect) {
+//    override init(frame: CGRect) {
+//        super.init(frame: .zero)
+//        viewModel = GeneralViewModel()
+    init(viewModel: GeneralViewModelProtocol) {
         
-        super.init(frame: .zero)
+        self.viewModel = viewModel
         print("КАРТОЧКИ ИНИЦИАЛИЗИРОВАНЫ")
+        super.init(frame: .zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +55,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: data.card(at: i), atIndex: i )
-            currentIndex = i
+            
         }
     }
     
@@ -62,6 +65,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         cardViews.append(cardView)
         insertSubview(cardView, at: 0)
         remainingCards -= 1
+        viewModel.currentIndex = index
     }
     
     private func addCardFrame(index: Int, cardView: SwipeCardView) {

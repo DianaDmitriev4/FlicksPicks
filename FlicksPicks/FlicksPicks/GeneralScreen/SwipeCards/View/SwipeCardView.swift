@@ -9,19 +9,19 @@ import SnapKit
 import UIKit
 
 final class SwipeCardView : UIView {
-    
     //MARK: - Properties
     private lazy var imageView: UIImageView = {
         
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         
         return imageView
     }()
     
-    private var viewModel: GeneralViewModelProtocol?
+    private var viewModel: GeneralViewModelProtocol
     
     var delegate: SwipeCardsDelegate?
+    
     var dataSource: MovieResponseViewModel? {
         didSet {
             guard let data = self.dataSource?.imageData else { return }
@@ -29,8 +29,13 @@ final class SwipeCardView : UIView {
         }
     }
     
+    
     //MARK: - Initialization
-    override init(frame: CGRect) {
+//    override init(frame: CGRect) {
+//        super.init(frame: .zero)
+    init(viewModel: GeneralViewModelProtocol) {
+        self.viewModel = viewModel
+        
         super.init(frame: .zero)
         
         print("ПОСТЕРЫ ИНИЦИАЛИЗИРОВАНЫ")
@@ -75,17 +80,18 @@ final class SwipeCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-//                                        self.viewModel?.loadData(count: 2)
+                    self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
+//                                        self.viewModel?.loadData(count: 1)
                 }
                 return
                 // Swipe left
-            }else if card.center.x < -65 {
+            } else if card.center.x < -65 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 0.2) {
                     card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-//                                        self.viewModel?.loadData(count: 2)
+//                                        self.viewModel?.loadData(count: 1)
                 }
                 return
             }

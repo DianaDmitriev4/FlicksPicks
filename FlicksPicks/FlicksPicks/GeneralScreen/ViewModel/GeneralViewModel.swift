@@ -11,6 +11,8 @@ protocol GeneralViewModelProtocol {
     var movies: [MovieResponseViewModel] { get set }
     var showError: ((String) -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
+    var currentIndex: Int { get set }
+    var selectedMovies: [MovieResponseViewModel] { get set }
     func loadData(count: Int)
 }
 
@@ -25,6 +27,14 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             }
         }
     }
+    var selectedMovies: [MovieResponseViewModel] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.reloadData?()
+            }
+        }
+    }
+    var currentIndex = 0
     
     // MARK: - Methods
     func loadData(count: Int) {
