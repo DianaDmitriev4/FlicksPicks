@@ -67,9 +67,9 @@ final class SwipeCardView : UIView {
     
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer){
         let card = sender.view as! SwipeCardView
-        let point = sender.translation(in: self)
+        let newPoint = sender.translation(in: self)
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
-        card.center = CGPoint(x: centerOfParentContainer.x + point.x, y: centerOfParentContainer.y + point.y)
+        card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x, y: centerOfParentContainer.y + newPoint.y)
         
         switch sender.state {
         case .ended:
@@ -77,7 +77,7 @@ final class SwipeCardView : UIView {
             if (card.center.x) > 400 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 0.2) {
-                    card.center = CGPoint(x: centerOfParentContainer.x + point.x + 200, y: centerOfParentContainer.y + point.y + 75)
+                    card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x + 200, y: centerOfParentContainer.y + newPoint.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
                     self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
@@ -85,10 +85,10 @@ final class SwipeCardView : UIView {
                 }
                 return
                 // Swipe left
-            } else if card.center.x < -65 {
+            } else if card.center.x < -10 {
                 delegate?.swipeDidEnd(on: card)
                 UIView.animate(withDuration: 0.2) {
-                    card.center = CGPoint(x: centerOfParentContainer.x + point.x - 200, y: centerOfParentContainer.y + point.y + 75)
+                    card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x - 200, y: centerOfParentContainer.y + newPoint.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
 //                                        self.viewModel?.loadData(count: 1)
@@ -101,7 +101,7 @@ final class SwipeCardView : UIView {
                 self.layoutIfNeeded()
             }
         case .changed:
-            let rotation = tan(point.x / (self.frame.width * 2.0))
+            let rotation = tan(newPoint.x / (self.frame.width * 2.0))
             card.transform = CGAffineTransform(rotationAngle: rotation)
         default:
             break

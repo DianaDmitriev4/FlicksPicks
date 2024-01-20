@@ -17,24 +17,24 @@ enum GenreTypes: String {
     case fantastic = "&genres.name=%D1%84%D0%B0%D0%BD%D1%82%D0%B0%D1%81%D1%82%D0%B8%D0%BA%D0%B0"
     case documentary = "&genres.name=%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9"
     
-    var genreName: String {
-        switch self {
-        case .comedy:
-            "Comedy"
-        case .drama:
-            "Drama"
-        case .actionMovie:
-            "Action movie"
-        case .horror:
-            "Horror"
-        case .adventures:
-            "Adventures"
-        case .thriller:
-            "Thriller"
-        case .fantastic:
-            "Fantastic"
-        case .documentary:
-            "Documentary"
-        }
-    }
+//    var genreName: String {
+//        switch self {
+//        case .comedy:
+//            "Comedy"
+//        case .drama:
+//            "Drama"
+//        case .actionMovie:
+//            "Action movie"
+//        case .horror:
+//            "Horror"
+//        case .adventures:
+//            "Adventures"
+//        case .thriller:
+//            "Thriller"
+//        case .fantastic:
+//            "Fantastic"
+//        case .documentary:
+//            "Documentary"
+//        }
+//    }
 }

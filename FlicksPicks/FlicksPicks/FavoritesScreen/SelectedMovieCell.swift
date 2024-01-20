@@ -20,7 +20,7 @@ final class SelectedMovieCell: UITableViewCell {
         return view
     }()
     
-    lazy var posterImageView: UIImageView = {
+    private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         
         imageView.contentMode = .scaleAspectFill
@@ -29,7 +29,13 @@ final class SelectedMovieCell: UITableViewCell {
         return imageView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var dataView: UIView = {
+       let view = UIView()
+        
+        return view
+    }()
+    
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 19)
@@ -37,7 +43,7 @@ final class SelectedMovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var yearLabel: UILabel = {
+    private lazy var yearLabel: UILabel = {
         let label = UILabel()
         
         label.font = .systemFont(ofSize: 14)
@@ -45,7 +51,7 @@ final class SelectedMovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var ratingLabel: UILabel = {
+    private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         
         label.font = .systemFont(ofSize: 14)
@@ -53,7 +59,7 @@ final class SelectedMovieCell: UITableViewCell {
         return label
     }()
     
-    lazy var ratingLabelView: UIView = {
+    private lazy var ratingLabelView: UIView = {
         let view = UIView()
         
         view.layer.borderWidth = 2
@@ -85,13 +91,9 @@ final class SelectedMovieCell: UITableViewCell {
     
     // MARK: - Private methods
     private func setupUI() {
+        dataView.addSubviews(views: [titleLabel, yearLabel])
         ratingLabelView.addSubview(ratingLabel)
-        addSubviews(views: [
-            posterImageView,
-            titleLabel,
-            yearLabel,
-            ratingLabelView
-        ])
+        stackView.addArrangedSubviews([posterImageView, dataView, ratingLabelView])
         
         setConstraint()
     }
@@ -103,15 +105,18 @@ final class SelectedMovieCell: UITableViewCell {
             make.leading.equalToSuperview().inset(30)
         }
         
-        titleLabel.snp.makeConstraints { make in
+        dataView.snp.makeConstraints { make in
             make.leading.equalTo(posterImageView.snp.trailing).offset(10)
-            make.trailing.equalTo(ratingLabelView.snp.leading).offset(5)
+            make.height.equalTo(posterImageView.snp.height)
         }
         
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+        }
+
         yearLabel.snp.makeConstraints { make in
-            make.leading.equalTo(posterImageView.snp.trailing).offset(10)
-            make.trailing.equalTo(ratingLabelView.snp.leading).offset(5)
-            make.top.equalTo(titleLabel).offset(5)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         
         ratingLabelView.snp.makeConstraints { make in

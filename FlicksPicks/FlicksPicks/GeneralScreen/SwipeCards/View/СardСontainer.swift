@@ -55,7 +55,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: data.card(at: i), atIndex: i )
-            
         }
     }
     
@@ -65,7 +64,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         cardViews.append(cardView)
         insertSubview(cardView, at: 0)
         remainingCards -= 1
-        viewModel.currentIndex = index
     }
     
     private func addCardFrame(index: Int, cardView: SwipeCardView) {
@@ -99,6 +97,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                     cardView.center = self.center
                     self.addCardFrame(index: cardIndex, cardView: cardView)
                     self.layoutIfNeeded()
+                    self.viewModel.currentIndex = cardIndex
                 })
             }
         } else {

@@ -41,16 +41,17 @@ final class GeneralViewController: UIViewController {
         makeConstraints()
         addGestureForImage()
         setupNavBar()
+//        viewModel.loadData(count: 4, genre: )
         viewModel.loadData(count: 4)
         setupViewModel()
-        
     }
     
     // MARK: - Private func
     @objc private func selectFilters() {
-        let vc = Filters()
-        navigationController?.present(vc, animated: true)
+//        let vc = Filters()
+//        navigationController?.present(vc, animated: true)
     }
+    
     @objc private func showMovie() {
         let movies = viewModel.movies[viewModel.currentIndex]
         navigationController?.pushViewController(Movie(viewModel: movies), animated: true)

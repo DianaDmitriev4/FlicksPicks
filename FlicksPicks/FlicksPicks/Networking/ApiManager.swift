@@ -11,14 +11,16 @@ final class ApiManager {
     //    private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2" - МОЙ
     private static let token = "F7HTR22-3T3MQ15-JBBR889-EWM0898"
     
-    static func getFilms(genre: [GenreTypes]?, count: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+//    static func getFilms(genre: [GenreTypes]?, count: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+    static func getFilms(count: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
         let headers = [
             "accept": "application/json",
             "X-API-KEY": token
         ]
         for _ in 1...count {
-            let selectedGenres = genre?.reduce("") { $0 + $1.rawValue }
-            guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie/random?isSeries=false&rating.kp=7-10\(selectedGenres ?? "")") else { return }
+//            let selectedGenres = genre?.reduce("") { $0 + $1.rawValue }
+//            guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie/random?isSeries=false&rating.kp=7-10\(selectedGenres ?? "")") else { return }
+            guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie/random?isSeries=false&rating.kp=7-10") else { return }
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.allHTTPHeaderFields = headers
