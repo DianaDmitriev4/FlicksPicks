@@ -50,7 +50,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     }
     
     // MARK: - Private methods
-    private func handleResult(result: (Result<MovieResponse, Error>)) {
+    private func handleResult(result: (Result<[Docs], Error>)) {
         switch result {
         case .success(let movie):
             convertToMovieResponse(movie)
@@ -62,9 +62,9 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     
-    private func convertToMovieResponse(_ response: MovieResponse) {
-        let movieResponseViewModel = MovieResponseViewModel(response)
-        movies.append(movieResponseViewModel)
+    private func convertToMovieResponse(_ response: [Docs]) {
+        let movieResponseViewModel = response.map { MovieResponseViewModel($0) }
+        movies = movieResponseViewModel
     }
     
     private func getImage() {

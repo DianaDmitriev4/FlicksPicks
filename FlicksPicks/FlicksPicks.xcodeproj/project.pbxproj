@@ -34,6 +34,7 @@
 		CEE331632B55599000D2EF1B /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE331622B55599000D2EF1B /* FiltersViewModel.swift */; };
 		CEE331652B555C5200D2EF1B /* UIStackView + extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE331642B555C5200D2EF1B /* UIStackView + extens.swift */; };
 		CEE331682B56492B00D2EF1B /* FiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE331672B56492B00D2EF1B /* FiltersModel.swift */; };
+		CEE3316B2B5BAFED00D2EF1B /* Docs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3316A2B5BAFED00D2EF1B /* Docs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		CEE331622B55599000D2EF1B /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
 		CEE331642B555C5200D2EF1B /* UIStackView + extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + extens.swift"; sourceTree = "<group>"; };
 		CEE331672B56492B00D2EF1B /* FiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersModel.swift; sourceTree = "<group>"; };
+		CEE3316A2B5BAFED00D2EF1B /* Docs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB586402B42CF0C0050AA58 /* MovieResponse.swift */,
+				CEE3316A2B5BAFED00D2EF1B /* Docs.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				CEE331632B55599000D2EF1B /* FiltersViewModel.swift in Sources */,
 				CEE3315F2B55474200D2EF1B /* FiltersTableViewCell.swift in Sources */,
 				CEB586512B452A2F0050AA58 /* MovieResponseViewModel.swift in Sources */,
+				CEE3316B2B5BAFED00D2EF1B /* Docs.swift in Sources */,
 				CE9C59232B4921BB0012EA2F /* ApiManager.swift in Sources */,
 				CE9C59252B4A7B480012EA2F /* NetworkingError.swift in Sources */,
 				CE7EC6E42B46F05C00EEC570 /* SelectedMovies.swift in Sources */,
