@@ -9,7 +9,7 @@
 import Foundation
 
 struct MovieResponse: Codable {
-    let docs: [Docs]
+    let docs: [Doc]
     let total, limit, page, pages: Int?
 }
 

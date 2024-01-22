@@ -12,6 +12,7 @@ final class GeneralViewController: UIViewController {
     // MARK: - Properties
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer(viewModel: self.viewModel)
+        view.dataSource = self
         
         return view
     }()
@@ -42,7 +43,7 @@ final class GeneralViewController: UIViewController {
         addGestureForImage()
         setupNavBar()
 //        viewModel.loadData(count: 4, genre: )
-        viewModel.loadData(count: 4)
+        viewModel.loadData()
         setupViewModel()
     }
     

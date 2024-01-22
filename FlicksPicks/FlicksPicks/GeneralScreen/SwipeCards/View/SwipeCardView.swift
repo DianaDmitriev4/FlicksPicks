@@ -26,6 +26,7 @@ final class SwipeCardView : UIView {
         didSet {
             guard let data = self.dataSource?.imageData else { return }
             self.imageView.image = UIImage(data: data)
+            print("ПРИШЛИ ДАННЫЕ ДЛЯ КАРТИНОК")
         }
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Docs: Codable {
+struct Doc: Codable {
     let poster: Poster?
     let rating: Rating?
     let name: String?

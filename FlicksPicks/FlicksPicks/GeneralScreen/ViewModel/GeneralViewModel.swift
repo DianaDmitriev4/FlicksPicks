@@ -13,12 +13,14 @@ protocol GeneralViewModelProtocol {
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
     var selectedMovies: [MovieResponseViewModel] { get set}
+    var reloadTable: (() -> Void)? { get set }
 //    func loadData(count: Int, genre: [GenreTypes]?)
-    func loadData(count: Int)
+    func loadData()
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
+    var reloadTable: (() -> Void)?
     var reloadData: (() -> Void)?
     var showError: ((String) -> Void)?
     var movies: [MovieResponseViewModel] = [] {
@@ -31,7 +33,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     var selectedMovies: [MovieResponseViewModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.reloadData?()
+                self.reloadTable?()
             }
         }
     }
@@ -43,14 +45,14 @@ final class GeneralViewModel: GeneralViewModelProtocol {
 //            self?.handleResult(result: result)
 //        }
 //    }
-    func loadData(count: Int) {
-        ApiManager.getFilms(count: count) { [weak self] result in
+    func loadData() {
+        ApiManager.getFilms() { [weak self] result in
             self?.handleResult(result: result)
         }
     }
     
     // MARK: - Private methods
-    private func handleResult(result: (Result<[Docs], Error>)) {
+    private func handleResult(result: (Result<[Doc], Error>)) {
         switch result {
         case .success(let movie):
             convertToMovieResponse(movie)
@@ -62,7 +64,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     
-    private func convertToMovieResponse(_ response: [Docs]) {
+    private func convertToMovieResponse(_ response: [Doc]) {
         let movieResponseViewModel = response.map { MovieResponseViewModel($0) }
         movies = movieResponseViewModel
     }

@@ -12,7 +12,7 @@ final class ApiManager {
     private static let token = "F7HTR22-3T3MQ15-JBBR889-EWM0898"
     
 //    static func getFilms(genre: [GenreTypes]?, count: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
-    static func getFilms(count: Int, completion: @escaping (Result<[Docs], Error>) -> Void) {
+    static func getFilms(completion: @escaping (Result<[Doc], Error>) -> Void) {
         let headers = [
             "accept": "application/json",
             "X-API-KEY": token
@@ -45,7 +45,7 @@ final class ApiManager {
         session.resume()
     }
     
-    private static func handleResponse(data: Data?, error: Error?, completion: @escaping (Result<[Docs], Error>) -> ()) {
+    private static func handleResponse(data: Data?, error: Error?, completion: @escaping (Result<[Doc], Error>) -> ()) {
         if let error {
             completion(.failure(NetworkingError.networkingError(error)))
         } else if let data {

@@ -18,7 +18,7 @@ final class MovieResponseViewModel {
     var imageData: Data?
     let year: Int
     
-    init(_ from: Docs) {
+    init(_ from: Doc) {
         self.poster = from.poster?.url ?? ""
         self.rating = from.rating?.kp ?? 0.0
         self.name = from.name ?? ""
