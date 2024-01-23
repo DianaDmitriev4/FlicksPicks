@@ -12,7 +12,6 @@ final class GeneralViewController: UIViewController {
     // MARK: - Properties
     lazy private var moviePosterView: СardСontainer = {
         let view = СardСontainer(viewModel: self.viewModel)
-        view.dataSource = self
         
         return view
     }()
@@ -44,7 +43,7 @@ final class GeneralViewController: UIViewController {
         setupNavBar()
 //        viewModel.loadData(count: 4, genre: )
         viewModel.loadData()
-        setupViewModel()
+//        setupViewModel()
     }
     
     // MARK: - Private func
@@ -56,14 +55,6 @@ final class GeneralViewController: UIViewController {
     @objc private func showMovie() {
         let movies = viewModel.movies[viewModel.currentIndex]
         navigationController?.pushViewController(Movie(viewModel: movies), animated: true)
-    }
-    
-    private func setupViewModel() {
-        viewModel.reloadData = { [weak self] in
-            self?.moviePosterView.dataSource = self
-//            self?.navigationItem.title = self?.viewModel.movies[self?.moviePosterView.currentIndex ?? 0].name
-            print("ЗАМЫКАНИЕ СРАБОТАЛО")
-        }
     }
     
     private func addGestureForImage() {
@@ -85,19 +76,5 @@ final class GeneralViewController: UIViewController {
                                            target: self,
                                            action: #selector(selectFilters))
         navigationItem.rightBarButtonItem = filterButton
-    }
-}
-
-// MARK: - SwipeCardsDataProtocol
-extension GeneralViewController : SwipeCardsDataSource {
-    
-    func numberOfCardsToShow() -> Int {
-        return viewModel.movies.count
-    }
-    
-    func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView(viewModel: self.viewModel)
-        card.dataSource = viewModel.movies[index]
-        return card
     }
 }

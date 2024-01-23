@@ -24,16 +24,13 @@ final class SwipeCardView : UIView {
     
     var dataSource: MovieResponseViewModel? {
         didSet {
+            print("GET CHANGE FROM ARRAY")
             guard let data = self.dataSource?.imageData else { return }
             self.imageView.image = UIImage(data: data)
-            print("ПРИШЛИ ДАННЫЕ ДЛЯ КАРТИНОК")
         }
     }
-    
-    
+        
     //MARK: - Initialization
-//    override init(frame: CGRect) {
-//        super.init(frame: .zero)
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
         
@@ -43,7 +40,6 @@ final class SwipeCardView : UIView {
         addSubview(imageView)
         setupConstraints()
         addPanGestureOnCards()
-        setViewModel(GeneralViewModel())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,10 +47,6 @@ final class SwipeCardView : UIView {
     }
     
     // MARK: - Private methods
-    private func setViewModel(_ viewModel: GeneralViewModelProtocol) {
-        self.viewModel = viewModel
-    }
-    
     private func setupConstraints() {
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
