@@ -41,9 +41,7 @@ final class GeneralViewController: UIViewController {
         makeConstraints()
         addGestureForImage()
         setupNavBar()
-//        viewModel.loadData(count: 4, genre: )
         viewModel.loadData()
-//        setupViewModel()
     }
     
     // MARK: - Private func

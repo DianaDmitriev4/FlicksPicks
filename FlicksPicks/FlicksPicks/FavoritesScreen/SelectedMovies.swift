@@ -20,17 +20,27 @@ final class SelectedMovies: UITableViewController {
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
+        setResetButton()
     }
     
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
-        
+    
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private func
+    @objc func cleanTableItems() {
+        viewModel.selectedMovies.removeAll()
+    }
+    private func setResetButton() {
+        let resetButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(cleanTableItems))
+        navigationItem.rightBarButtonItem = resetButton
     }
 }
 
@@ -41,7 +51,7 @@ extension SelectedMovies {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let movie = viewModel.selectedMovies[indexPath.row]
+        let movie = viewModel.selectedMovies[indexPath.item]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectedMovieCell",
                                                        for: indexPath) as? SelectedMovieCell else { return UITableViewCell() }
@@ -55,7 +65,7 @@ extension SelectedMovies {
 extension SelectedMovies {
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
-        let response = viewModel.movies[indexPath.row]
+        let response = viewModel.movies[indexPath.item]
         let movieVC = Movie(viewModel: response)
         
         navigationController?.pushViewController(movieVC, animated: true)
