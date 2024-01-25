@@ -196,6 +196,7 @@
 				CEE331602B5552D800D2EF1B /* GenreTypes.swift */,
 				CE9C59262B4A7B7F0012EA2F /* Networking */,
 				CE9C591D2B49061C0012EA2F /* Movie */,
+				CEB5864C2B4516F60050AA58 /* SwipeCards */,
 				CECE68AD2B40876400EC6813 /* GeneralScreen */,
 				CEE3315C2B55468D00D2EF1B /* FilterScreen */,
 				CE7EC6E52B46F06500EEC570 /* FavoritesScreen */,
@@ -218,7 +219,6 @@
 		CECE68AD2B40876400EC6813 /* GeneralScreen */ = {
 			isa = PBXGroup;
 			children = (
-				CEB5864C2B4516F60050AA58 /* SwipeCards */,
 				CECE68AC2B40873C00EC6813 /* View */,
 				CEB5863F2B4151560050AA58 /* ViewModel */,
 				CEB586422B42CF120050AA58 /* Model */,

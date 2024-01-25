@@ -21,9 +21,9 @@ final class TabBar: UITabBarController {
     private func setupVC() {
         viewControllers = [
             setupNavigationController(rootViewController: GeneralViewController(viewModel: viewModel),
-                                      image: UIImage(systemName: "house") ?? .cancel),
+                                      image: UIImage(systemName: "house") ?? .add),
             setupNavigationController(rootViewController: SelectedMovies(viewModel: viewModel),
-                                      image: UIImage(systemName: "bookmark") ?? .cancel)
+                                      image: UIImage(systemName: "bookmark") ?? .add)
         ]
     }
     

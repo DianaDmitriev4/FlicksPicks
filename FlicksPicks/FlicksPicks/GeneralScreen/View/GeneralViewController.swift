@@ -16,7 +16,39 @@ final class GeneralViewController: UIViewController {
         return view
     }()
     
-    private var viewModel: GeneralViewModelProtocol
+    lazy private var declineButton: UIButton = {
+       let button = UIButton()
+        
+        return button
+    }()
+    
+    lazy private var declineImageView: UIImageView = {
+       let view = UIImageView()
+        
+        let image = UIImage(named: "decline")
+        view.image = image
+        
+        return view
+    }()
+    
+    lazy private var likeButton: UIButton = {
+       let button = UIButton()
+        
+        return button
+    }()
+    
+    lazy private var likeImageView: UIImageView = {
+       let view = UIImageView()
+        
+        let image = UIImage(named: "like")
+        view.image = image
+        
+        return view
+    }()
+    
+    private let viewModel: GeneralViewModelProtocol
+    private let square = 80
+    
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
@@ -38,6 +70,11 @@ final class GeneralViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        view.addSubviews(views: [declineButton, likeButton])
+        declineButton.addSubview(declineImageView)
+        likeButton.addSubview(likeImageView)
+        
         makeConstraints()
         addGestureForImage()
         setupNavBar()
@@ -66,6 +103,26 @@ final class GeneralViewController: UIViewController {
             make.height.equalTo(450)
             make.width.equalTo(300)
             make.top.equalToSuperview().inset(150)
+        }
+        
+        declineButton.snp.makeConstraints { make in
+            make.height.width.equalTo(square)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(35)
+            make.leading.equalToSuperview().inset(50)
+        }
+        
+        declineImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        likeButton.snp.makeConstraints { make in
+            make.height.width.equalTo(square)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(35)
+            make.trailing.equalToSuperview().inset(50)
+        }
+        
+        likeImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
