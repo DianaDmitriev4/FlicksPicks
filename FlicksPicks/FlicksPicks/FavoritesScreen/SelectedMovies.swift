@@ -17,7 +17,7 @@ final class SelectedMovies: UITableViewController {
         
         tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
         
-        viewModel.reloadData = { [weak self] in
+        viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
     }

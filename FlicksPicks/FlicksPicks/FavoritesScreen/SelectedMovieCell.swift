@@ -9,22 +9,16 @@ import UIKit
 
 final class SelectedMovieCell: UITableViewCell {
     // MARK: - GUI variables
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        
-        view.axis = .horizontal
-        view.distribution = .fillEqually
-        view.alignment = .center
-        view.spacing = 5
+    private lazy var containerView: UIView = {
+       let view = UIView()
         
         return view
     }()
-    
     private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 5
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
         
         return imageView
     }()
@@ -38,6 +32,7 @@ final class SelectedMovieCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
+        label.numberOfLines = 0
         label.font = .boldSystemFont(ofSize: 19)
         
         return label
@@ -54,7 +49,7 @@ final class SelectedMovieCell: UITableViewCell {
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 10)
         
         return label
     }()
@@ -62,7 +57,7 @@ final class SelectedMovieCell: UITableViewCell {
     private lazy var ratingLabelView: UIView = {
         let view = UIView()
         
-        view.layer.borderWidth = 2
+        view.layer.borderWidth = 1
         
         return view
     }()
@@ -93,41 +88,44 @@ final class SelectedMovieCell: UITableViewCell {
     private func setupUI() {
         dataView.addSubviews(views: [titleLabel, yearLabel])
         ratingLabelView.addSubview(ratingLabel)
-        stackView.addArrangedSubviews([posterImageView, dataView, ratingLabelView])
+        containerView.addSubviews(views: [posterImageView, dataView, ratingLabelView])
+        addSubview(containerView)
         
-        setConstraint()
+        setConstraints()
     }
     
-    private func setConstraint() {
+    private func setConstraints() {
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         posterImageView.snp.makeConstraints { make in
-            make.height.equalTo(100)
-            make.width.equalTo(50)
+            make.top.bottom.equalToSuperview()
+            make.height.equalTo(90)
+            make.width.equalTo(60)
             make.leading.equalToSuperview().inset(30)
         }
         
         dataView.snp.makeConstraints { make in
-            make.leading.equalTo(posterImageView.snp.trailing).offset(10)
-            make.height.equalTo(posterImageView.snp.height)
+            make.leading.equalTo(posterImageView.snp.trailing).offset(30)
+            make.trailing.equalTo(ratingLabelView.snp.leading).offset(20)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
         }
 
         yearLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.top.equalTo(ratingLabelView.snp.centerY)
         }
         
         ratingLabelView.snp.makeConstraints { make in
-            let square = frame.height / 2
             make.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(square)
-            make.width.equalTo(square)
+            make.centerY.equalTo(posterImageView.snp.centerY)
         }
         
         ratingLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(5)
         }
     }
 }

@@ -90,7 +90,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         }
         return card
     }
-    
+
     func swipeDidEnd(on view: SwipeCardView) {
         view.removeFromSuperview()
         if remainingCards > 0 {

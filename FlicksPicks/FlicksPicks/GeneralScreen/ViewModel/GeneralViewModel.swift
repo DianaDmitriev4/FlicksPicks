@@ -13,15 +13,14 @@ protocol GeneralViewModelProtocol {
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
     var selectedMovies: [MovieResponseViewModel] { get set}
-//    var reloadTable: (() -> Void)? { get set }
+    var reloadTable: (() -> Void)? { get set }
 //    func loadData(count: Int, genre: [GenreTypes]?)
     func loadData()
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
-    
     // MARK: - Properties
-//    var reloadTable: (() -> Void)?
+    var reloadTable: (() -> Void)?
     var reloadData: (() -> Void)?
     var showError: ((String) -> Void)?
     var movies: [MovieResponseViewModel] = [] {
@@ -34,7 +33,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     var selectedMovies: [MovieResponseViewModel] = [] {
         didSet {
             DispatchQueue.main.async {
-//                self.reloadTable?()
+                self.reloadTable?()
             }
         }
     }
