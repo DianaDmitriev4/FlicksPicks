@@ -18,7 +18,7 @@ final class GeneralViewController: UIViewController {
     
     lazy private var declineButton: UIButton = {
        let button = UIButton()
-        
+        button.addTarget(self, action: #selector(declineMovie), for: .touchUpInside)
         return button
     }()
     
@@ -33,6 +33,7 @@ final class GeneralViewController: UIViewController {
     
     lazy private var likeButton: UIButton = {
        let button = UIButton()
+        button.addTarget(self, action: #selector(addMovieToFavorite), for: .touchUpInside)
         
         return button
     }()
@@ -90,6 +91,14 @@ final class GeneralViewController: UIViewController {
     @objc private func showMovie() {
         let movies = viewModel.movies[viewModel.currentIndex]
         navigationController?.pushViewController(Movie(viewModel: movies), animated: true)
+    }
+    
+    @objc private func declineMovie() {
+        
+    }
+    
+    @objc private func addMovieToFavorite() {
+        
     }
     
     private func addGestureForImage() {

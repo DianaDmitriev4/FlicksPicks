@@ -16,7 +16,7 @@ final class SelectedMovies: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
-        
+
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
@@ -63,11 +63,17 @@ extension SelectedMovies {
 
 // MARK: - UITableViewDelegate
 extension SelectedMovies {
-    override func tableView(_ tableView: UITableView,
-                            didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let response = viewModel.movies[indexPath.item]
         let movieVC = Movie(viewModel: response)
-        
         navigationController?.pushViewController(movieVC, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
+            self.viewModel.selectedMovies.remove(at: indexPath.item)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
