@@ -17,13 +17,13 @@ final class GeneralViewController: UIViewController {
     }()
     
     lazy private var declineButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.addTarget(self, action: #selector(declineMovie), for: .touchUpInside)
         return button
     }()
     
     lazy private var declineImageView: UIImageView = {
-       let view = UIImageView()
+        let view = UIImageView()
         
         let image = UIImage(named: "decline")
         view.image = image
@@ -32,14 +32,14 @@ final class GeneralViewController: UIViewController {
     }()
     
     lazy private var likeButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.addTarget(self, action: #selector(addMovieToFavorite), for: .touchUpInside)
         
         return button
     }()
     
     lazy private var likeImageView: UIImageView = {
-       let view = UIImageView()
+        let view = UIImageView()
         
         let image = UIImage(named: "like")
         view.image = image
@@ -70,22 +70,14 @@ final class GeneralViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
-        view.addSubviews(views: [declineButton, likeButton])
-        declineButton.addSubview(declineImageView)
-        likeButton.addSubview(likeImageView)
-        
-        makeConstraints()
-        addGestureForImage()
-        setupNavBar()
+        setupUI()
         viewModel.loadData()
     }
     
     // MARK: - Private func
     @objc private func selectFilters() {
-//        let vc = Filters()
-//        navigationController?.present(vc, animated: true)
+        //        let vc = Filters()
+        //        navigationController?.present(vc, animated: true)
     }
     
     @objc private func showMovie() {
@@ -104,6 +96,25 @@ final class GeneralViewController: UIViewController {
     private func addGestureForImage() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
         moviePosterView.addGestureRecognizer(gesture)
+    }
+    
+    private func setupNavBar() {
+        let filterButton = UIBarButtonItem(barButtonSystemItem: .action,
+                                           target: self,
+                                           action: #selector(selectFilters))
+        navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .white
+        
+        view.addSubviews(views: [declineButton, likeButton])
+        declineButton.addSubview(declineImageView)
+        likeButton.addSubview(likeImageView)
+        
+        makeConstraints()
+        setupNavBar()
+        addGestureForImage()
     }
     
     private func makeConstraints() {
@@ -133,12 +144,5 @@ final class GeneralViewController: UIViewController {
         likeImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    private func setupNavBar() {
-        let filterButton = UIBarButtonItem(barButtonSystemItem: .action,
-                                           target: self,
-                                           action: #selector(selectFilters))
-        navigationItem.rightBarButtonItem = filterButton
     }
 }
