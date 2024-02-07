@@ -47,8 +47,16 @@ final class GeneralViewController: UIViewController {
         return view
     }()
     
-    private let viewModel: GeneralViewModelProtocol
+    private var viewModel: GeneralViewModelProtocol
     private let square = 80
+    
+    var genresInUrl: [GenreTypes]? = nil {
+        didSet {
+            print("Genres was passed")
+            viewModel.movies = []
+            viewModel.loadData(genre: genresInUrl)
+        }
+    }
     
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
@@ -71,13 +79,14 @@ final class GeneralViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        viewModel.loadData()
+        viewModel.loadData(genre: genresInUrl)
     }
     
     // MARK: - Private func
     @objc private func selectFilters() {
-        //        let vc = Filters()
-        //        navigationController?.present(vc, animated: true)
+        let viewModel = FiltersViewModel()
+        let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: viewModel))
+        navigationController?.present(navController, animated: true)
     }
     
     @objc private func showMovie() {

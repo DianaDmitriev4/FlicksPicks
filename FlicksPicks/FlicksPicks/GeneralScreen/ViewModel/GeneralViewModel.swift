@@ -8,14 +8,13 @@
 import Foundation
 
 protocol GeneralViewModelProtocol {
-    var movies: [MovieResponseViewModel] { get }
+    var movies: [MovieResponseViewModel] { get set}
     var showError: ((String) -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
     var selectedMovies: [MovieResponseViewModel] { get set}
     var reloadTable: (() -> Void)? { get set }
-//    func loadData(count: Int, genre: [GenreTypes]?)
-    func loadData()
+    func loadData(genre: [GenreTypes]?)
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
@@ -40,13 +39,8 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     var currentIndex = 0
     
     // MARK: - Methods
-//    func loadData(count: Int, genre: [GenreTypes]?) {
-//        ApiManager.getFilms(genre: genre, count: count) { [weak self] result in
-//            self?.handleResult(result: result)
-//        }
-//    }
-    func loadData() {
-        ApiManager.getFilms() { [weak self] result in
+    func loadData(genre: [GenreTypes]?) {
+        ApiManager.getFilms(genre: genre) { [weak self] result in
             self?.handleResult(result: result)
         }
     }

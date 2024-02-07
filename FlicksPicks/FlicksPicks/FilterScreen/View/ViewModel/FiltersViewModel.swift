@@ -1,29 +1,33 @@
-////
-////  FiltersViewModel.swift
-////  FlicksPicks
-////
-////  Created by User on 15.01.2024.
-////
 //
-//import Foundation
+//  FiltersViewModel.swift
+//  FlicksPicks
 //
-//protocol FiltersViewModelProtocol {
-//    var selectedGenres: [GenreTypes] { get set }
-//    var genresType: [String] { get }
-//}
+//  Created by User on 15.01.2024.
 //
-//final class FiltersViewModel: FiltersViewModelProtocol {
-//    private(set) var genresType: [String] = []
-//    var selectedGenres: [GenreTypes] = []
-//    
-//    //MARK: - Initialization
-//    init() {
-//        fillArrayWithGenresName()
-//    }
-//    
-//    // MARK: - Private methods
-//    private func fillArrayWithGenresName() {
-//        let data = FiltersModel()
-//        genresType = data.genresName
-//    }
-//}
+
+import Foundation
+
+protocol FiltersViewModelProtocol {
+    var genresType: [String] { get }
+    var selectedGenres: [GenreTypes] { get set }
+}
+
+final class FiltersViewModel: FiltersViewModelProtocol {
+    private(set) var genresType: [String] = []
+    var selectedGenres: [GenreTypes] = [] {
+        didSet {
+            print(selectedGenres)
+        }
+    }
+    
+    //MARK: - Initialization
+    init() {
+        fillArrayWithGenresName()
+    }
+    
+    // MARK: - Private methods
+    private func fillArrayWithGenresName() {
+        let data = FiltersModel()
+        genresType = data.genresName
+    }
+}
