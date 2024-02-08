@@ -20,6 +20,7 @@ final class SelectedMovies: UITableViewController {
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
+        
         setResetButton()
     }
     
@@ -38,6 +39,7 @@ final class SelectedMovies: UITableViewController {
     @objc func cleanTableItems() {
         viewModel.selectedMovies.removeAll()
     }
+    
     private func setResetButton() {
         let resetButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(cleanTableItems))
         navigationItem.rightBarButtonItem = resetButton

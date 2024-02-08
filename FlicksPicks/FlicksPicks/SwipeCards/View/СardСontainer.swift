@@ -38,7 +38,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Private methods
-    private func reloadData() {
+     func reloadData() {
         removeAllCardViews()
         setNeedsLayout()
         layoutIfNeeded()
@@ -84,6 +84,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     
     func card(at index: Int) -> SwipeCardView {
         let card = SwipeCardView(viewModel: self.viewModel)
+        // УЖАСНЫЙ ФИКС
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             card.dataSource = self?.viewModel.movies[index]
             self?.viewModel.currentIndex = index - 2

@@ -14,11 +14,7 @@ protocol FiltersViewModelProtocol {
 
 final class FiltersViewModel: FiltersViewModelProtocol {
     private(set) var genresType: [String] = []
-    var selectedGenres: [GenreTypes] = [] {
-        didSet {
-            print(selectedGenres)
-        }
-    }
+    var selectedGenres: [GenreTypes] = [] 
     
     //MARK: - Initialization
     init() {

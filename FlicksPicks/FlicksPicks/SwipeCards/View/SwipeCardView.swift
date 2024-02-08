@@ -25,8 +25,11 @@ final class SwipeCardView : UIView {
     var dataSource: MovieResponseViewModel? {
         didSet {
             print("GET CHANGE FROM ARRAY")
-            guard let data = self.dataSource?.imageData else { return }
-            self.imageView.image = UIImage(data: data)
+            if !viewModel.movies.isEmpty {
+                print("Получаем картинку")
+                guard let data = self.dataSource?.imageData else { return }
+                self.imageView.image = UIImage(data: data)
+            }
         }
     }
         

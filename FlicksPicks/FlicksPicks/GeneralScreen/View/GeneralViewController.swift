@@ -50,11 +50,19 @@ final class GeneralViewController: UIViewController {
     private var viewModel: GeneralViewModelProtocol
     private let square = 80
     
-    var genresInUrl: [GenreTypes]? = nil {
+    var genresInUrl: [GenreTypes] = [] {
         didSet {
-            print("Genres was passed")
             viewModel.movies = []
+            moviePosterView.reloadData()
             viewModel.loadData(genre: genresInUrl)
+            print("GENRES ISN'T EMPTY")
+            print(genresInUrl )
+            //            DispatchQueue.main.async { [weak self] in
+            //                self?.viewModel.movies = []
+            //                self?.moviePosterView.reloadData()
+            //                self?.viewModel.loadData(genre: self?.genresInUrl)
+            //                print("GENRES ISN'T EMPTY")
+            //                print(self?.genresInUrl ?? "Nil value")
         }
     }
     
@@ -82,11 +90,23 @@ final class GeneralViewController: UIViewController {
         viewModel.loadData(genre: genresInUrl)
     }
     
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //
+    //        print("VIEWWILLAPPEAR")
+    //        if !genresInUrl.isEmpty {
+    //            print("ТУТ ДОЛЖЕН ВЫЗВАТЬСЯ ЗАПРОС")
+    //            viewModel.movies = []
+    //            viewModel.loadData(genre: genresInUrl)
+    //        }
+    //    }
+    
     // MARK: - Private func
     @objc private func selectFilters() {
         let viewModel = FiltersViewModel()
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: viewModel))
         navigationController?.present(navController, animated: true)
+        //        navigationController?.pushViewController(FiltersTableViewController(viewModel: viewModel), animated: true)
     }
     
     @objc private func showMovie() {
@@ -102,6 +122,9 @@ final class GeneralViewController: UIViewController {
         
     }
     
+    private func makeRequest() {
+        
+    }
     private func addGestureForImage() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
         moviePosterView.addGestureRecognizer(gesture)
