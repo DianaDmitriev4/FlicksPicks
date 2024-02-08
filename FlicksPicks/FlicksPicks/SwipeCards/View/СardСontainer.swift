@@ -27,8 +27,8 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         print("КАРТОЧКИ ИНИЦИАЛИЗИРОВАНЫ")
         super.init(frame: .zero)
         
-        self.viewModel.reloadData = {
-            self.reloadData()
+        self.viewModel.reloadData = { [weak self] in
+            self?.reloadData()
             print("ПОЛУЧИЛИ ДАННЫЕ С МАССИВА")
         }
     }
@@ -38,18 +38,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Private methods
-     func reloadData() {
-        removeAllCardViews()
-        setNeedsLayout()
-        layoutIfNeeded()
-        cardsToShow = numberOfCardsToShow()
-        remainingCards = cardsToShow
-        
-        for i in 0..<min(cardsToShow,cardsToBeVisible) {
-            addCardView(cardView: card(at: i), atIndex: i )
-        }
-    }
-    
     private func addCardView(cardView: SwipeCardView, atIndex index: Int) {
         cardView.delegate = self
         addCardFrame(index: index, cardView: cardView)
@@ -83,7 +71,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView(viewModel: self.viewModel)
+        let card = SwipeCardView(viewModel: viewModel)
         // УЖАСНЫЙ ФИКС
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             card.dataSource = self?.viewModel.movies[index]
@@ -91,25 +79,37 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         }
         return card
     }
-
+    
+    func reloadData() {
+        removeAllCardViews()
+        setNeedsLayout()
+        layoutIfNeeded()
+        cardsToShow = numberOfCardsToShow()
+        remainingCards = cardsToShow
+        
+        for i in 0..<min(cardsToShow,cardsToBeVisible) {
+            addCardView(cardView: card(at: i), atIndex: i )
+        }
+    }
+    
     func swipeDidEnd(on view: SwipeCardView) {
         view.removeFromSuperview()
         if remainingCards > 0 {
             let newIndex = numberOfCardsToShow() - remainingCards
             addCardView(cardView: card(at: newIndex), atIndex: 2)
             for (cardIndex, cardView) in visibleCards.enumerated() {
-                UIView.animate(withDuration: 0.2, animations: {
-                    cardView.center = self.center
-                    self.addCardFrame(index: cardIndex, cardView: cardView)
-                    self.layoutIfNeeded()
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    cardView.center = self?.center ?? .zero
+                    self?.addCardFrame(index: cardIndex, cardView: cardView)
+                    self?.layoutIfNeeded()
                 })
             }
         } else {
             for (cardIndex, cardView) in visibleCards.enumerated() {
-                UIView.animate(withDuration: 0.2, animations: {
-                    cardView.center = self.center
-                    self.addCardFrame(index: cardIndex, cardView: cardView)
-                    self.layoutIfNeeded()
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    cardView.center = self?.center ?? .zero
+                    self?.addCardFrame(index: cardIndex, cardView: cardView)
+                    self?.layoutIfNeeded()
                 })
             }
         }

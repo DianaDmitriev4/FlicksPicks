@@ -13,8 +13,8 @@ final class MovieResponseViewModel {
     let rating: Double
     let name: String
     let description: String
-//    let genres: [String]
-//    let countries: [String]
+    //    let genres: [String]
+    //    let countries: [String]
     var imageData: Data?
     let year: Int
     
@@ -24,7 +24,7 @@ final class MovieResponseViewModel {
         self.name = from.name ?? ""
         self.description = from.description ?? ""
         self.year = from.year ?? 0
-//        self.countries = from.countries?.compactMap { $0.name } ?? []
-//        self.genres = from.genres?.compactMap { $0.name } ?? []
+        //        self.countries = from.countries?.compactMap { $0.name } ?? []
+        //        self.genres = from.genres?.compactMap { $0.name } ?? []
     }
 }

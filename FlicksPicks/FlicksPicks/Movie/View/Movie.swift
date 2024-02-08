@@ -42,7 +42,6 @@ final class Movie: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        
         scrollView.showsVerticalScrollIndicator = false
         
         return scrollView
@@ -65,8 +64,6 @@ final class Movie: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.name
-        view.backgroundColor = .white
         setupUI()
     }
     
@@ -88,6 +85,8 @@ final class Movie: UIViewController {
     }
     
     private func setupUI() {
+        title = viewModel.name
+        view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         titleView.addSubview(titleLabel)

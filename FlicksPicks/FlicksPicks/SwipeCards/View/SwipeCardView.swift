@@ -21,7 +21,6 @@ final class SwipeCardView : UIView {
     private var viewModel: GeneralViewModelProtocol
     
     var delegate: SwipeCardsDelegate?
-    
     var dataSource: MovieResponseViewModel? {
         didSet {
             print("GET CHANGE FROM ARRAY")
@@ -32,7 +31,7 @@ final class SwipeCardView : UIView {
             }
         }
     }
-        
+    
     //MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
@@ -50,18 +49,7 @@ final class SwipeCardView : UIView {
     }
     
     // MARK: - Private methods
-    private func setupConstraints() {
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
-    
-    private func addPanGestureOnCards() {
-        self.isUserInteractionEnabled = true
-        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
-    }
-    
-    @objc private func handlePanGesture(sender: UIPanGestureRecognizer){
+    @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
         let card = sender.view as! SwipeCardView
         let newPoint = sender.translation(in: self)
         let centerOfParentContainer = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
@@ -77,7 +65,6 @@ final class SwipeCardView : UIView {
                     card.alpha = 0
                     self.layoutIfNeeded()
                     self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
-//                                        self.viewModel?.loadData(count: 1)
                 }
                 return
                 // Swipe left
@@ -87,7 +74,6 @@ final class SwipeCardView : UIView {
                     card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x - 200, y: centerOfParentContainer.y + newPoint.y + 75)
                     card.alpha = 0
                     self.layoutIfNeeded()
-//                                        self.viewModel?.loadData(count: 1)
                 }
                 return
             }
@@ -103,5 +89,15 @@ final class SwipeCardView : UIView {
             break
         }
     }
+    
+    private func setupConstraints() {
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    private func addPanGestureOnCards() {
+        self.isUserInteractionEnabled = true
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture)))
+    }
 }
-

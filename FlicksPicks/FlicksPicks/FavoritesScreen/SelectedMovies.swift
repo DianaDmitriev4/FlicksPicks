@@ -11,23 +11,10 @@ final class SelectedMovies: UITableViewController {
     // MARK: Properties
     private var viewModel: GeneralViewModelProtocol
     
-    // MARK: - Life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
-
-        viewModel.reloadTable = { [weak self] in
-            self?.tableView.reloadData()
-        }
-        
-        setResetButton()
-    }
-    
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
-    
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,14 +22,27 @@ final class SelectedMovies: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
+        
+        viewModel.reloadTable = { [weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        setTrashButton()
+    }
+    
     // MARK: - Private func
     @objc func cleanTableItems() {
         viewModel.selectedMovies.removeAll()
     }
     
-    private func setResetButton() {
-        let resetButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(cleanTableItems))
-        navigationItem.rightBarButtonItem = resetButton
+    private func setTrashButton() {
+        let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(cleanTableItems))
+        navigationItem.rightBarButtonItem = trashButton
     }
 }
 
@@ -72,8 +72,8 @@ extension SelectedMovies {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
-            self.viewModel.selectedMovies.remove(at: indexPath.item)
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, view, completion in
+            self?.viewModel.selectedMovies.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])

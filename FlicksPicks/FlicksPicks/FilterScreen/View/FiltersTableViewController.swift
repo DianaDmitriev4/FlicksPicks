@@ -39,7 +39,7 @@ final class FiltersTableViewController: UITableViewController {
         let vc = GeneralViewController(viewModel: GeneralViewModel())
         vc.genresInUrl = viewModel.selectedGenres
         dismiss(animated: true)
-//        navigationController?.popViewController(animated: true)
+        //        navigationController?.popViewController(animated: true)
     }
     
     private func setupUI() {

@@ -10,4 +10,3 @@ import Foundation
 protocol SwipeCardsDelegate {
     func swipeDidEnd(on view: SwipeCardView)
 }
-

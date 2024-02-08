@@ -19,6 +19,7 @@ final class GeneralViewController: UIViewController {
     lazy private var declineButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(declineMovie), for: .touchUpInside)
+        
         return button
     }()
     
@@ -86,8 +87,8 @@ final class GeneralViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
         viewModel.loadData(genre: genresInUrl)
+        setupUI()
     }
     
     //    override func viewWillAppear(_ animated: Bool) {
@@ -122,9 +123,6 @@ final class GeneralViewController: UIViewController {
         
     }
     
-    private func makeRequest() {
-        
-    }
     private func addGestureForImage() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
         moviePosterView.addGestureRecognizer(gesture)

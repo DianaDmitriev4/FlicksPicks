@@ -10,7 +10,7 @@ import UIKit
 final class SelectedMovieCell: UITableViewCell {
     // MARK: - GUI variables
     private lazy var containerView: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         return view
     }()
@@ -24,7 +24,7 @@ final class SelectedMovieCell: UITableViewCell {
     }()
     
     private lazy var dataView: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         return view
     }()
@@ -113,7 +113,7 @@ final class SelectedMovieCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
         }
-
+        
         yearLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.top.equalTo(ratingLabelView.snp.centerY)
@@ -129,4 +129,3 @@ final class SelectedMovieCell: UITableViewCell {
         }
     }
 }
-

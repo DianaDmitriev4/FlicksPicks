@@ -21,17 +21,17 @@ final class ApiManager {
             "X-API-KEY": token
         ]
         guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie?type=movie&rating.kp=7-10\(selectedGenres ?? "")") else { return }
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.allHTTPHeaderFields = headers
-            
-            let session = URLSession.shared.dataTask(with: request) { data, _, error in
-                handleResponse(data: data,
-                               error: error,
-                               completion: completion)
-            }
-            session.resume()
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+        
+        let session = URLSession.shared.dataTask(with: request) { data, _, error in
+            handleResponse(data: data,
+                           error: error,
+                           completion: completion)
         }
+        session.resume()
+    }
     
     static func getImage(url: String, completion: @escaping (Result<Data, Error>) -> ()) {
         guard let url = URL(string: url) else { return }
