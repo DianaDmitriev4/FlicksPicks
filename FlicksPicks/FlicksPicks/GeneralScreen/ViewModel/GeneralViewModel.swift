@@ -79,4 +79,9 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             }
         }
     }
+    
+    private func getMovies() {
+        let movies = MoviePersistent.fetchAll()
+        print(movies)
+    }
 }

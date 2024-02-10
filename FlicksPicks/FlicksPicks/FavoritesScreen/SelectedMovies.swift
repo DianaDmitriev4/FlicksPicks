@@ -66,7 +66,7 @@ extension SelectedMovies {
 // MARK: - UITableViewDelegate
 extension SelectedMovies {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let response = viewModel.movies[indexPath.item]
+        let response = viewModel.selectedMovies[indexPath.item]
         let movieVC = Movie(viewModel: response)
         navigationController?.pushViewController(movieVC, animated: true)
     }

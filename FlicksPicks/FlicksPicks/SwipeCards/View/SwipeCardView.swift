@@ -24,12 +24,10 @@ final class SwipeCardView : UIView {
     var dataSource: MovieResponseViewModel? {
         didSet {
             print("GET CHANGE FROM ARRAY")
-            if !viewModel.movies.isEmpty {
-                print("Получаем картинку")
+//                print("Получаем картинку")
                 guard let data = self.dataSource?.imageData else { return }
                 self.imageView.image = UIImage(data: data)
             }
-        }
     }
     
     //MARK: - Initialization
@@ -70,17 +68,19 @@ final class SwipeCardView : UIView {
                 // Swipe left
             } else if card.center.x < -10 {
                 delegate?.swipeDidEnd(on: card)
-                UIView.animate(withDuration: 0.2) {
+                UIView.animate(withDuration: 0.2) { [weak self] in
                     card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x - 200, y: centerOfParentContainer.y + newPoint.y + 75)
                     card.alpha = 0
-                    self.layoutIfNeeded()
+                    self?.layoutIfNeeded()
                 }
                 return
             }
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.2) { [weak self] in
                 card.transform = .identity
-                card.center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
-                self.layoutIfNeeded()
+                if let self {
+                    card.center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+                    self.layoutIfNeeded()
+                }
             }
         case .changed:
             let rotation = tan(newPoint.x / (self.frame.width * 2.0))
