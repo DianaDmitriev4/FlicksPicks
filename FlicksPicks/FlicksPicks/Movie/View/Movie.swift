@@ -53,6 +53,7 @@ final class Movie: UIViewController {
     // MARK: - Initialization
     init(viewModel: MovieResponseViewModel) {
         self.viewModel = viewModel
+        
         super.init(nibName: nil, bundle: nil)
     }
     

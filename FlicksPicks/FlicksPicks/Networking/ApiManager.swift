@@ -8,7 +8,7 @@
 import Foundation
 
 final class ApiManager {
-    //    private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2" - МОЙ
+    //    private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2" - еще один
     private static let token = "F7HTR22-3T3MQ15-JBBR889-EWM0898"
     
     static func getFilms(genre: [GenreTypes]?, completion: @escaping (Result<[Doc], Error>) -> Void) {

@@ -41,12 +41,10 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     var currentIndex = 0
-//    let movie: MovieResponseViewModel?
-//    
-//    init(movie: MovieResponseViewModel?) {
-//        self.movie = movie
-//        getMovies()
-//    }
+
+        init() {
+            getMovies()
+        }
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
@@ -60,20 +58,15 @@ final class GeneralViewModel: GeneralViewModelProtocol {
                                                rating: Rating(kp: rating),
                                                name: name,
                                                description: description,
-                                               year: year))
-//        let movie = ModelFromCoreData(poster: urlFromImage,
-//                                      rating: rating,
-//                                      name: name,
-//                                      description: description,
-//                                      imageData: imageData,
-//                                      year: year)
+                                               year: year),
+                                           imageData: imageData)
         MoviePersistent.save(movie)
     }
     
     func deleteAll() {
-//        if let movie {
-            MoviePersistent.deleteAll()
-//        }
+        //        if let movie {
+        MoviePersistent.deleteAll()
+        //        }
     }
     
     // MARK: - Private methods
@@ -90,7 +83,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     }
     
     private func convertToMovieResponse(_ response: [Doc]) {
-        let movieResponseViewModel = response.map { MovieResponseViewModel($0) }
+        let movieResponseViewModel = response.map { MovieResponseViewModel($0, imageData: nil) }
         movies = movieResponseViewModel
     }
     
@@ -111,7 +104,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     
-     func getMovies() {
+    func getMovies() {
         let movies = MoviePersistent.fetchAll()
         selectedMovies = []
         selectedMovies = movies

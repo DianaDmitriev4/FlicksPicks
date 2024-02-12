@@ -21,7 +21,7 @@ extension MovieEntity {
     @NSManaged public var name: String?
     @NSManaged public var filmsDescription: String?
     @NSManaged public var year: Int32
-
+    @NSManaged public var imageData: Data?
 }
 
 extension MovieEntity : Identifiable {

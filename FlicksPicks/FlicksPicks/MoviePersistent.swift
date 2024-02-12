@@ -22,6 +22,7 @@ final class MoviePersistent {
         entity.poster = movie.poster
         entity.rating = movie.rating
         entity.year = Int32(movie.year)
+        entity.imageData = movie.imageData
         
         do {
             try context.save()
@@ -29,6 +30,10 @@ final class MoviePersistent {
             debugPrint("Save movie error: \(error)")
         }
         saveContext()
+    }
+    
+    static func deleteEntity() {
+        
     }
     
     static func deleteAll() {
@@ -67,19 +72,18 @@ final class MoviePersistent {
     //            return nil
     //        }
     //    }
+    private static func postNotification() {
+        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
+    }
     
     private static func convert(entities: [MovieEntity]) -> [MovieResponseViewModel] {
         let movies = entities.map {
-                        MovieResponseViewModel(Doc(poster: Poster(url: $0.poster ?? ""),
-                                                   rating: Rating(kp: $0.rating),
-                                                   name: $0.name,
-                                                   description: $0.filmsDescription,
-                                                   year: Int($0.year)))
-//            ModelFromCoreData(poster: $0.poster ?? "",
-//                              rating: $0.rating,
-//                              name: $0.name ?? "",
-//                              description: $0.description,
-//                              year: Int($0.year))
+            MovieResponseViewModel(Doc(poster: Poster(url: $0.poster ?? ""),
+                                       rating: Rating(kp: $0.rating),
+                                       name: $0.name,
+                                       description: $0.filmsDescription,
+                                       year: Int($0.year)),
+                                   imageData: $0.imageData)
         }
         return movies
     }
@@ -87,6 +91,7 @@ final class MoviePersistent {
     private static func saveContext() {
         do {
             try context.save()
+            postNotification()
         } catch let error {
             debugPrint("Save not error: \(error)")
         }

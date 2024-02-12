@@ -15,8 +15,6 @@ final class SelectedMovies: UITableViewController {
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
         
-        viewModel.getMovies()
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,6 +27,7 @@ final class SelectedMovies: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
+        registerObserver()
         
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
@@ -38,13 +37,26 @@ final class SelectedMovies: UITableViewController {
     }
     
     // MARK: - Private func
-    @objc func cleanTableItems() {
+    @objc private func cleanTableItems() {
 //        viewModel.selectedMovies.removeAll()
         viewModel.deleteAll()
     }
     
+    @objc private func updateData() {
+        viewModel.getMovies()
+    }
+    
+    private func registerObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateData),
+                                               name: NSNotification.Name("Update"),
+                                               object: nil)
+    }
+    
     private func setTrashButton() {
-        let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(cleanTableItems))
+        let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, 
+                                          target: self,
+                                          action: #selector(cleanTableItems))
         navigationItem.rightBarButtonItem = trashButton
     }
 }
@@ -69,8 +81,8 @@ extension SelectedMovies {
 // MARK: - UITableViewDelegate
 extension SelectedMovies {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let response = viewModel.selectedMovies[indexPath.item]
-        let movieVC = Movie(viewModel: response)
+        let currentMovie = viewModel.selectedMovies[indexPath.item]
+        let movieVC = Movie(viewModel: currentMovie)
         navigationController?.pushViewController(movieVC, animated: true)
     }
     

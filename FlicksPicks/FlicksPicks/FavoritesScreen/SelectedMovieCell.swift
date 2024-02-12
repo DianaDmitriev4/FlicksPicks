@@ -77,8 +77,9 @@ final class SelectedMovieCell: UITableViewCell {
     
     // MARK: - Methods
     func set(_ source: MovieResponseViewModel) {
-        guard let data = source.imageData else { return }
-        posterImageView.image = UIImage(data: data)
+        if let data = source.imageData {
+            posterImageView.image = UIImage(data: data)
+        }
         titleLabel.text = source.name
         ratingLabel.text = String(source.rating)
         yearLabel.text = String(source.year)

@@ -18,12 +18,13 @@ final class MovieResponseViewModel {
     var imageData: Data?
     let year: Int
     
-    init(_ from: Doc) {
+    init(_ from: Doc, imageData: Data?) {
         self.poster = from.poster?.url ?? ""
         self.rating = from.rating?.kp ?? 0.0
         self.name = from.name ?? ""
         self.description = from.description ?? ""
         self.year = from.year ?? 0
+        self.imageData = imageData
         //        self.countries = from.countries?.compactMap { $0.name } ?? []
         //        self.genres = from.genres?.compactMap { $0.name } ?? []
     }
