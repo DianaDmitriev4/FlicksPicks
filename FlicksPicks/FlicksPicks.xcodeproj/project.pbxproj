@@ -19,6 +19,7 @@
 		CEB586532B45324F0050AA58 /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586522B45324F0050AA58 /* SwipeCardView.swift */; };
 		CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586542B454E980050AA58 /* UIView + extens.swift */; };
 		CEB5865E2B457C9C0050AA58 /* SwipeCardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */; };
+		CEC678122B7A5720004FC159 /* SelectedMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC678112B7A5720004FC159 /* SelectedMovieViewModel.swift */; };
 		CECE68942B4084E900EC6813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68932B4084E900EC6813 /* AppDelegate.swift */; };
 		CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68972B4084E900EC6813 /* GeneralViewController.swift */; };
 		CECE689D2B4084E900EC6813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECE689C2B4084E900EC6813 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		CEB586522B45324F0050AA58 /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
 		CEB586542B454E980050AA58 /* UIView + extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extens.swift"; sourceTree = "<group>"; };
 		CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardsDataSource.swift; sourceTree = "<group>"; };
+		CEC678112B7A5720004FC159 /* SelectedMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieViewModel.swift; sourceTree = "<group>"; };
 		CECE68902B4084E900EC6813 /* FlicksPicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlicksPicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE68932B4084E900EC6813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE68972B4084E900EC6813 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -104,8 +106,8 @@
 		CE7EC6E52B46F06500EEC570 /* FavoritesScreen */ = {
 			isa = PBXGroup;
 			children = (
-				CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */,
-				CEE331582B53B83200D2EF1B /* SelectedMovieCell.swift */,
+				CEC678142B7A58BE004FC159 /* View */,
+				CEC678132B7A5797004FC159 /* ViewModel */,
 			);
 			path = FavoritesScreen;
 			sourceTree = "<group>";
@@ -178,6 +180,23 @@
 				CEE331642B555C5200D2EF1B /* UIStackView + extens.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CEC678132B7A5797004FC159 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEC678112B7A5720004FC159 /* SelectedMovieViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEC678142B7A58BE004FC159 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */,
+				CEE331582B53B83200D2EF1B /* SelectedMovieCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CECE68872B4084E900EC6813 = {
@@ -386,6 +405,7 @@
 				CEE331762B760B9A00D2EF1B /* MovieEntity+CoreDataClass.swift in Sources */,
 				CEB586482B443DC20050AA58 /* TabBar.swift in Sources */,
 				CE7EC6E22B46DE4E00EEC570 /* Movie.swift in Sources */,
+				CEC678122B7A5720004FC159 /* SelectedMovieViewModel.swift in Sources */,
 				CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */,
 				CEE331612B5552D800D2EF1B /* GenreTypes.swift in Sources */,
 			);

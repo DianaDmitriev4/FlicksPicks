@@ -12,18 +12,12 @@ protocol GeneralViewModelProtocol {
     var showError: ((String) -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
-    var selectedMovies: [MovieResponseViewModel] { get set}
-    var reloadTable: (() -> Void)? { get set }
     
     func loadData(genre: [GenreTypes]?)
-    func save(_ from: MovieResponseViewModel)
-    func deleteAll()
-    func getMovies()
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
-    var reloadTable: (() -> Void)?
     var reloadData: (() -> Void)?
     var showError: ((String) -> Void)?
     var movies: [MovieResponseViewModel] = [] {
@@ -33,40 +27,13 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             }
         }
     }
-    var selectedMovies: [MovieResponseViewModel] = [] {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.reloadTable?()
-            }
-        }
-    }
     var currentIndex = 0
-
-        init() {
-            getMovies()
-        }
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
         ApiManager.getFilms(genre: genre) { [weak self] result in
             self?.handleResult(result: result)
         }
-    }
-    
-    func save(_ from: MovieResponseViewModel) {
-        let movie = MovieResponseViewModel(Doc(poster: Poster(url: from.poster),
-                                               rating: Rating(kp: from.rating),
-                                               name: from.name,
-                                               description: from.description,
-                                               year: from.year),
-                                           imageData: from.imageData)
-        MoviePersistent.save(movie)
-    }
-    
-    func deleteAll() {
-        //        if let movie {
-        MoviePersistent.deleteAll()
-        //        }
     }
     
     // MARK: - Private methods
@@ -102,11 +69,5 @@ final class GeneralViewModel: GeneralViewModelProtocol {
                 }
             }
         }
-    }
-    
-    func getMovies() {
-        let movies = MoviePersistent.fetchAll()
-        selectedMovies = []
-        selectedMovies = movies
     }
 }

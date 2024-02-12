@@ -8,8 +8,6 @@
 import UIKit
 
 final class TabBar: UITabBarController {
-    // MARK: - Properties
-    let viewModel = GeneralViewModel()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -22,8 +20,10 @@ final class TabBar: UITabBarController {
     // MARK: - Private methods
     private func setupVC() {
         viewControllers = [
-            setupNavigationController(rootViewController: GeneralViewController(viewModel: viewModel), image: UIImage(systemName: "house") ?? .add),
-            setupNavigationController(rootViewController: SelectedMovies(viewModel: viewModel), image: UIImage(systemName: "bookmark") ?? .add)
+            setupNavigationController(rootViewController: GeneralViewController(viewModel: GeneralViewModel()), 
+                                      image: UIImage(systemName: "house") ?? .add),
+            setupNavigationController(rootViewController: SelectedMovies(viewModel: SelectedMovieViewModel()), 
+                                      image: UIImage(systemName: "bookmark") ?? .add)
         ]
     }
     

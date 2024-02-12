@@ -9,10 +9,10 @@ import UIKit
 
 final class SelectedMovies: UITableViewController {
     // MARK: Properties
-    private var viewModel: GeneralViewModelProtocol
+    private var viewModel: SelectedMovieViewModelProtocol
     
     // MARK: - Initialization
-    init(viewModel: GeneralViewModelProtocol) {
+    init(viewModel: SelectedMovieViewModelProtocol) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)

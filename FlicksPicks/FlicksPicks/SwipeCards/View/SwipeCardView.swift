@@ -19,6 +19,7 @@ final class SwipeCardView : UIView {
     }()
     
     private var viewModel: GeneralViewModelProtocol
+    private var viewModelFromSelected: SelectedMovieViewModelProtocol
     
     var delegate: SwipeCardsDelegate?
     var dataSource: MovieResponseViewModel? {
@@ -33,6 +34,7 @@ final class SwipeCardView : UIView {
     //MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
+        viewModelFromSelected = SelectedMovieViewModel()
         
         super.init(frame: .zero)
         
@@ -67,7 +69,7 @@ final class SwipeCardView : UIView {
                         //                    self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
 //                        self.viewModel.selectedMovies.append(currentMovie)
                         //                    let vc = SelectedMovies(viewModel: GeneralViewModel(movie: currentMovie))
-                        self.viewModel.save(currentMovie)
+                        self.viewModelFromSelected.save(currentMovie)
                     }
                 }
                 return
