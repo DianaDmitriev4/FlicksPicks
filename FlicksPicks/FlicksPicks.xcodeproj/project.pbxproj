@@ -19,7 +19,6 @@
 		CEB586532B45324F0050AA58 /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586522B45324F0050AA58 /* SwipeCardView.swift */; };
 		CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586542B454E980050AA58 /* UIView + extens.swift */; };
 		CEB5865E2B457C9C0050AA58 /* SwipeCardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */; };
-		CEC678102B7A0205004FC159 /* ModelFromCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6780F2B7A0205004FC159 /* ModelFromCoreData.swift */; };
 		CECE68942B4084E900EC6813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68932B4084E900EC6813 /* AppDelegate.swift */; };
 		CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE68972B4084E900EC6813 /* GeneralViewController.swift */; };
 		CECE689D2B4084E900EC6813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECE689C2B4084E900EC6813 /* Assets.xcassets */; };
@@ -57,7 +56,6 @@
 		CEB586522B45324F0050AA58 /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
 		CEB586542B454E980050AA58 /* UIView + extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extens.swift"; sourceTree = "<group>"; };
 		CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardsDataSource.swift; sourceTree = "<group>"; };
-		CEC6780F2B7A0205004FC159 /* ModelFromCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFromCoreData.swift; sourceTree = "<group>"; };
 		CECE68902B4084E900EC6813 /* FlicksPicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlicksPicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE68932B4084E900EC6813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE68972B4084E900EC6813 /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 				CEB586472B443DC20050AA58 /* TabBar.swift */,
 				CEE331602B5552D800D2EF1B /* GenreTypes.swift */,
 				CEE331782B760D8900D2EF1B /* MoviePersistent.swift */,
-				CEC6780F2B7A0205004FC159 /* ModelFromCoreData.swift */,
 				CE9C59262B4A7B7F0012EA2F /* Networking */,
 				CE9C591D2B49061C0012EA2F /* Movie */,
 				CEB5864C2B4516F60050AA58 /* SwipeCards */,
@@ -366,7 +363,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE331592B53B83200D2EF1B /* SelectedMovieCell.swift in Sources */,
-				CEC678102B7A0205004FC159 /* ModelFromCoreData.swift in Sources */,
 				CEE331772B760B9A00D2EF1B /* MovieEntity+CoreDataProperties.swift in Sources */,
 				CEE331732B76089500D2EF1B /* Model.xcdatamodeld in Sources */,
 				CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */,

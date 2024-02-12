@@ -12,7 +12,7 @@ protocol GeneralViewModelProtocol {
     var showError: ((String) -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
-    var selectedMovies: [ModelFromCoreData] { get set}
+    var selectedMovies: [MovieResponseViewModel] { get set}
     var reloadTable: (() -> Void)? { get set }
     
     func loadData(genre: [GenreTypes]?)
@@ -33,8 +33,8 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             }
         }
     }
-    var selectedMovies: [ModelFromCoreData] = [] {
-        didSet { 
+    var selectedMovies: [MovieResponseViewModel] = [] {
+        didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.reloadTable?()
             }
@@ -56,17 +56,17 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     }
     
     func save(name: String, year: Int, rating: Double, description: String, urlFromImage: String, imageData: Data) {
-//        let movie = MovieResponseViewModel(Doc(poster: Poster(url: urlFromImage),
-//                                               rating: Rating(kp: rating),
-//                                               name: name,
-//                                               description: description,
-//                                               year: year))
-        let movie = ModelFromCoreData(poster: urlFromImage,
-                                      rating: rating,
-                                      name: name,
-                                      description: description,
-                                      imageData: imageData,
-                                      year: year)
+        let movie = MovieResponseViewModel(Doc(poster: Poster(url: urlFromImage),
+                                               rating: Rating(kp: rating),
+                                               name: name,
+                                               description: description,
+                                               year: year))
+//        let movie = ModelFromCoreData(poster: urlFromImage,
+//                                      rating: rating,
+//                                      name: name,
+//                                      description: description,
+//                                      imageData: imageData,
+//                                      year: year)
         MoviePersistent.save(movie)
     }
     

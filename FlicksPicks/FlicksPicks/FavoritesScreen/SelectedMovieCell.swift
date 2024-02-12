@@ -76,7 +76,7 @@ final class SelectedMovieCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func set(_ source: ModelFromCoreData) {
+    func set(_ source: MovieResponseViewModel) {
         guard let data = source.imageData else { return }
         posterImageView.image = UIImage(data: data)
         titleLabel.text = source.name

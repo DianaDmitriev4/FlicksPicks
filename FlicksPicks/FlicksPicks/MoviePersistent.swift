@@ -13,7 +13,7 @@ final class MoviePersistent {
     private static let context = AppDelegate.persistentContainer.viewContext
     
     // MARK: - Methods
-    static func save(_ movie: ModelFromCoreData) {
+    static func save(_ movie: MovieResponseViewModel) {
         guard let description = NSEntityDescription.entity(forEntityName: "MovieEntity", in: context) else { return }
         let entity = MovieEntity(entity: description, insertInto: context)
         
@@ -44,7 +44,7 @@ final class MoviePersistent {
         saveContext()
     }
     
-    static func fetchAll() -> [ModelFromCoreData] {
+    static func fetchAll() -> [MovieResponseViewModel] {
         let request = MovieEntity.fetchRequest()
         do {
             let movies = try context.fetch(request)
@@ -68,18 +68,18 @@ final class MoviePersistent {
     //        }
     //    }
     
-    private static func convert(entities: [MovieEntity]) -> [ModelFromCoreData] {
+    private static func convert(entities: [MovieEntity]) -> [MovieResponseViewModel] {
         let movies = entities.map {
-            //            MovieResponseViewModel(Doc(poster: Poster(url: $0.poster ?? ""),
-            //                                       rating: Rating(kp: $0.rating),
-            //                                       name: $0.name,
-            //                                       description: $0.filmsDescription,
-            //                                       year: Int($0.year)))
-            ModelFromCoreData(poster: $0.poster ?? "",
-                              rating: $0.rating,
-                              name: $0.name ?? "",
-                              description: $0.description,
-                              year: Int($0.year))
+                        MovieResponseViewModel(Doc(poster: Poster(url: $0.poster ?? ""),
+                                                   rating: Rating(kp: $0.rating),
+                                                   name: $0.name,
+                                                   description: $0.filmsDescription,
+                                                   year: Int($0.year)))
+//            ModelFromCoreData(poster: $0.poster ?? "",
+//                              rating: $0.rating,
+//                              name: $0.name ?? "",
+//                              description: $0.description,
+//                              year: Int($0.year))
         }
         return movies
     }
