@@ -16,7 +16,7 @@ protocol GeneralViewModelProtocol {
     var reloadTable: (() -> Void)? { get set }
     
     func loadData(genre: [GenreTypes]?)
-    func save(name: String, year: Int, rating: Double, description: String, urlFromImage: String, imageData: Data)
+    func save(_ from: MovieResponseViewModel)
     func deleteAll()
     func getMovies()
 }
@@ -53,13 +53,13 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     
-    func save(name: String, year: Int, rating: Double, description: String, urlFromImage: String, imageData: Data) {
-        let movie = MovieResponseViewModel(Doc(poster: Poster(url: urlFromImage),
-                                               rating: Rating(kp: rating),
-                                               name: name,
-                                               description: description,
-                                               year: year),
-                                           imageData: imageData)
+    func save(_ from: MovieResponseViewModel) {
+        let movie = MovieResponseViewModel(Doc(poster: Poster(url: from.poster),
+                                               rating: Rating(kp: from.rating),
+                                               name: from.name,
+                                               description: from.description,
+                                               year: from.year),
+                                           imageData: from.imageData)
         MoviePersistent.save(movie)
     }
     

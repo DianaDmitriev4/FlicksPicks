@@ -67,12 +67,7 @@ final class SwipeCardView : UIView {
                         //                    self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
 //                        self.viewModel.selectedMovies.append(currentMovie)
                         //                    let vc = SelectedMovies(viewModel: GeneralViewModel(movie: currentMovie))
-                        self.viewModel.save(name: currentMovie.name,
-                                            year: currentMovie.year,
-                                            rating: currentMovie.rating,
-                                            description: currentMovie.description,
-                                            urlFromImage: currentMovie.poster,
-                                            imageData: currentMovie.imageData ?? .SubSequence())
+                        self.viewModel.save(currentMovie)
                     }
                 }
                 return
