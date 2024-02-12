@@ -8,7 +8,16 @@
 
 import Foundation
 
-final class MovieResponseViewModel {
+protocol MovieResponseViewModelProtocol {
+    var poster: String { get }
+    var rating: Double { get }
+    var name: String { get }
+    var description: String { get }
+    var imageData: Data? { get set }
+    var year: Int { get }
+}
+
+final class MovieResponseViewModel: MovieResponseViewModelProtocol {
     let poster: String
     let rating: Double
     let name: String

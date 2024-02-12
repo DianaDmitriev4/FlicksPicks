@@ -5,16 +5,20 @@
 //  Created by User on 31.12.2023.
 //
 
-import Foundation
+import UIKit
 
 protocol GeneralViewModelProtocol {
     var movies: [MovieResponseViewModel] { get set}
     var showError: ((String) -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
-    var selectedMovies: [MovieResponseViewModel] { get set}
+    var selectedMovies: [ModelFromCoreData] { get set}
     var reloadTable: (() -> Void)? { get set }
+    
     func loadData(genre: [GenreTypes]?)
+    func save(name: String, year: Int, rating: Double, description: String, urlFromImage: String, imageData: Data)
+    func deleteAll()
+    func getMovies()
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
@@ -29,20 +33,47 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             }
         }
     }
-    var selectedMovies: [MovieResponseViewModel] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.reloadTable?()
+    var selectedMovies: [ModelFromCoreData] = [] {
+        didSet { 
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadTable?()
             }
         }
     }
     var currentIndex = 0
+//    let movie: MovieResponseViewModel?
+//    
+//    init(movie: MovieResponseViewModel?) {
+//        self.movie = movie
+//        getMovies()
+//    }
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
         ApiManager.getFilms(genre: genre) { [weak self] result in
             self?.handleResult(result: result)
         }
+    }
+    
+    func save(name: String, year: Int, rating: Double, description: String, urlFromImage: String, imageData: Data) {
+//        let movie = MovieResponseViewModel(Doc(poster: Poster(url: urlFromImage),
+//                                               rating: Rating(kp: rating),
+//                                               name: name,
+//                                               description: description,
+//                                               year: year))
+        let movie = ModelFromCoreData(poster: urlFromImage,
+                                      rating: rating,
+                                      name: name,
+                                      description: description,
+                                      imageData: imageData,
+                                      year: year)
+        MoviePersistent.save(movie)
+    }
+    
+    func deleteAll() {
+//        if let movie {
+            MoviePersistent.deleteAll()
+//        }
     }
     
     // MARK: - Private methods
@@ -80,8 +111,9 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         }
     }
     
-    private func getMovies() {
+     func getMovies() {
         let movies = MoviePersistent.fetchAll()
-        print(movies)
+        selectedMovies = []
+        selectedMovies = movies
     }
 }

@@ -15,6 +15,8 @@ final class SelectedMovies: UITableViewController {
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
         
+        viewModel.getMovies()
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,7 +39,8 @@ final class SelectedMovies: UITableViewController {
     
     // MARK: - Private func
     @objc func cleanTableItems() {
-        viewModel.selectedMovies.removeAll()
+//        viewModel.selectedMovies.removeAll()
+        viewModel.deleteAll()
     }
     
     private func setTrashButton() {

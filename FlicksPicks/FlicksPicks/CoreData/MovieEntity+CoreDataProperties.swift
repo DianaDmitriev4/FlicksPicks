@@ -16,7 +16,7 @@ extension MovieEntity {
         return NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
     }
 
-    @NSManaged public var poster: URL?
+    @NSManaged public var poster: String?
     @NSManaged public var rating: Double
     @NSManaged public var name: String?
     @NSManaged public var filmsDescription: String?

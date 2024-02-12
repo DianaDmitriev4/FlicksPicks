@@ -48,10 +48,10 @@ final class Movie: UIViewController {
     }()
     
     // MARK: - Properties
-    private let viewModel: MovieResponseViewModel
+    private let viewModel: MovieResponseViewModelProtocol
     
     // MARK: - Initialization
-    init(viewModel: MovieResponseViewModel) {
+    init(viewModel: MovieResponseViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

@@ -24,10 +24,10 @@ final class SwipeCardView : UIView {
     var dataSource: MovieResponseViewModel? {
         didSet {
             print("GET CHANGE FROM ARRAY")
-//                print("Получаем картинку")
-                guard let data = self.dataSource?.imageData else { return }
-                self.imageView.image = UIImage(data: data)
-            }
+            //                print("Получаем картинку")
+            guard let data = self.dataSource?.imageData else { return }
+            self.imageView.image = UIImage(data: data)
+        }
     }
     
     //MARK: - Initialization
@@ -58,11 +58,22 @@ final class SwipeCardView : UIView {
             // Swipe right
             if (card.center.x) > 400 {
                 delegate?.swipeDidEnd(on: card)
-                UIView.animate(withDuration: 0.2) {
-                    card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x + 200, y: centerOfParentContainer.y + newPoint.y + 75)
-                    card.alpha = 0
-                    self.layoutIfNeeded()
-                    self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
+                UIView.animate(withDuration: 0.2) { [ weak self ] in
+                    if let self {
+                        card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x + 200, y: centerOfParentContainer.y + newPoint.y + 75)
+                        card.alpha = 0
+                        self.layoutIfNeeded()
+                        let currentMovie = self.viewModel.movies[self.viewModel.currentIndex]
+                        //                    self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
+//                        self.viewModel.selectedMovies.append(currentMovie)
+                        //                    let vc = SelectedMovies(viewModel: GeneralViewModel(movie: currentMovie))
+                        self.viewModel.save(name: currentMovie.name,
+                                            year: currentMovie.year,
+                                            rating: currentMovie.rating,
+                                            description: currentMovie.description,
+                                            urlFromImage: currentMovie.poster,
+                                            imageData: currentMovie.imageData ?? .SubSequence())
+                    }
                 }
                 return
                 // Swipe left
