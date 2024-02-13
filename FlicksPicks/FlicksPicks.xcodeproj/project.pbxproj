@@ -95,12 +95,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE7EC6E02B46D78F00EEC570 /* SwipeCardsViewModel */ = {
+		CE7EC6E02B46D78F00EEC570 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				CEB5865D2B457C9C0050AA58 /* SwipeCardsDataSource.swift */,
 			);
-			path = SwipeCardsViewModel;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CE7EC6E52B46F06500EEC570 /* FavoritesScreen */ = {
@@ -158,7 +158,7 @@
 		CEB5864C2B4516F60050AA58 /* SwipeCards */ = {
 			isa = PBXGroup;
 			children = (
-				CE7EC6E02B46D78F00EEC570 /* SwipeCardsViewModel */,
+				CE7EC6E02B46D78F00EEC570 /* ViewModel */,
 				CEB5864D2B45184B0050AA58 /* View */,
 			);
 			path = SwipeCards;

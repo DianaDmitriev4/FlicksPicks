@@ -71,7 +71,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView(viewModel: viewModel)
+        var card = SwipeCardView(viewModel: viewModel)
         // УЖАСНЫЙ ФИКС
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             card.dataSource = self?.viewModel.movies[index]
@@ -98,6 +98,14 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
             let newIndex = numberOfCardsToShow() - remainingCards
             addCardView(cardView: card(at: newIndex), atIndex: 2)
             for (cardIndex, cardView) in visibleCards.enumerated() {
+                // This is a check to make sure the following cards are not available
+                for i in 0...2 {
+                    if i == cardIndex {
+                        cardView.isUserInteractionEnabled = true
+                    } else {
+                        cardView.isUserInteractionEnabled = false
+                    }
+                }
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     cardView.center = self?.center ?? .zero
                     self?.addCardFrame(index: cardIndex, cardView: cardView)
