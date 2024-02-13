@@ -38,7 +38,7 @@ final class SelectedMovies: UITableViewController {
     
     // MARK: - Private func
     @objc private func cleanTableItems() {
-//        viewModel.selectedMovies.removeAll()
+        //        viewModel.selectedMovies.removeAll()
         viewModel.deleteAll()
     }
     
@@ -88,8 +88,10 @@ extension SelectedMovies {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, view, completion in
-            self?.viewModel.selectedMovies.remove(at: indexPath.item)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            if let self {
+                self.viewModel.deleteMovie(self.viewModel.selectedMovies[indexPath.item])
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }

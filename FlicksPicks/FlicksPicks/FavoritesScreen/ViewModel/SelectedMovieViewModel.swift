@@ -13,6 +13,7 @@ protocol SelectedMovieViewModelProtocol {
     
     func save(_ from: MovieResponseViewModel)
     func deleteAll()
+    func deleteMovie(_ movie: MovieResponseViewModel)
     func getMovies()
 }
 
@@ -30,7 +31,6 @@ final class SelectedMovieViewModel: SelectedMovieViewModelProtocol {
         getMovies()
     }
 
-    
     func getMovies() {
         let movies = MoviePersistent.fetchAll()
         selectedMovies = []
@@ -49,5 +49,9 @@ final class SelectedMovieViewModel: SelectedMovieViewModelProtocol {
     
     func deleteAll() {
         MoviePersistent.deleteAll()
+    }
+    
+    func deleteMovie(_ movie: MovieResponseViewModel) {
+        MoviePersistent.deleteEntity(movie)
     }
 }

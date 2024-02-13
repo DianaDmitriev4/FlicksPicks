@@ -39,6 +39,7 @@ final class FiltersTableViewController: UITableViewController {
         let vc = GeneralViewController(viewModel: GeneralViewModel())
         vc.genresInUrl = viewModel.selectedGenres
         dismiss(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name("UpdateFilters"), object: nil)
         //        navigationController?.popViewController(animated: true)
     }
     

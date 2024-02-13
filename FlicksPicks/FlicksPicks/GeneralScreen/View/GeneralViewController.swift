@@ -53,9 +53,7 @@ final class GeneralViewController: UIViewController {
     
     var genresInUrl: [GenreTypes] = [] {
         didSet {
-            viewModel.movies = []
-            moviePosterView.reloadData()
-            viewModel.loadData(genre: genresInUrl)
+
             print("GENRES ISN'T EMPTY")
             print(genresInUrl )
             //            DispatchQueue.main.async { [weak self] in
@@ -89,20 +87,19 @@ final class GeneralViewController: UIViewController {
         
         viewModel.loadData(genre: genresInUrl)
         setupUI()
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.updateData),
+                                                   name: NSNotification.Name("UpdateFilters"),
+                                                   object: nil)
     }
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //
-    //        print("VIEWWILLAPPEAR")
-    //        if !genresInUrl.isEmpty {
-    //            print("ТУТ ДОЛЖЕН ВЫЗВАТЬСЯ ЗАПРОС")
-    //            viewModel.movies = []
-    //            viewModel.loadData(genre: genresInUrl)
-    //        }
-    //    }
-    
     // MARK: - Private func
+    @objc private func updateData() {
+            self.viewModel.movies = []
+        viewModel.loadData(genre: genresInUrl)
+//            moviePosterView.reloadData()
+    }
+    
     @objc private func selectFilters() {
         let viewModel = FiltersViewModel()
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: viewModel))

@@ -259,6 +259,8 @@
 			isa = PBXGroup;
 			children = (
 				CEE3315D2B5546F100D2EF1B /* View */,
+				CEE331662B5648EA00D2EF1B /* ViewModel */,
+				CEE331692B5649C800D2EF1B /* Model */,
 			);
 			path = FilterScreen;
 			sourceTree = "<group>";
@@ -268,8 +270,6 @@
 			children = (
 				CE9C591B2B46F7BE0012EA2F /* FiltersTableViewController.swift */,
 				CEE3315E2B55474200D2EF1B /* FiltersTableViewCell.swift */,
-				CEE331692B5649C800D2EF1B /* Model */,
-				CEE331662B5648EA00D2EF1B /* ViewModel */,
 			);
 			path = View;
 			sourceTree = "<group>";
