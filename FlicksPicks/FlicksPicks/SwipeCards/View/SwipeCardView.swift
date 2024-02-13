@@ -65,9 +65,6 @@ final class SwipeCardView : UIView {
                         card.alpha = 0
                         self.layoutIfNeeded()
                         let currentMovie = self.viewModel.movies[self.viewModel.currentIndex]
-                        //                    self.viewModel.selectedMovies.append(self.viewModel.movies[self.viewModel.currentIndex])
-//                        self.viewModel.selectedMovies.append(currentMovie)
-                        //                    let vc = SelectedMovies(viewModel: GeneralViewModel(movie: currentMovie))
                         self.viewModelFromSelected.save(currentMovie)
                     }
                 }

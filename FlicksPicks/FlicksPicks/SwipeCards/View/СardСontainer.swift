@@ -71,7 +71,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     func card(at index: Int) -> SwipeCardView {
-        var card = SwipeCardView(viewModel: viewModel)
+        let card = SwipeCardView(viewModel: viewModel)
         // УЖАСНЫЙ ФИКС
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             card.dataSource = self?.viewModel.movies[index]
