@@ -33,11 +33,11 @@ final class Movie: UIViewController {
         return view
     }()
     
-    private lazy var titleLabel = makeLabel(size: 40, textColor: .white, numberOfLines: 1)
+    private lazy var titleLabel = makeLabel(size: 30, textColor: .white, numberOfLines: 0)
     private lazy var yearLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
     private lazy var ratingLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
-    //    private lazy var countriesLabel = makeLabel(size: 19)
-    //    private lazy var genresLabel = makeLabel(size: 19)
+    private lazy var genresLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 0)
+    private lazy var countriesLabel = makeLabel(size: 13, textColor: .black, numberOfLines: 1)
     private lazy var descriptionLabel = makeLabel(size: 23, textColor: .black, numberOfLines: 0)
     
     private lazy var scrollView: UIScrollView = {
@@ -96,7 +96,9 @@ final class Movie: UIViewController {
             titleView,
             descriptionLabel,
             yearLabel,
-            ratingLabel
+            ratingLabel,
+            genresLabel,
+            countriesLabel
         ])
         setData()
         setupConstraints()
@@ -108,9 +110,12 @@ final class Movie: UIViewController {
         yearLabel.text = "Year: " + String(viewModel.year)
         ratingLabel.text = "Rating: " + String(viewModel.rating)
         
-        if let data = viewModel.imageData {
-            imageView.image = UIImage(data: data)
-        }
+        guard let textForGenres = viewModel.genres.map({ $0 })?.joined(separator: ", "),
+              let textForCountry = viewModel.countries.map({ $0 })?.joined(separator: ", "),
+              let data = viewModel.imageData else { return }
+        genresLabel.text = "Genres: " + textForGenres
+        countriesLabel.text = "Countries: " + textForCountry
+        imageView.image = UIImage(data: data)
     }
     
     private func setupConstraints() {
@@ -149,8 +154,18 @@ final class Movie: UIViewController {
             make.leading.trailing.equalToSuperview().inset(10)
         }
         
+        genresLabel.snp.makeConstraints { make in
+            make.top.equalTo(ratingLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+        
+        countriesLabel.snp.makeConstraints { make in
+            make.top.equalTo(genresLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+        
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(ratingLabel.snp.bottom).offset(30)
+            make.top.equalTo(countriesLabel.snp.bottom).offset(30)
             make.trailing.leading.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
         }

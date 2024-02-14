@@ -42,6 +42,8 @@ final class SelectedMovieViewModel: SelectedMovieViewModelProtocol {
                                                rating: Rating(kp: from.rating),
                                                name: from.name,
                                                description: from.description,
+                                               genres: nil, 
+                                               countries: nil,
                                                year: from.year),
                                            imageData: from.imageData)
         MoviePersistent.save(movie)

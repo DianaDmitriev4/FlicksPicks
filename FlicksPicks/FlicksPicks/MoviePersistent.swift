@@ -91,7 +91,9 @@ final class MoviePersistent {
             MovieResponseViewModel(Doc(poster: Poster(url: $0.poster ?? ""),
                                        rating: Rating(kp: $0.rating),
                                        name: $0.name,
-                                       description: $0.filmsDescription,
+                                       description: $0.filmsDescription, 
+                                       genres: nil, 
+                                       countries: nil,
                                        year: Int($0.year)),
                                    imageData: $0.imageData)
         }

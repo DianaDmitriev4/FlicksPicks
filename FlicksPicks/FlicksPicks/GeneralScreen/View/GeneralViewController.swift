@@ -109,7 +109,7 @@ final class GeneralViewController: UIViewController {
     }
     
     private func setupNavBar() {
-        let filterButton = UIBarButtonItem(barButtonSystemItem: .action,
+        let filterButton = UIBarButtonItem(barButtonSystemItem: .search,
                                            target: self,
                                            action: #selector(selectFilters))
         navigationItem.rightBarButtonItem = filterButton

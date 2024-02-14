@@ -12,8 +12,8 @@ struct Doc: Codable {
     let rating: Rating?
     let name: String?
     let description: String?
-    //    let genres: [Genres]?
-    //    let countries: [Country]?
+    let genres: [Genres]?
+    let countries: [Country]?
     let year: Int?
     
     enum CodingKeys: CodingKey {
@@ -21,8 +21,8 @@ struct Doc: Codable {
         case rating
         case name
         case description
-        //        case genres
-        //        case countries
+        case genres
+        case countries
         case year
     }
 }
