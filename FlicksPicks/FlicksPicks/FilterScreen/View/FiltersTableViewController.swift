@@ -79,25 +79,31 @@ extension FiltersTableViewController {
 // MARK: - UITableViewDelegate
 extension FiltersTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            viewModel.selectedGenres.append(GenreTypes.comedy)
-        case 1:
-            viewModel.selectedGenres.append(GenreTypes.drama)
-        case 2:
-            viewModel.selectedGenres.append(GenreTypes.actionMovie)
-        case 3:
-            viewModel.selectedGenres.append(GenreTypes.horror)
-        case 4:
-            viewModel.selectedGenres.append(GenreTypes.adventures)
-        case 5:
-            viewModel.selectedGenres.append(GenreTypes.thriller)
-        case 6:
-            viewModel.selectedGenres.append(GenreTypes.fantastic)
-        case 7:
-            viewModel.selectedGenres.append(GenreTypes.documentary)
-        default:
-            break
+        let movieType = viewModel.genresType[indexPath.row]
+        if isSelected(movieType) {
+            viewModel.selectedGenres.removeAll(where: { $0.genreName == movieType })
+        } else {
+            switch indexPath.row {
+            case 0:
+                viewModel.selectedGenres.append(GenreTypes.comedy)
+            case 1:
+                viewModel.selectedGenres.append(GenreTypes.drama)
+            case 2:
+                viewModel.selectedGenres.append(GenreTypes.actionMovie)
+            case 3:
+                viewModel.selectedGenres.append(GenreTypes.horror)
+            case 4:
+                viewModel.selectedGenres.append(GenreTypes.adventures)
+            case 5:
+                viewModel.selectedGenres.append(GenreTypes.thriller)
+            case 6:
+                viewModel.selectedGenres.append(GenreTypes.fantastic)
+            case 7:
+                viewModel.selectedGenres.append(GenreTypes.documentary)
+            default:
+                break
+            }
         }
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

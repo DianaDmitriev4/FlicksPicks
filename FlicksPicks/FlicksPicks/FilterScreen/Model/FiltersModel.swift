@@ -8,5 +8,5 @@
 import Foundation
 
 struct FiltersModel {
-let genresName = ["comedy", "drama", "actionMovie", "horror", "adventures", "thriller", "fantastic", "documentary"]
+let genresName = ["Comedy", "Drama", "Action movie", "Horror", "Adventures", "Thriller", "Fantastic", "Documentary"]
 }
