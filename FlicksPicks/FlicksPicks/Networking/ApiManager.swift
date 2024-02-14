@@ -20,7 +20,7 @@ final class ApiManager {
             "accept": "application/json",
             "X-API-KEY": token
         ]
-        guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie?type=movie&rating.kp=7-10\(selectedGenres ?? "")") else { return }
+        guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie?type=movie&rating.kp=6-10\(selectedGenres ?? "")") else { return }
         print("УРЛ: \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

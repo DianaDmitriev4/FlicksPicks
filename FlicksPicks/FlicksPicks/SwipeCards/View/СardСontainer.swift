@@ -75,7 +75,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         // УЖАСНЫЙ ФИКС
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             card.dataSource = self?.viewModel.movies[index]
-            self?.viewModel.currentIndex = index - 2
+//            self?.viewModel.currentIndex = index - 2
         }
         return card
     }
@@ -93,27 +93,35 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     func swipeDidEnd(on view: SwipeCardView) {
+        viewModel.currentIndex += 1
         view.removeFromSuperview()
         if remainingCards > 0 {
             let newIndex = numberOfCardsToShow() - remainingCards
             addCardView(cardView: card(at: newIndex), atIndex: 2)
             for (cardIndex, cardView) in visibleCards.enumerated() {
                 // This is a check to make sure the following cards are not available
-                for i in 0...2 {
+                    for i in 0...2 {
+                        if i == cardIndex {
+                            cardView.isUserInteractionEnabled = true
+                        } else {
+                            cardView.isUserInteractionEnabled = false
+                        }
+                    }
+                    UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                        cardView.center = self?.center ?? .zero
+                        self?.addCardFrame(index: cardIndex, cardView: cardView)
+                        self?.layoutIfNeeded()
+                    })
+                }
+        } else {
+            for (cardIndex, cardView) in visibleCards.enumerated() {
+                for i in 0...1 {
                     if i == cardIndex {
                         cardView.isUserInteractionEnabled = true
                     } else {
                         cardView.isUserInteractionEnabled = false
                     }
                 }
-                UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                    cardView.center = self?.center ?? .zero
-                    self?.addCardFrame(index: cardIndex, cardView: cardView)
-                    self?.layoutIfNeeded()
-                })
-            }
-        } else {
-            for (cardIndex, cardView) in visibleCards.enumerated() {
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     cardView.center = self?.center ?? .zero
                     self?.addCardFrame(index: cardIndex, cardView: cardView)
