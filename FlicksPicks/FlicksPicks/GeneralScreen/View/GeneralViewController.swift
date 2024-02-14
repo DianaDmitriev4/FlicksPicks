@@ -50,21 +50,7 @@ final class GeneralViewController: UIViewController {
     
     private var viewModel: GeneralViewModelProtocol
     private let square = 80
-    
-    var genresInUrl: [GenreTypes] = [] {
-        didSet {
 
-            print("GENRES ISN'T EMPTY")
-            print(genresInUrl )
-            //            DispatchQueue.main.async { [weak self] in
-            //                self?.viewModel.movies = []
-            //                self?.moviePosterView.reloadData()
-            //                self?.viewModel.loadData(genre: self?.genresInUrl)
-            //                print("GENRES ISN'T EMPTY")
-            //                print(self?.genresInUrl ?? "Nil value")
-        }
-    }
-    
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
@@ -85,16 +71,17 @@ final class GeneralViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.loadData(genre: genresInUrl)
+        viewModel.loadData(genre: nil)
         setupUI()
         registerObserver()
     }
     
     // MARK: - Private func
-    @objc private func updateData() {
-            self.viewModel.movies = []
-        viewModel.loadData(genre: genresInUrl)
-//            moviePosterView.reloadData()
+    @objc private func updateData(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let url = userInfo["url"] as? [GenreTypes]
+        self.viewModel.movies = []
+        viewModel.loadData(genre: url)
     }
     
     @objc private func selectFilters() {
