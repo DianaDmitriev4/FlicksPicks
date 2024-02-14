@@ -87,10 +87,7 @@ final class GeneralViewController: UIViewController {
         
         viewModel.loadData(genre: genresInUrl)
         setupUI()
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(self.updateData),
-                                                   name: NSNotification.Name("UpdateFilters"),
-                                                   object: nil)
+        registerObserver()
     }
     
     // MARK: - Private func
@@ -104,7 +101,6 @@ final class GeneralViewController: UIViewController {
         let viewModel = FiltersViewModel()
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: viewModel))
         navigationController?.present(navController, animated: true)
-        //        navigationController?.pushViewController(FiltersTableViewController(viewModel: viewModel), animated: true)
     }
     
     @objc private func showMovie() {
@@ -130,6 +126,13 @@ final class GeneralViewController: UIViewController {
                                            target: self,
                                            action: #selector(selectFilters))
         navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    private func registerObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateData),
+                                               name: NSNotification.Name("UpdateFilters"),
+                                               object: nil)
     }
     
     private func setupUI() {

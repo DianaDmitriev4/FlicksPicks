@@ -38,7 +38,6 @@ final class SelectedMovies: UITableViewController {
     
     // MARK: - Private func
     @objc private func cleanTableItems() {
-        //        viewModel.selectedMovies.removeAll()
         viewModel.deleteAll()
     }
     

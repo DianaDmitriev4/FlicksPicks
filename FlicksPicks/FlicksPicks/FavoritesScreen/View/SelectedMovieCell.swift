@@ -63,10 +63,8 @@ final class SelectedMovieCell: UITableViewCell {
     }()
     
     // MARK: - Initialization
-    override init(style: UITableViewCell.CellStyle,
-                  reuseIdentifier: String?) {
-        super.init(style: style,
-                   reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.setupUI()
     }
@@ -99,6 +97,7 @@ final class SelectedMovieCell: UITableViewCell {
         containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
         posterImageView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.height.equalTo(90)
