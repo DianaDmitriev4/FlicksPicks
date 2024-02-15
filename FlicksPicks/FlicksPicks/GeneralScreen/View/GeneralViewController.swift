@@ -94,11 +94,11 @@ final class GeneralViewController: UIViewController {
     }
     
     @objc private func declineMovie() {
-        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews.first!, needSave: false)
+        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: false)
     }
     
     @objc private func addMovieToFavorite() {
-        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews.first!, needSave: true)
+        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: true)
     }
     
     private func addGestureForImage() {
