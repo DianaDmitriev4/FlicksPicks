@@ -57,24 +57,26 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     private func getImages(completion: @escaping () -> Void) {
         let moviesCount = movies.count
-        let loadDidFinish: (Int) -> Void = { index in
-            if index == moviesCount - 1 {
+        let loadDidFinish: ([Data]) -> Void = { data in
+            if data.count == moviesCount {
                 completion()
             }
         }
-        
+        var dataArray: [Data] = []
         for (i, film) in movies.enumerated() {
             let url = film.poster
+            print(i)
             ApiManager.getImage(url: url) { [weak self] result in
                 switch result {
                 case .success(let data):
                     let movie = self?.movies[i]
                     movie?.imageData = data
-                    
+                    dataArray.append(data)
                 case .failure(let error):
                     self?.showError?(error.localizedDescription)
+                    print(error.localizedDescription)
                 }
-                loadDidFinish(i)
+                loadDidFinish(dataArray)
             }
         }
     }

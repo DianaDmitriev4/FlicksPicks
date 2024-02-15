@@ -42,6 +42,7 @@ final class ApiManager {
                 completion(.success(data))
             } else if let error {
                 completion(.failure(error))
+                print(error)
             }
         }
         session.resume()

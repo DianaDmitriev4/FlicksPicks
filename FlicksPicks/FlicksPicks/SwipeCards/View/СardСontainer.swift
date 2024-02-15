@@ -89,11 +89,11 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     func swipeDidEnd(on view: SwipeCardView, needSave: Bool) {
-        viewModel.currentIndex += 1
-        view.removeFromSuperview()
         if needSave {
             MoviePersistent.save(viewModel.movies[viewModel.currentIndex])
         }
+        viewModel.currentIndex += 1
+        view.removeFromSuperview()
         if remainingCards > 0 {
             let newIndex = numberOfCardsToShow() - remainingCards
             addCardView(cardView: card(at: newIndex), atIndex: 2)
@@ -106,7 +106,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                 }
         } else {
             for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
-
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     cardView.center = self?.center ?? .zero
                     self?.addCardFrame(index: cardIndex, cardView: cardView)
