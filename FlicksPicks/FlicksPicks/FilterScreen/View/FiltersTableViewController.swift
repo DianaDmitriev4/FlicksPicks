@@ -31,14 +31,12 @@ final class FiltersTableViewController: UITableViewController {
     
     // MARK: - Private methods
     @objc private func cancelAction() {
-        viewModel.selectedGenres = []
         dismiss(animated: true)
     }
     
     @objc private func saveAction() {
         dismiss(animated: true)
-        let userInfo: [AnyHashable: Any] = ["url": viewModel.selectedGenres]
-        NotificationCenter.default.post(name: NSNotification.Name("UpdateFilters"), object: nil, userInfo: userInfo)
+        viewModel.disappearClosure?(viewModel.selectedGenres)
     }
     
     private func setupUI() {
@@ -50,7 +48,6 @@ final class FiltersTableViewController: UITableViewController {
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAction))
-        
     }
     
     private func isSelected(_ genre: String) -> Bool {

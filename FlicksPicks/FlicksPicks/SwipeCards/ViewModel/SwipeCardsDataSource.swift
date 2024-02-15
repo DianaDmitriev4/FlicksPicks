@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SwipeCardsDelegate {
-    func swipeDidEnd(on view: SwipeCardView)
+    func swipeDidEnd(on view: SwipeCardView, needSave: Bool)
 }

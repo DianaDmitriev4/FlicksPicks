@@ -17,10 +17,6 @@ final class SwipeCardView : UIView {
         
         return imageView
     }()
-    
-    private var viewModel: GeneralViewModelProtocol
-    private var viewModelFromSelected: SelectedMovieViewModelProtocol
-    
     var delegate: SwipeCardsDelegate?
     var dataSource: MovieResponseViewModel? {
         didSet {
@@ -31,10 +27,7 @@ final class SwipeCardView : UIView {
     }
     
     //MARK: - Initialization
-    init(viewModel: GeneralViewModelProtocol) {
-        self.viewModel = viewModel
-        viewModelFromSelected = SelectedMovieViewModel()
-        
+    init() {        
         super.init(frame: .zero)
         
         print("ПОСТЕРЫ ИНИЦИАЛИЗИРОВАНЫ")
@@ -58,20 +51,18 @@ final class SwipeCardView : UIView {
         case .ended:
             // Swipe right
             if (card.center.x) > 400 {
-                delegate?.swipeDidEnd(on: card)
+                delegate?.swipeDidEnd(on: card, needSave: true)
                 UIView.animate(withDuration: 0.2) { [ weak self ] in
                     if let self {
                         card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x + 200, y: centerOfParentContainer.y + newPoint.y + 75)
                         card.alpha = 0
                         self.layoutIfNeeded()
-                        let currentMovie = self.viewModel.movies[self.viewModel.currentIndex]
-                        self.viewModelFromSelected.save(currentMovie)
                     }
                 }
                 return
                 // Swipe left
             } else if card.center.x < -10 {
-                delegate?.swipeDidEnd(on: card)
+                delegate?.swipeDidEnd(on: card, needSave: false)
                 UIView.animate(withDuration: 0.2) { [weak self] in
                     card.center = CGPoint(x: centerOfParentContainer.x + newPoint.x - 200, y: centerOfParentContainer.y + newPoint.y + 75)
                     card.alpha = 0

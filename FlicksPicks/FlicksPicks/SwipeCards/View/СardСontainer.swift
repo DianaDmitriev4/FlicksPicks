@@ -13,7 +13,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     private let verticalInset: CGFloat = 10.0
     private var cardsToShow: Int = 0
     private var cardsToBeVisible: Int = 3
-    private var cardViews : [SwipeCardView] = []
+    var cardViews : [SwipeCardView] = []
     private var remainingCards: Int = 0
     private var viewModel: GeneralViewModelProtocol
     private var visibleCards: [SwipeCardView] {
@@ -71,12 +71,8 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView(viewModel: viewModel)
-        // УЖАСНЫЙ ФИКС
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            card.dataSource = self?.viewModel.movies[index]
-//            self?.viewModel.currentIndex = index - 2
-        }
+        let card = SwipeCardView()
+        card.dataSource = viewModel.movies[index]
         return card
     }
     
@@ -87,14 +83,17 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         cardsToShow = numberOfCardsToShow()
         remainingCards = cardsToShow
         
-        for i in 0..<min(cardsToShow,cardsToBeVisible) {
-            addCardView(cardView: card(at: i), atIndex: i )
+        for i in 0..<min(cardsToShow, cardsToBeVisible) {
+            addCardView(cardView: card(at: i), atIndex: i)
         }
     }
     
-    func swipeDidEnd(on view: SwipeCardView) {
+    func swipeDidEnd(on view: SwipeCardView, needSave: Bool) {
         viewModel.currentIndex += 1
         view.removeFromSuperview()
+        if needSave {
+            MoviePersistent.save(viewModel.movies[viewModel.currentIndex])
+        }
         if remainingCards > 0 {
             let newIndex = numberOfCardsToShow() - remainingCards
             addCardView(cardView: card(at: newIndex), atIndex: 2)

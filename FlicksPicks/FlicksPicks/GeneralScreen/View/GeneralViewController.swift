@@ -63,17 +63,12 @@ final class GeneralViewController: UIViewController {
     }
     
     // MARK: - Life cycle
-    override func loadView() {
-        view = UIView()
-        view.addSubview(moviePosterView)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.loadData(genre: nil)
         setupUI()
-        registerObserver()
     }
     
     // MARK: - Private func
@@ -85,8 +80,11 @@ final class GeneralViewController: UIViewController {
     }
     
     @objc private func selectFilters() {
-        let viewModel = FiltersViewModel()
-        let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: viewModel))
+        let filtersViewModel = FiltersViewModel()
+        filtersViewModel.disappearClosure = { [weak self] selectedTypes in
+            self?.viewModel.loadData(genre: selectedTypes)
+        }
+        let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: filtersViewModel))
         navigationController?.present(navController, animated: true)
     }
     
@@ -96,11 +94,11 @@ final class GeneralViewController: UIViewController {
     }
     
     @objc private func declineMovie() {
-        
+        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews.first!, needSave: false)
     }
     
     @objc private func addMovieToFavorite() {
-        
+        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews.first!, needSave: true)
     }
     
     private func addGestureForImage() {
@@ -115,16 +113,10 @@ final class GeneralViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
     }
     
-    private func registerObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateData),
-                                               name: NSNotification.Name("UpdateFilters"),
-                                               object: nil)
-    }
-    
     private func setupUI() {
         view.backgroundColor = .white
         
+        view.addSubview(moviePosterView)
         view.addSubviews(views: [declineButton, likeButton])
         declineButton.addSubview(declineImageView)
         likeButton.addSubview(likeImageView)

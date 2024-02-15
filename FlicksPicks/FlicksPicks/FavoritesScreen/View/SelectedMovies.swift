@@ -27,29 +27,18 @@ final class SelectedMovies: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
-        registerObserver()
         
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
         
         setTrashButton()
+        viewModel.getMovies()
     }
     
     // MARK: - Private func
     @objc private func cleanTableItems() {
         viewModel.deleteAll()
-    }
-    
-    @objc private func updateData() {
-        viewModel.getMovies()
-    }
-    
-    private func registerObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateData),
-                                               name: NSNotification.Name("Update"),
-                                               object: nil)
     }
     
     private func setTrashButton() {
