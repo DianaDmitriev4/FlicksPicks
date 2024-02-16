@@ -33,7 +33,7 @@ final class SelectedMovieCell: UITableViewCell {
         let label = UILabel()
         
         label.numberOfLines = 0
-        label.font = .boldSystemFont(ofSize: 19)
+        label.font = .boldSystemFont(ofSize: 17)
         
         return label
     }()
@@ -107,11 +107,12 @@ final class SelectedMovieCell: UITableViewCell {
         
         dataView.snp.makeConstraints { make in
             make.leading.equalTo(posterImageView.snp.trailing).offset(30)
-            make.trailing.equalTo(ratingLabelView.snp.leading).offset(20)
+            make.trailing.equalTo(ratingLabelView.snp.leading).offset(5)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
         yearLabel.snp.makeConstraints { make in

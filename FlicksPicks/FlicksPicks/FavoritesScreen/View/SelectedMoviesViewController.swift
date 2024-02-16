@@ -25,18 +25,32 @@ final class SelectedMoviesViewController: UITableViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
+        viewModel.getMovies()
+        registerObserver()
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
         setTrashButton()
-        viewModel.getMovies()
     }
     
     // MARK: - Private func
     @objc private func cleanTableItems() {
         viewModel.deleteAll()
     }
+    
+    @objc private func updateData() {
+        viewModel.getMovies()
+    }
+    
+    private func registerObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateData),
+                                               name: NSNotification.Name("Update"),
+                                               object: nil)
+    }
+
     
     private func setTrashButton() {
         let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, 
