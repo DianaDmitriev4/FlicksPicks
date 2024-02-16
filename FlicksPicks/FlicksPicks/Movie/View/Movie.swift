@@ -130,7 +130,7 @@ final class Movie: UIViewController {
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(350)
+            make.height.equalTo(370)
         }
         
         titleView.snp.makeConstraints { make in

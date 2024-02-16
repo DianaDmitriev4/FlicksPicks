@@ -30,11 +30,11 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
+        DispatchQueue.main.async { [weak self] in
+            self?.startLoading?()
+        }
         ApiManager.getFilms(genre: genre) { [weak self] result in
             self?.handleResult(result: result)
-            DispatchQueue.main.async { [weak self] in
-                self?.startLoading?()
-            }
         }
     }
     

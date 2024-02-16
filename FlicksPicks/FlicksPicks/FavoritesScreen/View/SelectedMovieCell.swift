@@ -33,7 +33,7 @@ final class SelectedMovieCell: UITableViewCell {
         let label = UILabel()
         
         label.numberOfLines = 0
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .boldSystemFont(ofSize: 15)
         
         return label
     }()
@@ -124,6 +124,7 @@ final class SelectedMovieCell: UITableViewCell {
         ratingLabelView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(30)
             make.centerY.equalTo(posterImageView.snp.centerY)
+            make.width.equalTo(40)
         }
         
         ratingLabel.snp.makeConstraints { make in
