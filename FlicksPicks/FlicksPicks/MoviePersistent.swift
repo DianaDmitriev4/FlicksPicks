@@ -28,6 +28,8 @@ final class MoviePersistent {
         entity?.rating = movie.rating
         entity?.year = Int32(movie.year)
         entity?.imageData = movie.imageData
+        entity?.genres = movie.genres.map { $0 }?.joined(separator: ", ")
+        entity?.countries = movie.countries.map { $0 }?.joined(separator: ", ")
         
         do {
             try context.save()
@@ -91,9 +93,9 @@ final class MoviePersistent {
             MovieResponseViewModel(Doc(poster: Poster(url: $0.poster ?? ""),
                                        rating: Rating(kp: $0.rating),
                                        name: $0.name,
-                                       description: $0.filmsDescription, 
-                                       genres: nil, 
-                                       countries: nil,
+                                       description: $0.filmsDescription,
+                                       genres: [Genres(name: $0.genres ?? "")],
+                                       countries: [Country(name: $0.countries ?? "")],
                                        year: Int($0.year)),
                                    imageData: $0.imageData)
         }

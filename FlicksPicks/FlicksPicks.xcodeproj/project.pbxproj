@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE7EC6E22B46DE4E00EEC570 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E12B46DE4E00EEC570 /* Movie.swift */; };
-		CE7EC6E42B46F05C00EEC570 /* SelectedMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */; };
+		CE7EC6E42B46F05C00EEC570 /* SelectedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EC6E32B46F05C00EEC570 /* SelectedMoviesViewController.swift */; };
 		CE9C591C2B46F7BE0012EA2F /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C591B2B46F7BE0012EA2F /* FiltersTableViewController.swift */; };
 		CE9C59232B4921BB0012EA2F /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C59222B4921BB0012EA2F /* ApiManager.swift */; };
 		CE9C59252B4A7B480012EA2F /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C59242B4A7B480012EA2F /* NetworkingError.swift */; };
@@ -46,7 +46,7 @@
 
 /* Begin PBXFileReference section */
 		CE7EC6E12B46DE4E00EEC570 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovies.swift; sourceTree = "<group>"; };
+		CE7EC6E32B46F05C00EEC570 /* SelectedMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMoviesViewController.swift; sourceTree = "<group>"; };
 		CE9C591B2B46F7BE0012EA2F /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
 		CE9C59222B4921BB0012EA2F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		CE9C59242B4A7B480012EA2F /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		CEC678142B7A58BE004FC159 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE7EC6E32B46F05C00EEC570 /* SelectedMovies.swift */,
+				CE7EC6E32B46F05C00EEC570 /* SelectedMoviesViewController.swift */,
 				CEE331582B53B83200D2EF1B /* SelectedMovieCell.swift */,
 			);
 			path = View;
@@ -393,7 +393,7 @@
 				CEE3316B2B5BAFED00D2EF1B /* Doc.swift in Sources */,
 				CE9C59232B4921BB0012EA2F /* ApiManager.swift in Sources */,
 				CE9C59252B4A7B480012EA2F /* NetworkingError.swift in Sources */,
-				CE7EC6E42B46F05C00EEC570 /* SelectedMovies.swift in Sources */,
+				CE7EC6E42B46F05C00EEC570 /* SelectedMoviesViewController.swift in Sources */,
 				CEB586552B454E980050AA58 /* UIView + extens.swift in Sources */,
 				CEE331652B555C5200D2EF1B /* UIStackView + extens.swift in Sources */,
 				CE9C591C2B46F7BE0012EA2F /* FiltersTableViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SelectedMovies.swift
+//  SelectedMoviesViewController.swift
 //  FlicksPicks
 //
 //  Created by User on 04.01.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SelectedMovies: UITableViewController {
+final class SelectedMoviesViewController: UITableViewController {
     // MARK: Properties
     private var viewModel: SelectedMovieViewModelProtocol
     
@@ -25,13 +25,10 @@ final class SelectedMovies: UITableViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(SelectedMovieCell.self, forCellReuseIdentifier: "SelectedMovieCell")
-        
         viewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
-        
         setTrashButton()
         viewModel.getMovies()
     }
@@ -50,7 +47,7 @@ final class SelectedMovies: UITableViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension SelectedMovies {
+extension SelectedMoviesViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.selectedMovies.count
     }
@@ -67,7 +64,7 @@ extension SelectedMovies {
 }
 
 // MARK: - UITableViewDelegate
-extension SelectedMovies {
+extension SelectedMoviesViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentMovie = viewModel.selectedMovies[indexPath.item]
         let movieVC = Movie(viewModel: currentMovie)

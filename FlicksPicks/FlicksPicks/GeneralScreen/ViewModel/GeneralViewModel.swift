@@ -19,6 +19,7 @@ protocol GeneralViewModelProtocol {
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
     var reloadData: (() -> Void)?
+    //TODO: - MAKE ERROR ALERT
     var showError: ((String) -> Void)?
     var movies: [MovieResponseViewModel] = []
     var currentIndex = 0
@@ -65,7 +66,6 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         var dataArray: [Data] = []
         for (i, film) in movies.enumerated() {
             let url = film.poster
-            print(i)
             ApiManager.getImage(url: url) { [weak self] result in
                 switch result {
                 case .success(let data):

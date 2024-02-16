@@ -63,7 +63,6 @@ final class GeneralViewController: UIViewController {
     }
     
     // MARK: - Life cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,13 +71,6 @@ final class GeneralViewController: UIViewController {
     }
     
     // MARK: - Private func
-//    @objc private func updateData(_ notification: Notification) {
-//        guard let userInfo = notification.userInfo else { return }
-//        let url = userInfo["url"] as? [GenreTypes]
-//        self.viewModel.movies = []
-//        viewModel.loadData(genre: url)
-//    }
-    
     @objc private func selectFilters() {
         let filtersViewModel = FiltersViewModel()
         filtersViewModel.disappearClosure = { [weak self] selectedTypes in

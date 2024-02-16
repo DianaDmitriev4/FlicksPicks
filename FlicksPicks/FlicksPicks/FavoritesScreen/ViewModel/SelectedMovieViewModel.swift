@@ -18,26 +18,23 @@ protocol SelectedMovieViewModelProtocol {
 
 final class SelectedMovieViewModel: SelectedMovieViewModelProtocol {
     var reloadTable: (() -> Void)?
-    var selectedMovies: [MovieResponseViewModel] = []
-    
-    func getMovies() {
-        selectedMovies = MoviePersistent.fetchAll()
-        DispatchQueue.main.async { [weak self] in
-            self?.reloadTable?()
+    var selectedMovies: [MovieResponseViewModel] = []  {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadTable?()
+            }
         }
     }
     
+    func getMovies() {
+        selectedMovies = MoviePersistent.fetchAll()
+        }
+    
     func deleteAll() {
         MoviePersistent.deleteAll()
-        DispatchQueue.main.async { [weak self] in
-            self?.reloadTable?()
-        }
     }
     
     func deleteMovie(_ movie: MovieResponseViewModel) {
         MoviePersistent.deleteEntity(movie)
-        DispatchQueue.main.async { [weak self] in
-            self?.reloadTable?()
-        }
     }
 }

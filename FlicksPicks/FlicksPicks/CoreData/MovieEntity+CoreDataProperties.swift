@@ -22,6 +22,8 @@ extension MovieEntity {
     @NSManaged public var filmsDescription: String?
     @NSManaged public var year: Int32
     @NSManaged public var imageData: Data?
+    @NSManaged public var genres: String?
+    @NSManaged public var countries: String?
 }
 
 extension MovieEntity : Identifiable {
