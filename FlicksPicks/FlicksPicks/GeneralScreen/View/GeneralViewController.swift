@@ -48,6 +48,12 @@ final class GeneralViewController: UIViewController {
         return view
     }()
     
+    lazy private var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        
+        return indicator
+    }()
+    
     private var viewModel: GeneralViewModelProtocol
     private let square = 80
 
@@ -65,9 +71,9 @@ final class GeneralViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewModel.loadData(genre: nil)
         setupUI()
+
     }
     
     // MARK: - Private func
@@ -109,13 +115,24 @@ final class GeneralViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(moviePosterView)
-        view.addSubviews(views: [declineButton, likeButton])
+        view.addSubviews(views: [declineButton, likeButton, activityIndicator])
         declineButton.addSubview(declineImageView)
         likeButton.addSubview(likeImageView)
         
         makeConstraints()
         setupNavBar()
         addGestureForImage()
+        setupViewModel()
+    }
+    
+    private func setupViewModel() {
+        viewModel.startLoading = { [weak self] in
+            self?.activityIndicator.startAnimating()
+        }
+        
+        viewModel.endLoading = { [weak self] in
+            self?.activityIndicator.stopAnimating()
+        }
     }
     
     private func makeConstraints() {
@@ -124,6 +141,10 @@ final class GeneralViewController: UIViewController {
             make.height.equalTo(450)
             make.width.equalTo(300)
             make.top.equalToSuperview().inset(150)
+        }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
         
         declineButton.snp.makeConstraints { make in

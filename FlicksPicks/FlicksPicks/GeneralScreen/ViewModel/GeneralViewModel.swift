@@ -12,6 +12,8 @@ protocol GeneralViewModelProtocol {
     var showError: ((String) -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
     var currentIndex: Int { get set }
+    var startLoading: (() -> Void)? { get set }
+    var endLoading: (() -> Void)? { get set }
     
     func loadData(genre: [GenreTypes]?)
 }
@@ -19,6 +21,8 @@ protocol GeneralViewModelProtocol {
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
     var reloadData: (() -> Void)?
+    var startLoading: (() -> Void)?
+    var endLoading: (() -> Void)?
     //TODO: - MAKE ERROR ALERT
     var showError: ((String) -> Void)?
     var movies: [MovieResponseViewModel] = []
@@ -26,9 +30,11 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
-        // TODO: - Start loader
         ApiManager.getFilms(genre: genre) { [weak self] result in
             self?.handleResult(result: result)
+            DispatchQueue.main.async { [weak self] in
+                self?.startLoading?()
+            }
         }
     }
     
@@ -50,7 +56,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         movies = movieResponseViewModel
         getImages { [weak self] in
             DispatchQueue.main.async { [ weak self ] in
-                // TODO: - Stop loader
+                self?.endLoading?()
                 self?.reloadData?()
             }
         }
