@@ -56,7 +56,7 @@ final class GeneralViewController: UIViewController {
     
     private var viewModel: GeneralViewModelProtocol
     private let square = 80
-
+    
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         self.viewModel = viewModel
@@ -73,7 +73,6 @@ final class GeneralViewController: UIViewController {
         super.viewDidLoad()
         viewModel.loadData(genre: nil)
         setupUI()
-
     }
     
     // MARK: - Private func
@@ -92,11 +91,29 @@ final class GeneralViewController: UIViewController {
     }
     
     @objc private func declineMovie() {
-        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: false)
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+            if let self {
+                moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: false)
+                declineButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }
+        }) { [weak self] _ in
+            UIView.animate(withDuration: 0.1, animations: {
+                self?.declineButton.transform = .identity
+            })
+        }
     }
     
     @objc private func addMovieToFavorite() {
-        moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: true)
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+            if let self {
+                moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: true)
+                likeButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }
+        }) { [weak self] _ in
+            UIView.animate(withDuration: 0.1, animations: {
+                self?.likeButton.transform = .identity
+            })
+        }
     }
     
     private func addGestureForImage() {
