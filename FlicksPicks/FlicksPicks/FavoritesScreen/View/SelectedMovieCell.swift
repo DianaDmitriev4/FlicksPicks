@@ -113,6 +113,7 @@ final class SelectedMovieCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
         }
         
         yearLabel.snp.makeConstraints { make in
