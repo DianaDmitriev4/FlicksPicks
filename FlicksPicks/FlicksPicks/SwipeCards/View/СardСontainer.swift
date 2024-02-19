@@ -48,18 +48,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         return card
     }
     
-    private func reloadData() {
-        removeAllCardViews()
-        setNeedsLayout()
-        layoutIfNeeded()
-        cardsToShow = numberOfCardsToShow()
-        remainingCards = cardsToShow
-        
-        for i in 0..<min(cardsToShow, cardsToBeVisible) {
-            addCardView(cardView: card(at: i), atIndex: i)
-        }
-    }
-    
     private func addCardView(cardView: SwipeCardView, atIndex index: Int) {
         cardView.delegate = self
         addCardFrame(index: index, cardView: cardView)
@@ -88,6 +76,18 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Methods
+    func reloadData() {
+       removeAllCardViews()
+       setNeedsLayout()
+       layoutIfNeeded()
+       cardsToShow = numberOfCardsToShow()
+       remainingCards = cardsToShow
+       
+       for i in 0..<min(cardsToShow, cardsToBeVisible) {
+           addCardView(cardView: card(at: i), atIndex: i)
+       }
+   }
+    
     func swipeDidEnd(on view: SwipeCardView, needSave: Bool) {
         if needSave {
             MoviePersistent.save(viewModel.movies[viewModel.currentIndex])

@@ -79,10 +79,10 @@ final class GeneralViewController: UIViewController {
     @objc private func selectFilters() {
         let filtersViewModel = FiltersViewModel()
         filtersViewModel.disappearClosure = { [weak self] selectedTypes in
-//            self?.viewModel.movies = []
+            self?.viewModel.movies = []
             self?.viewModel.currentIndex = 0
             self?.viewModel.loadData(genre: selectedTypes)
-//            self?.cardContainer.reloadData()
+            self?.cardContainer.reloadData()
         }
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: filtersViewModel))
         navigationController?.present(navController, animated: true)
