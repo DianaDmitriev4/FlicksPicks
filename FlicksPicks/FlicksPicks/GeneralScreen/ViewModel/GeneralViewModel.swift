@@ -25,8 +25,16 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     var endLoading: (() -> Void)?
     //TODO: - MAKE ERROR ALERT
     var showError: ((String) -> Void)?
-    var movies: [MovieResponseViewModel] = []
-    var currentIndex = 0
+    var movies: [MovieResponseViewModel] = [] {
+        didSet {
+            movies.forEach { print($0.name) } 
+        }
+    }
+    var currentIndex = 0 {
+        didSet {
+            print(currentIndex)
+        }
+    }
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {

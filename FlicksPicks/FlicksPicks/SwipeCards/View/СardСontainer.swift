@@ -38,6 +38,28 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Private methods
+    private func numberOfCardsToShow() -> Int {
+        return viewModel.movies.count
+    }
+    
+    private func card(at index: Int) -> SwipeCardView {
+        let card = SwipeCardView()
+        card.dataSource = viewModel.movies[index]
+        return card
+    }
+    
+    private func reloadData() {
+        removeAllCardViews()
+        setNeedsLayout()
+        layoutIfNeeded()
+        cardsToShow = numberOfCardsToShow()
+        remainingCards = cardsToShow
+        
+        for i in 0..<min(cardsToShow, cardsToBeVisible) {
+            addCardView(cardView: card(at: i), atIndex: i)
+        }
+    }
+    
     private func addCardView(cardView: SwipeCardView, atIndex index: Int) {
         cardView.delegate = self
         addCardFrame(index: index, cardView: cardView)
@@ -66,28 +88,6 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     }
     
     // MARK: - Methods
-    func numberOfCardsToShow() -> Int {
-        return viewModel.movies.count
-    }
-    
-    func card(at index: Int) -> SwipeCardView {
-        let card = SwipeCardView()
-        card.dataSource = viewModel.movies[index]
-        return card
-    }
-    
-    func reloadData() {
-        removeAllCardViews()
-        setNeedsLayout()
-        layoutIfNeeded()
-        cardsToShow = numberOfCardsToShow()
-        remainingCards = cardsToShow
-        
-        for i in 0..<min(cardsToShow, cardsToBeVisible) {
-            addCardView(cardView: card(at: i), atIndex: i)
-        }
-    }
-    
     func swipeDidEnd(on view: SwipeCardView, needSave: Bool) {
         if needSave {
             MoviePersistent.save(viewModel.movies[viewModel.currentIndex])
@@ -98,12 +98,12 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
             let newIndex = numberOfCardsToShow() - remainingCards
             addCardView(cardView: card(at: newIndex), atIndex: 2)
             for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
-                    UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                        cardView.center = self?.center ?? .zero
-                        self?.addCardFrame(index: cardIndex, cardView: cardView)
-                        self?.layoutIfNeeded()
-                    })
-                }
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    cardView.center = self?.center ?? .zero
+                    self?.addCardFrame(index: cardIndex, cardView: cardView)
+                    self?.layoutIfNeeded()
+                })
+            }
         } else {
             for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in

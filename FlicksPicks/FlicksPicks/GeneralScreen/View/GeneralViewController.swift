@@ -10,7 +10,7 @@ import UIKit
 
 final class GeneralViewController: UIViewController {
     // MARK: - Properties
-    lazy private var moviePosterView: СardСontainer = {
+    lazy private var cardContainer: СardСontainer = {
         let view = СardСontainer(viewModel: self.viewModel)
         
         return view
@@ -79,9 +79,10 @@ final class GeneralViewController: UIViewController {
     @objc private func selectFilters() {
         let filtersViewModel = FiltersViewModel()
         filtersViewModel.disappearClosure = { [weak self] selectedTypes in
-            self?.viewModel.movies = []
-            self?.moviePosterView.reloadData()
+//            self?.viewModel.movies = []
+            self?.viewModel.currentIndex = 0
             self?.viewModel.loadData(genre: selectedTypes)
+//            self?.cardContainer.reloadData()
         }
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: filtersViewModel))
         navigationController?.present(navController, animated: true)
@@ -95,7 +96,7 @@ final class GeneralViewController: UIViewController {
     @objc private func declineMovie() {
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
             if let self {
-                moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: false)
+                cardContainer.swipeDidEnd(on: cardContainer.cardViews[viewModel.currentIndex], needSave: false)
                 declineButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }
         }) { [weak self] _ in
@@ -108,7 +109,7 @@ final class GeneralViewController: UIViewController {
     @objc private func addMovieToFavorite() {
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
             if let self {
-                moviePosterView.swipeDidEnd(on: moviePosterView.cardViews[viewModel.currentIndex], needSave: true)
+                cardContainer.swipeDidEnd(on: cardContainer.cardViews[viewModel.currentIndex], needSave: true)
                 likeButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }
         }) { [weak self] _ in
@@ -120,7 +121,7 @@ final class GeneralViewController: UIViewController {
     
     private func addGestureForImage() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(showMovie))
-        moviePosterView.addGestureRecognizer(gesture)
+        cardContainer.addGestureRecognizer(gesture)
     }
     
     private func setupNavBar() {
@@ -133,7 +134,7 @@ final class GeneralViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         
-        view.addSubview(moviePosterView)
+        view.addSubview(cardContainer)
         view.addSubviews(views: [declineButton, likeButton, activityIndicator])
         declineButton.addSubview(declineImageView)
         likeButton.addSubview(likeImageView)
@@ -155,7 +156,7 @@ final class GeneralViewController: UIViewController {
     }
     
     private func makeConstraints() {
-        moviePosterView.snp.makeConstraints { make in
+        cardContainer.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.height.equalTo(450)
             make.width.equalTo(300)
