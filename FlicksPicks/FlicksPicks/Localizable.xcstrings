@@ -45,13 +45,13 @@
         }
       }
     },
-    "Documentary" : {
+    "Detective" : {
       "extractionState" : "manual",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Документальный фильм"
+            "value" : "Детектив"
           }
         }
       }

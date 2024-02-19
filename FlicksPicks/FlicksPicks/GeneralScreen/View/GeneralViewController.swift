@@ -131,14 +131,6 @@ final class GeneralViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
     }
     
-    private func makeAlert() {
-        viewModel.showError = { error in
-            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .cancel)
-            alert.addAction(action)
-        }
-    }
-    
     private func setupUI() {
         view.backgroundColor = .white
         
@@ -151,6 +143,15 @@ final class GeneralViewController: UIViewController {
         setupNavBar()
         addGestureForImage()
         setupViewModel()
+    }
+    
+    private func makeAlert() {
+        viewModel.showError = { [weak self] error in
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(action)
+            self?.navigationController?.present(alert, animated: true)
+        }
     }
     
     private func setupViewModel() {

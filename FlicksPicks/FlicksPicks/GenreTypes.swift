@@ -15,7 +15,7 @@ enum GenreTypes: String {
     case adventures
     case thriller
     case fantastic
-    case documentary
+    case detective
     
     var  stringForUrl: String {
         switch self {
@@ -33,8 +33,8 @@ enum GenreTypes: String {
             "&genres.name=триллер"
         case .fantastic:
             "&genres.name=фантастика"
-        case .documentary:
-            "&genres.name=документальный"
+        case .detective:
+            "&genres.name=детектив"
         }
     }
     
@@ -54,8 +54,8 @@ enum GenreTypes: String {
             "Thriller".localized
         case .fantastic:
             "Fantastic".localized
-        case .documentary:
-            "Documentary".localized
+        case .detective:
+            "Detective".localized
         }
     }
 }

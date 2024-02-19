@@ -94,7 +94,7 @@ extension FiltersTableViewController {
             case 6:
                 viewModel.selectedGenres.append(GenreTypes.fantastic)
             case 7:
-                viewModel.selectedGenres.append(GenreTypes.documentary)
+                viewModel.selectedGenres.append(GenreTypes.detective)
             default:
                 break
             }
