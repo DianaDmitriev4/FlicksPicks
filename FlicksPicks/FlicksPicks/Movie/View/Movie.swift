@@ -106,14 +106,14 @@ final class Movie: UIViewController {
     private func setData() {
         titleLabel.text = viewModel.name
         descriptionLabel.text = viewModel.description
-        yearLabel.text = "Year: " + String(viewModel.year)
-        ratingLabel.text = "Rating: " + String(viewModel.rating)
+        yearLabel.text = "Year: ".localized + String(viewModel.year)
+        ratingLabel.text = "Rating: ".localized + String(viewModel.rating)
         
         guard let textForGenres = viewModel.genres.map({ $0 })?.joined(separator: ", "),
               let textForCountry = viewModel.countries.map({ $0 })?.joined(separator: ", "),
               let data = viewModel.imageData else { return }
-        genresLabel.text = "Genres: " + textForGenres
-        countriesLabel.text = "Countries: " + textForCountry
+        genresLabel.text = "Genres: ".localized + textForGenres
+        countriesLabel.text = "Countries: ".localized + textForCountry
         imageView.image = UIImage(data: data)
     }
     

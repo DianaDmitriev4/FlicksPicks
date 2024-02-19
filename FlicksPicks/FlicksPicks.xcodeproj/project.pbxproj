@@ -12,6 +12,8 @@
 		CE9C591C2B46F7BE0012EA2F /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C591B2B46F7BE0012EA2F /* FiltersTableViewController.swift */; };
 		CE9C59232B4921BB0012EA2F /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C59222B4921BB0012EA2F /* ApiManager.swift */; };
 		CE9C59252B4A7B480012EA2F /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C59242B4A7B480012EA2F /* NetworkingError.swift */; };
+		CEB315822B7F871E00266FFE /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CEB315812B7F871E00266FFE /* Localizable.xcstrings */; };
+		CEB315842B7F8A5B00266FFE /* String + extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB315832B7F8A5B00266FFE /* String + extens.swift */; };
 		CEB586412B42CF0C0050AA58 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586402B42CF0C0050AA58 /* MovieResponse.swift */; };
 		CEB586482B443DC20050AA58 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB586472B443DC20050AA58 /* TabBar.swift */; };
 		CEB5864B2B4516EE0050AA58 /* СardСontainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */; };
@@ -50,6 +52,9 @@
 		CE9C591B2B46F7BE0012EA2F /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
 		CE9C59222B4921BB0012EA2F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		CE9C59242B4A7B480012EA2F /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		CEB315802B7F86CA00266FFE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		CEB315812B7F871E00266FFE /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		CEB315832B7F8A5B00266FFE /* String + extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + extens.swift"; sourceTree = "<group>"; };
 		CEB586402B42CF0C0050AA58 /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		CEB586472B443DC20050AA58 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		CEB5864A2B4516EE0050AA58 /* СardСontainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СardСontainer.swift"; sourceTree = "<group>"; };
@@ -178,6 +183,7 @@
 			children = (
 				CEB586542B454E980050AA58 /* UIView + extens.swift */,
 				CEE331642B555C5200D2EF1B /* UIStackView + extens.swift */,
+				CEB315832B7F8A5B00266FFE /* String + extens.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 				CEB586472B443DC20050AA58 /* TabBar.swift */,
 				CEE331602B5552D800D2EF1B /* GenreTypes.swift */,
 				CEE331782B760D8900D2EF1B /* MoviePersistent.swift */,
+				CEB315812B7F871E00266FFE /* Localizable.xcstrings */,
 				CE9C59262B4A7B7F0012EA2F /* Networking */,
 				CE9C591D2B49061C0012EA2F /* Movie */,
 				CEB5864C2B4516F60050AA58 /* SwipeCards */,
@@ -350,6 +357,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = CECE68872B4084E900EC6813;
 			packageReferences = (
@@ -371,6 +379,7 @@
 			files = (
 				CECE68A02B4084E900EC6813 /* LaunchScreen.storyboard in Resources */,
 				CECE689D2B4084E900EC6813 /* Assets.xcassets in Resources */,
+				CEB315822B7F871E00266FFE /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE331592B53B83200D2EF1B /* SelectedMovieCell.swift in Sources */,
+				CEB315842B7F8A5B00266FFE /* String + extens.swift in Sources */,
 				CEE331772B760B9A00D2EF1B /* MovieEntity+CoreDataProperties.swift in Sources */,
 				CEE331732B76089500D2EF1B /* Model.xcdatamodeld in Sources */,
 				CECE68982B4084E900EC6813 /* GeneralViewController.swift in Sources */,
@@ -418,6 +428,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CECE689F2B4084E900EC6813 /* Base */,
+				CEB315802B7F86CA00266FFE /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -430,6 +441,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -493,6 +505,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

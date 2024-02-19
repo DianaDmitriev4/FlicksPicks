@@ -41,21 +41,21 @@ enum GenreTypes: String {
     var genreName: String {
         switch self {
         case .comedy:
-            "Comedy"
+            "Comedy".localized
         case .drama:
-            "Drama"
+            "Drama".localized
         case .actionMovie:
-            "Action movie"
+            "Action movie".localized
         case .horror:
-            "Horror"
+            "Horror".localized
         case .adventures:
-            "Adventures"
+            "Adventures".localized
         case .thriller:
-            "Thriller"
+            "Thriller".localized
         case .fantastic:
-            "Fantastic"
+            "Fantastic".localized
         case .documentary:
-            "Documentary"
+            "Documentary".localized
         }
     }
 }
