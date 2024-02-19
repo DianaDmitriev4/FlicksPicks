@@ -48,12 +48,12 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     // MARK: - Private methods
     private func handleResult(result: (Result<[Doc], Error>)) {
+        DispatchQueue.main.async { [ weak self ] in
         switch result {
         case .success(let movie):
-            convertToMovieResponse(movie)
+            self?.convertToMovieResponse(movie)
             
         case .failure(let error):
-            DispatchQueue.main.async { [ weak self ] in
                 self?.showError?(error.localizedDescription)
             }
         }

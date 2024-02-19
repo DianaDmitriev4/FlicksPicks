@@ -131,6 +131,14 @@ final class GeneralViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
     }
     
+    private func makeAlert() {
+        viewModel.showError = { error in
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(action)
+        }
+    }
+    
     private func setupUI() {
         view.backgroundColor = .white
         
@@ -153,6 +161,8 @@ final class GeneralViewController: UIViewController {
         viewModel.endLoading = { [weak self] in
             self?.activityIndicator.stopAnimating()
         }
+        
+        makeAlert()
     }
     
     private func makeConstraints() {
