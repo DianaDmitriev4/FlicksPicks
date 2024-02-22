@@ -55,6 +55,7 @@ final class GeneralViewController: UIViewController {
     }()
     
     private var viewModel: GeneralViewModelProtocol
+    private var selectedGenres: [GenreTypes] = []
     private let square = 80 //For buttons
     
     // MARK: - Initialization
@@ -83,6 +84,7 @@ final class GeneralViewController: UIViewController {
             self?.viewModel.currentIndex = 0
             self?.viewModel.page = 0
             self?.cardContainer.reloadData()
+            self?.selectedGenres = selectedTypes
             self?.viewModel.loadData(genre: selectedTypes)
         }
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: filtersViewModel))
@@ -165,7 +167,7 @@ final class GeneralViewController: UIViewController {
         }
         
         viewModel.getMoreMovies = { [weak self] in
-            self?.viewModel.loadData(genre: nil)
+            self?.viewModel.loadData(genre: self?.selectedGenres)
         }
         
         makeAlert()
