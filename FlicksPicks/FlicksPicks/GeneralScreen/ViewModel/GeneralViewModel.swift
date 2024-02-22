@@ -36,15 +36,14 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         didSet {
             let range = currentIndex / 10
             if currentIndex == 3 + (10 * range) {
-//            if currentIndex == 3 {
                 getMoreMovies?()
             }
         }
     }
+    //TODO: сохранить выбранные жанры в подгружаемые
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
-        // TODO: поправить поиск по другим жанрам
         if page == 0 {
         DispatchQueue.main.async { [weak self] in
                 self?.startLoading?()

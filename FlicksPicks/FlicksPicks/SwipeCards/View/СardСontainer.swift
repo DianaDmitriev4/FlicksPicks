@@ -75,8 +75,16 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         cardView.frame = cardViewFrame
     }
     
+    private func removeAllCardViews() {
+        for cardView in visibleCards {
+            cardView.removeFromSuperview()
+        }
+        cardViews = []
+    }
+    
     // MARK: - Methods
     func reloadData() {
+        removeAllCardViews()
         setNeedsLayout()
         layoutIfNeeded()
         cardsToShow = numberOfCardsToShow()

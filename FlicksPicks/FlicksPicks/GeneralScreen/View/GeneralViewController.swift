@@ -82,8 +82,8 @@ final class GeneralViewController: UIViewController {
             self?.viewModel.movies = []
             self?.viewModel.currentIndex = 0
             self?.viewModel.page = 0
-            self?.viewModel.loadData(genre: selectedTypes)
             self?.cardContainer.reloadData()
+            self?.viewModel.loadData(genre: selectedTypes)
         }
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: filtersViewModel))
         navigationController?.present(navController, animated: true)
