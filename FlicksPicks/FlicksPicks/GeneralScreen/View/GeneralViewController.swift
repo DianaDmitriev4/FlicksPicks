@@ -55,7 +55,7 @@ final class GeneralViewController: UIViewController {
     }()
     
     private var viewModel: GeneralViewModelProtocol
-    private let square = 80
+    private let square = 80 //For buttons
     
     // MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
@@ -81,6 +81,7 @@ final class GeneralViewController: UIViewController {
         filtersViewModel.disappearClosure = { [weak self] selectedTypes in
             self?.viewModel.movies = []
             self?.viewModel.currentIndex = 0
+            self?.viewModel.page = 0
             self?.viewModel.loadData(genre: selectedTypes)
             self?.cardContainer.reloadData()
         }
@@ -161,6 +162,10 @@ final class GeneralViewController: UIViewController {
         
         viewModel.endLoading = { [weak self] in
             self?.activityIndicator.stopAnimating()
+        }
+        
+        viewModel.getMoreMovies = { [weak self] in
+            self?.viewModel.loadData(genre: nil)
         }
         
         makeAlert()

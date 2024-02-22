@@ -11,7 +11,7 @@ final class ApiManager {
     //    private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2" - еще один
     private static let token = "F7HTR22-3T3MQ15-JBBR889-EWM0898"
     
-    static func getFilms(genre: [GenreTypes]?, completion: @escaping (Result<[Doc], Error>) -> Void) {
+    static func getFilms(genre: [GenreTypes]?, page: Int, completion: @escaping (Result<[Doc], Error>) -> Void) {
         var selectedGenres: String?
         if let genre {
             selectedGenres = genre.compactMap { $0.stringForUrl }.joined()
@@ -20,7 +20,7 @@ final class ApiManager {
             "accept": "application/json",
             "X-API-KEY": token
         ]
-        guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie?type=movie&rating.kp=6-10\(selectedGenres ?? "")") else { return }
+        guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie?page=\(page)&limit=10&type=movie&rating.kp=6-10\(selectedGenres ?? "")") else { return }
         print("УРЛ: \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

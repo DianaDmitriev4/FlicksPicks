@@ -17,10 +17,9 @@ final class SwipeCardView : UIView {
         
         return imageView
     }()
-    var delegate: SwipeCardsDelegate?
+    weak var delegate: SwipeCardsDelegate?
     var dataSource: MovieResponseViewModel? {
         didSet {
-            print("GET CHANGE FROM ARRAY")
             guard let data = self.dataSource?.imageData else { return }
             self.imageView.image = UIImage(data: data)
         }
@@ -30,7 +29,6 @@ final class SwipeCardView : UIView {
     init() {        
         super.init(frame: .zero)
         
-        print("ПОСТЕРЫ ИНИЦИАЛИЗИРОВАНЫ")
         addSubview(imageView)
         setupConstraints()
         addPanGestureOnCards()

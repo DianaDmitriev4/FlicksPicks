@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SwipeCardsDelegate {
+protocol SwipeCardsDelegate: AnyObject {
     func swipeDidEnd(on view: SwipeCardView, needSave: Bool)
 }

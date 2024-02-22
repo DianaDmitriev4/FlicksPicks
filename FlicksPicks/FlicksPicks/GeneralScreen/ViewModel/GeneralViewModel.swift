@@ -14,34 +14,44 @@ protocol GeneralViewModelProtocol {
     var currentIndex: Int { get set }
     var startLoading: (() -> Void)? { get set }
     var endLoading: (() -> Void)? { get set }
-    
+    var getMoreMovies: (() -> Void)? { get set }
+    var page: Int { get set }
     func loadData(genre: [GenreTypes]?)
 }
 
 final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Properties
+    var page = 0
     var reloadData: (() -> Void)?
     var startLoading: (() -> Void)?
     var endLoading: (() -> Void)?
-    //TODO: - MAKE ERROR ALERT
     var showError: ((String) -> Void)?
+    var getMoreMovies: (() -> Void)?
     var movies: [MovieResponseViewModel] = [] {
         didSet {
-            movies.forEach { print($0.name) } 
+            movies.forEach { print($0.name) }
         }
     }
     var currentIndex = 0 {
         didSet {
-            print(currentIndex)
+            let range = currentIndex / 10
+            if currentIndex == 3 + (10 * range) {
+//            if currentIndex == 3 {
+                getMoreMovies?()
+            }
         }
     }
     
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
+        // TODO: поправить поиск по другим жанрам
+        if page == 0 {
         DispatchQueue.main.async { [weak self] in
-            self?.startLoading?()
+                self?.startLoading?()
+            }
         }
-        ApiManager.getFilms(genre: genre) { [weak self] result in
+        page += 1
+        ApiManager.getFilms(genre: genre, page: page) { [weak self] result in
             self?.handleResult(result: result)
         }
     }
@@ -49,11 +59,11 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     // MARK: - Private methods
     private func handleResult(result: (Result<[Doc], Error>)) {
         DispatchQueue.main.async { [ weak self ] in
-        switch result {
-        case .success(let movie):
-            self?.convertToMovieResponse(movie)
-            
-        case .failure(let error):
+            switch result {
+            case .success(let movie):
+                self?.convertToMovieResponse(movie)
+                
+            case .failure(let error):
                 self?.showError?(error.localizedDescription)
             }
         }
@@ -61,11 +71,18 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     
     private func convertToMovieResponse(_ response: [Doc]) {
         let movieResponseViewModel = response.map { MovieResponseViewModel($0, imageData: nil) }
-        movies = movieResponseViewModel
+        if movies.isEmpty {
+            movies = movieResponseViewModel
+        } else {
+            movies += movieResponseViewModel
+        }
+        
         getImages { [weak self] in
             DispatchQueue.main.async { [ weak self ] in
-                self?.endLoading?()
-                self?.reloadData?()
+                if let self {
+                    self.endLoading?()
+                    self.reloadData?()
+                }
             }
         }
     }

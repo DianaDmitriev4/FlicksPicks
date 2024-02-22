@@ -13,23 +13,30 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     private let verticalInset: CGFloat = 10.0
     private var cardsToShow: Int = 0
     private var cardsToBeVisible: Int = 3
-    private var remainingCards: Int = 0
+    private var remainingCards: Int = 0 {
+        didSet {
+            print("remain: \(remainingCards)")
+        }
+    }
     private var viewModel: GeneralViewModelProtocol
     private var visibleCards: [SwipeCardView] {
         return subviews as? [SwipeCardView] ?? []
     }
-    var cardViews : [SwipeCardView] = []
+    var cardViews: [SwipeCardView] = []
     
     //MARK: - Initialization
     init(viewModel: GeneralViewModelProtocol) {
         
         self.viewModel = viewModel
-        print("КАРТОЧКИ ИНИЦИАЛИЗИРОВАНЫ")
+        
         super.init(frame: .zero)
         
         self.viewModel.reloadData = { [weak self] in
-            self?.reloadData()
-            print("ПОЛУЧИЛИ ДАННЫЕ С МАССИВА")
+            if let self {
+                if self.viewModel.movies.count <= 10 {
+                    self.reloadData()
+                }
+            }
         }
     }
     
@@ -68,35 +75,35 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         cardView.frame = cardViewFrame
     }
     
-    private func removeAllCardViews() {
-        for cardView in visibleCards {
-            cardView.removeFromSuperview()
-        }
-        cardViews = []
-    }
-    
     // MARK: - Methods
     func reloadData() {
-       removeAllCardViews()
-       setNeedsLayout()
-       layoutIfNeeded()
-       cardsToShow = numberOfCardsToShow()
-       remainingCards = cardsToShow
-       
-       for i in 0..<min(cardsToShow, cardsToBeVisible) {
-           addCardView(cardView: card(at: i), atIndex: i)
-       }
-   }
+        setNeedsLayout()
+        layoutIfNeeded()
+        cardsToShow = numberOfCardsToShow()
+        remainingCards = cardsToShow
+        
+        for i in 0..<min(cardsToShow, cardsToBeVisible) {
+            addCardView(cardView: card(at: i), atIndex: i)
+        }
+    }
     
     func swipeDidEnd(on view: SwipeCardView, needSave: Bool) {
         if needSave {
             MoviePersistent.save(viewModel.movies[viewModel.currentIndex])
         }
+        
         viewModel.currentIndex += 1
+        let index = viewModel.currentIndex + 2
+        print(index)
         view.removeFromSuperview()
+        
         if remainingCards > 0 {
-            let newIndex = numberOfCardsToShow() - remainingCards
-            addCardView(cardView: card(at: newIndex), atIndex: 2)
+            let intervalNumber = (index / 10)
+            if index == 9 + (10 * intervalNumber) && intervalNumber + 1 != viewModel.page {
+                remainingCards = 11
+            }
+            addCardView(cardView: card(at: index), atIndex: 2)
+            
             for (cardIndex, cardView) in visibleCards.reversed().enumerated() {
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     cardView.center = self?.center ?? .zero
@@ -110,6 +117,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
                     cardView.center = self?.center ?? .zero
                     self?.addCardFrame(index: cardIndex, cardView: cardView)
                     self?.layoutIfNeeded()
+                    self?.isUserInteractionEnabled = false
                 })
             }
         }
