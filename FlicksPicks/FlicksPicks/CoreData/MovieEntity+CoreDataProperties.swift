@@ -11,11 +11,11 @@ import CoreData
 
 
 extension MovieEntity {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MovieEntity> {
         return NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
     }
-
+    
     @NSManaged public var poster: String?
     @NSManaged public var rating: Double
     @NSManaged public var name: String?
@@ -27,5 +27,5 @@ extension MovieEntity {
 }
 
 extension MovieEntity : Identifiable {
-
+    
 }

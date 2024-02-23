@@ -41,11 +41,11 @@ final class GeneralViewModel: GeneralViewModelProtocol {
             }
         }
     }
-
+    
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
         if page == 0 {
-        DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.startLoading?()
             }
         }

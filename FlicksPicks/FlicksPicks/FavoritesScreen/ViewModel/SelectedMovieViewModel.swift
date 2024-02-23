@@ -28,7 +28,7 @@ final class SelectedMovieViewModel: SelectedMovieViewModelProtocol {
     
     func getMovies() {
         selectedMovies = MoviePersistent.fetchAll()
-        }
+    }
     
     func deleteAll() {
         MoviePersistent.deleteAll()

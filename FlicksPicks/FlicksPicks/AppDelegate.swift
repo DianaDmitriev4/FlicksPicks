@@ -11,7 +11,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static var persistentContainer: NSPersistentContainer = {
-       let container = NSPersistentContainer(name: "Model")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Unable to load persistence stores: \(error)")

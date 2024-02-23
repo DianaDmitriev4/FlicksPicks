@@ -8,8 +8,8 @@
 import Foundation
 
 final class ApiManager {
-        private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2" 
-//    private static let token = "F7HTR22-3T3MQ15-JBBR889-EWM0898"
+    private static let token = "3CSCFW6-77B43AX-QRMSPM0-TWH6EV2"
+    //    private static let token = "F7HTR22-3T3MQ15-JBBR889-EWM0898"
     
     static func getFilms(genre: [GenreTypes]?, page: Int, completion: @escaping (Result<[Doc], Error>) -> Void) {
         var selectedGenres: String = ""
@@ -33,7 +33,7 @@ final class ApiManager {
         }
         session.resume()
     }
-        
+    
     private static func handleResponse(data: Data?, error: Error?, completion: @escaping (Result<[Doc], Error>) -> ()) {
         if let error {
             completion(.failure(NetworkingError.networkingError(error)))

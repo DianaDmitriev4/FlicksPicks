@@ -50,7 +50,7 @@ final class SelectedMoviesViewController: UITableViewController {
                                                name: NSNotification.Name("Update"),
                                                object: nil)
     }
-
+    
     
     private func setTrashButton() {
         let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, 
