@@ -33,7 +33,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         self.viewModel.reloadData = { [weak self] in
             if let self {
-                if self.viewModel.movies.count <= 10 {
+                if self.viewModel.movies.count <= 20 {
                     self.reloadData()
                 }
             }
@@ -84,6 +84,7 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
     
     // MARK: - Methods
     func reloadData() {
+        print("reload")
         removeAllCardViews()
         setNeedsLayout()
         layoutIfNeeded()
@@ -102,13 +103,13 @@ final class СardСontainer: UIView, SwipeCardsDelegate {
         
         viewModel.currentIndex += 1
         let index = viewModel.currentIndex + 2
-        print(index)
+        print("i: \(index)")
         view.removeFromSuperview()
         
         if remainingCards > 0 {
-            let intervalNumber = (index / 10)
-            if index == 9 + (10 * intervalNumber) && intervalNumber + 1 != viewModel.page {
-                remainingCards = 11
+            let intervalNumber = (index / 20)
+            if index == 19 + (20 * intervalNumber) && intervalNumber + 1 != viewModel.page {
+                remainingCards = 21
             }
             addCardView(cardView: card(at: index), atIndex: 2)
             

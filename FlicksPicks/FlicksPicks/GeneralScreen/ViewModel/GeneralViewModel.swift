@@ -34,14 +34,13 @@ final class GeneralViewModel: GeneralViewModelProtocol {
     }
     var currentIndex = 0 {
         didSet {
-            let range = currentIndex / 10
-            if currentIndex == 3 + (10 * range) {
+            let range = currentIndex / 20
+            if currentIndex == 5 + (20 * range) {
                 getMoreMovies?()
             }
         }
     }
-    //TODO: сохранить выбранные жанры в подгружаемые
-    
+
     // MARK: - Methods
     func loadData(genre: [GenreTypes]?) {
         if page == 0 {
@@ -91,6 +90,7 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         let loadDidFinish: ([Data]) -> Void = { data in
             if data.count == moviesCount {
                 completion()
+                print("ALL data were loaded")
             }
         }
         var dataArray: [Data] = []
