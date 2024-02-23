@@ -16,6 +16,7 @@ protocol GeneralViewModelProtocol {
     var endLoading: (() -> Void)? { get set }
     var getMoreMovies: (() -> Void)? { get set }
     var page: Int { get set }
+    
     func loadData(genre: [GenreTypes]?)
 }
 
@@ -74,40 +75,9 @@ final class GeneralViewModel: GeneralViewModelProtocol {
         } else {
             movies += movieResponseViewModel
         }
-        
-        getImages { [weak self] in
-            DispatchQueue.main.async { [ weak self ] in
-                if let self {
-                    self.endLoading?()
-                    self.reloadData?()
-                }
-            }
-        }
-    }
-    
-    private func getImages(completion: @escaping () -> Void) {
-        let moviesCount = movies.count
-        let loadDidFinish: ([Data]) -> Void = { data in
-            if data.count == moviesCount {
-                completion()
-                print("ALL data were loaded")
-            }
-        }
-        var dataArray: [Data] = []
-        for (i, film) in movies.enumerated() {
-            let url = film.poster
-            ApiManager.getImage(url: url) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    let movie = self?.movies[i]
-                    movie?.imageData = data
-                    dataArray.append(data)
-                case .failure(let error):
-                    self?.showError?(error.localizedDescription)
-                    print(error.localizedDescription)
-                }
-                loadDidFinish(dataArray)
-            }
+        DispatchQueue.main.async { [ weak self ] in
+            self?.reloadData?()
+            self?.endLoading?()
         }
     }
 }

@@ -75,9 +75,11 @@ final class SelectedMovieCell: UITableViewCell {
     
     // MARK: - Methods
     func set(_ source: MovieResponseViewModel) {
-        if let data = source.imageData {
-            posterImageView.image = UIImage(data: data)
+        let urlString = source.poster
+        if let url = URL(string: urlString) {
+            posterImageView.kf.setImage(with: url)
         }
+        
         titleLabel.text = source.name
         ratingLabel.text = String(source.rating)
         yearLabel.text = String(source.year)

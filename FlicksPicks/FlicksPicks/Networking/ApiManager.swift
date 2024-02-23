@@ -21,7 +21,7 @@ final class ApiManager {
             "X-API-KEY": token
         ]
         guard let url = URL(string: "https://api.kinopoisk.dev/v1.4/movie?page=\(page)&limit=20&type=movie&rating.kp=6-10\(selectedGenres)") else { return }
-        print("УРЛ: \(url)")
+        print("URL: \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
@@ -33,21 +33,7 @@ final class ApiManager {
         }
         session.resume()
     }
-    
-    static func getImage(url: String, completion: @escaping (Result<Data, Error>) -> ()) {
-        guard let url = URL(string: url) else { return }
         
-        let session = URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data {
-                completion(.success(data))
-            } else if let error {
-                completion(.failure(error))
-                print(error)
-            }
-        }
-        session.resume()
-    }
-    
     private static func handleResponse(data: Data?, error: Error?, completion: @escaping (Result<[Doc], Error>) -> ()) {
         if let error {
             completion(.failure(NetworkingError.networkingError(error)))

@@ -6,6 +6,7 @@
 //
 
 import SnapKit
+import Kingfisher
 import UIKit
 
 final class SwipeCardView : UIView {
@@ -20,13 +21,16 @@ final class SwipeCardView : UIView {
     weak var delegate: SwipeCardsDelegate?
     var dataSource: MovieResponseViewModel? {
         didSet {
-            guard let data = self.dataSource?.imageData else { return }
-            self.imageView.image = UIImage(data: data)
+            guard let data = self.dataSource?.poster else { return }
+            if let url = URL(string: data) {
+                let resource = KF.ImageResource(downloadURL: url)
+                imageView.kf.setImage(with: resource)
+            }
         }
     }
     
     //MARK: - Initialization
-    init() {        
+    init() {
         super.init(frame: .zero)
         
         addSubview(imageView)

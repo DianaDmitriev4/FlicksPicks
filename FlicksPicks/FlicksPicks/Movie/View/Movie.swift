@@ -5,6 +5,7 @@
 //  Created by User on 04.01.2024.
 //
 
+import Kingfisher
 import UIKit
 
 final class Movie: UIViewController {
@@ -108,13 +109,15 @@ final class Movie: UIViewController {
         descriptionLabel.text = viewModel.description
         yearLabel.text = "Year: ".localized + String(viewModel.year)
         ratingLabel.text = "Rating: ".localized + String(viewModel.rating)
+        let stringUrl = viewModel.poster
+        if let url = URL(string: stringUrl) {
+            imageView.kf.setImage(with: url)
+        }
         
         guard let textForGenres = viewModel.genres.map({ $0 })?.joined(separator: ", "),
-              let textForCountry = viewModel.countries.map({ $0 })?.joined(separator: ", "),
-              let data = viewModel.imageData else { return }
+              let textForCountry = viewModel.countries.map({ $0 })?.joined(separator: ", ") else { return }
         genresLabel.text = "Genres: ".localized + textForGenres
         countriesLabel.text = "Countries: ".localized + textForCountry
-        imageView.image = UIImage(data: data)
     }
     
     private func setupConstraints() {
