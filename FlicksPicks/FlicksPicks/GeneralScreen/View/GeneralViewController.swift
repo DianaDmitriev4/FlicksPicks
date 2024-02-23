@@ -87,6 +87,8 @@ final class GeneralViewController: UIViewController {
             self?.selectedGenres = selectedTypes
             self?.viewModel.loadData(genre: selectedTypes)
         }
+        
+        filtersViewModel.selectedGenres = selectedGenres
         let navController = UINavigationController(rootViewController: FiltersTableViewController(viewModel: filtersViewModel))
         navigationController?.present(navController, animated: true)
     }
