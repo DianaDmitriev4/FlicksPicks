@@ -86,7 +86,7 @@ extension SelectedMoviesViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, view, completion in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete".localized) { [weak self] action, view, completion in
             if let self {
                 self.viewModel.deleteMovie(self.viewModel.selectedMovies[indexPath.item])
                 tableView.deleteRows(at: [indexPath], with: .automatic)
