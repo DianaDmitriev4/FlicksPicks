@@ -1,1 +1,1 @@
-![movieProject]((http://d.zaix.ru/ETGg.gif)
+![movieProject](http://d.zaix.ru/ETGg.gif)
